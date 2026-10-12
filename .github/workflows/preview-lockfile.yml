@@ -1,0 +1,31 @@
+name: Preview lockfile generation
+on:
+  push:
+    branches: [fix/prototype-preview-lockfile]
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Create npm lockfile
+        working-directory: prototype-preview
+        run: npm install --package-lock-only --no-audit --no-fund
+      - name: Clean install and build
+        working-directory: prototype-preview
+        run: |
+          npm ci --no-audit --no-fund
+          npm run check
+          npm run validate
+          npm run build
+      - name: Commit lockfile
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add prototype-preview/package-lock.json
+          git commit -m 'fix: commit npm lockfile for Cloud preview'
+          git push origin HEAD:fix/prototype-preview-lockfile
