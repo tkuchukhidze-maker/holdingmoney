@@ -1,0 +1,83 @@
+.page{--pine:#112920;--gold:#ebc58a;--paper:#faf8f3;--text:#162e29;background:var(--paper);color:var(--text);font-family:Arial,Helvetica,sans-serif;overflow:hidden}
+.page :global(.photo){width:100%;height:100%;display:block}
+.hero{position:relative;min-height:590px;background:#16271e;color:#fff9ed;isolation:isolate;overflow:hidden}
+.heroArt{position:absolute;inset:0 0 0 38%;z-index:-2;opacity:.92}
+.heroArt :global(.photo){filter:sepia(.1) saturate(1.18);height:100%;width:100%}
+.heroTone{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#0b1c18ee 0%,#0b1c18df 29%,#10241bd4 40%,#10231982 58%,#0a1a1742 100%),linear-gradient(0deg,#0c201a80 0%,transparent 40%)}
+.restaurantHeader{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:15px clamp(25px,5.5vw,86px);border-bottom:1px solid #ffffff2b;min-height:105px;position:relative;z-index:4}
+.restaurantLogo{min-width:120px;display:flex;align-items:center;height:82px}
+.restaurantLogo img{width:115px;height:82px;object-fit:contain;filter:grayscale(1) brightness(0) invert(1)}
+.textLogo{font:22px Georgia,serif}
+.brandNav{display:flex;align-items:center;justify-content:center;gap:clamp(15px,2vw,33px);font-size:12px}
+.brandNav a{color:#f9f4e9;white-space:nowrap}
+.brandNav a:hover{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:9px}
+.headerCta{border-radius:30px;display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:43px;padding:12px 18px;background:var(--gold);color:#23352c;font-size:12px;white-space:nowrap}
+.headerCta:hover,.goldButton:hover{background:#f4d5a5}
+.heroBody{position:relative;z-index:1;padding:58px clamp(26px,5.6vw,88px) 118px;max-width:780px}
+.heroEyebrow{font-size:11px;color:#e5c995;letter-spacing:.2em;margin:0 0 17px}
+.heroBody h1{font-family:'Sylfaen','Noto Serif Georgian',Georgia,serif;font-weight:600;font-size:clamp(48px,5.3vw,83px);letter-spacing:-.065em;line-height:1.1;margin:0 0 7px}
+.handwritten{font:italic clamp(22px,2.5vw,35px) 'Sylfaen',Georgia,serif;color:#e3bd83;margin:0 0 18px}
+.heroDescription{font-size:14px;line-height:1.85;color:#eee7da;max-width:460px;margin:0 0 25px}
+.heroButtons{display:flex;flex-wrap:wrap;gap:12px}
+.goldButton,.outlineButton{border-radius:28px;display:inline-flex;align-items:center;justify-content:space-between;gap:30px;min-width:181px;padding:14px 22px;font-size:12px;font-weight:700}
+.goldButton{background:var(--gold);color:#173128}
+.outlineButton{border:1px solid #e9c990ae;color:#fffdf7;background:#14292035}
+.outlineButton:hover{background:#ffffff22}
+.heroFooter{position:absolute;bottom:19px;right:clamp(21px,5.5vw,86px);display:flex;gap:24px;border:1px solid #fff6e785;background:#142821c2;padding:13px 19px;border-radius:11px;backdrop-filter:blur(6px)}
+.heroFooter>span{display:flex;flex-direction:column;gap:4px}
+.heroFooter strong{font-size:11px}
+.heroFooter small{font-size:10px;color:#dbcaba}
+.featureBar{background:#0f2822;display:flex;justify-content:center;align-items:center;gap:0;padding:22px 6%;color:white}
+.featureBar>span{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;column-gap:15px;flex:1;text-align:center;min-height:44px;border-right:1px solid #ffffff34;font-size:22px}
+.featureBar>span:last-child{border-right:0}
+.featureBar strong,.featureBar small{flex:1 0 100%;font-size:12px;font-weight:500}
+.featureBar small{font-size:10px;margin:4px 0 0;color:#d7c9b4}
+.reservationSection{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:34px;align-items:center;padding:41px clamp(24px,5.5vw,85px);background:#eee7dc;border-bottom:1px solid #e1d6c5}
+.kicker{font-size:10px;letter-spacing:.15em;color:#9f7846;font-weight:700}
+.reservationIntro h2{font:400 clamp(25px,2.4vw,35px)/1.16 Georgia,serif;margin:11px 0 0}
+.demo{font-size:10px;margin:10px 0 0;color:#9b6537;line-height:1.6}
+.reservationForm{display:grid;grid-template-columns:1.2fr 1fr .8fr auto;gap:9px;align-items:end}
+.reservationForm label{font-size:11px;color:#5a6258;gap:7px}
+.reservationForm input,.reservationForm select{background:#fffcf6;border:1px solid #ddcfbd;border-radius:8px;min-height:46px;width:100%;font-size:13px;padding:10px 11px;color:#163025}
+.bookButton{height:46px;padding:11px 16px;border-radius:8px;background:#cba56c;color:#183026;font-size:12px;font-weight:700;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:12px}
+.bookButton:disabled{opacity:.55}
+.bookButton:hover{background:#ddba81}
+.validation{grid-column:1/-1;margin:0;font-size:11px;color:#9c5237}
+.featureTiles{padding:31px clamp(24px,5.5vw,85px) 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.featureTile{position:relative;min-height:196px;display:block;overflow:hidden;background:#aea08b;border-radius:7px;color:#fff}
+.featureTile :global(.photo){position:absolute;inset:0}
+.tileShade{position:absolute;inset:0;background:linear-gradient(0deg,#0d2119d9,transparent 85%)}
+.tileText{position:absolute;left:26px;bottom:24px;display:flex;flex-direction:column;gap:7px}
+.tileText strong{font:400 28px Georgia,'Sylfaen',serif}
+.tileText small{font-size:12px;color:#f3e8d6}
+.tileArrow{position:absolute;bottom:23px;right:23px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid #edd1a0;color:#fff}
+.featureTile:hover .tileArrow{background:#a17f49}
+.menuNote{margin:0 clamp(24px,5.5vw,85px) 38px;background:#f4eee4;border-radius:8px;padding:14px 20px;display:flex;gap:20px;align-items:center}
+.menuNote p{font-size:10px;letter-spacing:.14em;color:#987548;margin:0;white-space:nowrap}
+.menuNote span{font-size:11px;color:#74786d;line-height:1.6}
+.events,.gallery{padding:28px clamp(24px,5.5vw,85px) 42px;scroll-margin-top:30px}
+.sectionHeading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:19px}
+.sectionHeading h2{font:400 clamp(26px,2.6vw,36px) Georgia,'Sylfaen',serif;margin:9px 0 0}
+.allEvents{font-size:11px;color:#7e603c;padding:12px 0;white-space:nowrap}
+.allEvents:hover{text-decoration:underline}
+.eventGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.event{min-height:137px;border:1px solid #e5dfd3;background:#fff;border-radius:8px;display:flex;align-items:center;gap:12px;padding:10px}
+.eventPhoto{width:87px;height:113px;min-width:87px;border-radius:5px;overflow:hidden}
+.eventText{display:flex;flex-direction:column;gap:8px;flex:1}
+.eventText strong{font:400 17px Georgia,serif;overflow-wrap:anywhere}
+.eventText small{font-size:10px;color:#8c7460}
+.event>span:last-child{font-size:15px;color:#957142}
+.emptyEvents{font-size:13px;color:#74756e;background:#f0ebe3;padding:20px;border-radius:8px;line-height:1.8}
+.gallery{padding-top:35px}
+.galleryGrid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:13px;height:248px}
+.galleryGrid :global(.photo){border-radius:7px;overflow:hidden;background:#b7a188}
+.photoDisclaimer{font-size:10px;color:#89867e;margin:13px 0 0}
+.closing{background:#152c25;color:#f7f0e3;padding:49px clamp(24px,5.5vw,85px);display:flex;justify-content:space-between;align-items:end;gap:20px}
+.closing p{font-size:10px;letter-spacing:.18em;color:#d0b38b;margin:0 0 13px}
+.closing h2{font:400 33px Georgia,serif;margin:0 0 13px}
+.closing span{font-size:12px;color:#c8cfc8}
+.closing a{font-size:12px;color:#edc48e;white-space:nowrap}
+@media(max-width:1000px){.brandNav{gap:15px}.brandNav a:nth-child(5),.brandNav a:nth-child(6){display:none}.hero{min-height:560px}.reservationSection{display:block}.reservationForm{margin-top:20px}.eventGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:670px){.hero{min-height:640px}.heroArt{inset:0 0 0 13%;opacity:.68}.heroTone{background:linear-gradient(90deg,#0a1d18e8,#0a1d18bb 70%,#0a1d1888),linear-gradient(0deg,#0b1c18bb,transparent 50%)}.restaurantHeader{padding:12px 22px;min-height:84px;gap:8px}.restaurantLogo{min-width:75px;height:70px}.restaurantLogo img{width:78px;height:66px}.brandNav{gap:10px;font-size:11px}.brandNav a:nth-child(n+3){display:none}.headerCta{font-size:10px;padding:11px 13px;gap:5px}.heroBody{padding:52px 24px 133px}.heroBody h1{font-size:48px}.handwritten{font-size:27px}.heroDescription{font-size:13px}.heroFooter{bottom:15px;right:18px;left:18px;justify-content:space-between;gap:8px;padding:11px}.heroFooter strong{font-size:10px}.heroFooter small{font-size:9px}.featureBar{padding:14px 8px;gap:3px}.featureBar>span{font-size:15px}.featureBar strong{font-size:10px}.featureBar small{font-size:9px}.reservationSection{padding:27px 19px}.reservationForm{grid-template-columns:1fr 1fr}.reservationForm label:first-child{grid-column:1/-1}.reservationForm .bookButton{grid-column:1/-1}.featureTiles{grid-template-columns:1fr;padding:22px 18px 8px}.featureTile{min-height:180px}.tileText strong{font-size:26px}.menuNote{margin:15px 18px 20px;display:block}.menuNote span{display:block;margin-top:10px}.events,.gallery{padding:24px 18px}.eventGrid{grid-template-columns:1fr}.event{min-height:118px}.eventPhoto{height:97px}.galleryGrid{height:auto;grid-template-columns:1fr 1fr}.galleryGrid :global(.photo){height:125px}.galleryGrid :global(.photo):first-child{grid-column:1/-1;height:200px}.closing{padding:40px 19px;display:block}.closing a{display:block;margin-top:22px}}
+@media(prefers-reduced-motion:reduce){.page a{scroll-behavior:auto}}
+/* A restaurant is presented as an independent brand while using shared Episode accounts. */

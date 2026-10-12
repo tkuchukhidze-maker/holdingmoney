@@ -1,31 +1,39 @@
 {
-  "name": "episode-holding",
+  "name": "episodeholding",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint resources/js --max-warnings=0"
+    "test": "node --experimental-strip-types --test tests/unit.test.ts",
+    "test:integration": "node --experimental-strip-types --test --test-concurrency=1 tests/integration.test.ts",
+    "db:migrate": "node --env-file=.env --experimental-strip-types scripts/migrate.ts",
+    "db:seed": "node --env-file=.env --experimental-strip-types scripts/seed.ts",
+    "admin:grant": "node --env-file=.env --experimental-strip-types scripts/grant-admin.ts",
+    "setup:local": "node scripts/setup-local.mjs",
+    "mail:send": "node --env-file=.env --experimental-strip-types scripts/mail-worker.ts",
+    "mail:preview": "node --env-file=.env --experimental-strip-types scripts/mail-worker.ts --preview",
+    "db:migrate:cloud": "node --experimental-strip-types scripts/migrate.ts"
   },
   "dependencies": {
-    "@inertiajs/react": "^2.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "better-auth": "1.7.7",
+    "next": "16.4.0",
+    "pg": "8.23.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "3.25.76"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^4.4.0",
-    "eslint": "^9.0.0",
-    "globals": "^15.0.0",
-    "laravel-vite-plugin": "^1.2.0",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.8.0",
-    "typescript-eslint": "^8.0.0",
-    "vite": "^6.0.0"
+    "typescript": "5.9.3"
   }
 }

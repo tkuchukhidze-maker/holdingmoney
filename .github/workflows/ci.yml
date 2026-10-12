@@ -1,79 +1,41 @@
-name: Phase 1 checks
+name: Platform checks
 on:
   push:
-    branches:
-      - 'phase/**'
-      - 'main'
   pull_request:
 permissions:
   contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: episode
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: episode_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U episode -d episode_test"
+          --health-interval 5s --health-timeout 5s --health-retries 15
     env:
-      APP_ENV: testing
-      APP_DEBUG: 'true'
-      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-      APP_LOCALE: ka
-      DB_CONNECTION: sqlite
-      DB_DATABASE: ':memory:'
-      SESSION_DRIVER: array
-      CACHE_STORE: array
-      QUEUE_CONNECTION: sync
+      DATABASE_URL: postgresql://episode:ci-only-password@127.0.0.1:5432/episode_test
+      APP_ORIGIN: http://localhost:3000
+      EPISODE_TEST_DATABASE: '1'
+      REQUIRE_EMAIL_VERIFICATION: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
     steps:
-      - uses: actions/checkout@v4
-      - name: PHP 8.3
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
-          php-version: '8.3'
-          extensions: mbstring, dom, fileinfo, pdo_sqlite, xml
-          tools: composer:v2
-          coverage: none
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Resolve PHP packages
-        run: composer install --no-interaction --prefer-dist --no-progress
-      - name: Validate PHP configuration
-        run: composer validate --no-check-publish
-      - name: PHP style
-        run: vendor/bin/pint --test
-      - name: PHP tests (Pest)
-        run: php artisan test
-      - name: Install frontend
-        run: npm install --no-audit --no-fund
-      - name: ESLint
-        run: npm run lint
-      - name: TypeScript
-        run: npm run typecheck
-      - name: Vite build
-        run: npm run build
-
-  prototype-preview:
-    name: Validate approved design previews
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: prototype-preview
-    steps:
-      - uses: actions/checkout@v4
-      - name: Node 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install isolated viewer dependencies
-        run: npm install --no-audit --no-fund
-      - name: Validate markup and interactions
-        run: npm run check && npm run validate
-      - name: Build nine approved previews
-        run: npm run build
-      - name: Verify compiled screen files
-        run: |
-          test -f dist/index.html
-          test -f dist/project/Admin.dc.html
-          test -f dist/project/Magnolia.dc.html
-          test -f dist/project/Main.dc.html
-          test -f dist/assets/main.js
+          node-version: '24'
+          cache: npm
+      - name: Generate ephemeral test secret
+        run: node -e "const secret=require('crypto').randomBytes(48).toString('hex'); console.log('::add-mask::'+secret); require('fs').appendFileSync(process.env.GITHUB_ENV, 'BETTER_AUTH_SECRET='+secret+'\n')"
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run test:integration
+      - run: npm run build
