@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Hanken Grotesk', 'Noto Sans Georgian', system-ui, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-georgian: 'Noto Sans Georgian', sans-serif;
+    --color-ground: #F5F1EA;
+    --color-surface: #FFFDF9;
+    --color-ink: #1F1A17;
+    --color-muted: #5E5650;
+    --color-line: #E4DCD1;
+    --color-accent-holding: #8E2C3A;
+    --color-accent-batumi: #1F4E63;
+    --color-accent-kutaisi: #7A5418;
+    --color-accent-tbilisi: #6E3326;
+    --color-accent-magnolia: #6A3D5E;
+    --color-accent-chateau-mere: #4A5D3F;
+    --color-cream-deep: #DCD2C5;
+}
+@layer base {
+    body { background: var(--color-ground); color: var(--color-ink); }
+    :lang(ka) { font-family: 'Noto Sans Georgian', 'Hanken Grotesk', sans-serif; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--color-accent-holding); outline-offset: 3px; }
+}

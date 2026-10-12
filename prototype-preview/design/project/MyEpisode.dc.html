@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<title>My Episode — დეშბორდი</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=Noto+Sans+Georgian:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F1EA}
+a{color:#1F1A17}a:hover{color:#8E2C3A}
+select,input,button,textarea{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 1600px; background: #F5F1EA; color: #1F1A17; font-family: 'Hanken Grotesk', 'Noto Sans Georgian', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+
+<!-- TOP BAR -->
+<header style="border-bottom: 1px solid #E4DCD1; background: #FFFDF9">
+<div style="max-width: 1360px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 40px); min-height: 72px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Main.dc.html" style="display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: #1F1A17">
+<span style="font-size: 22px; font-weight: 600; letter-spacing: 0.32em">EPISODE</span>
+<span style="font-size: 12px; letter-spacing: 0.14em; color: #5E5650; text-transform: uppercase">My Episode</span>
+</a>
+<div style="display: flex; align-items: center; gap: 10px">
+<a href="Main.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: #8E2C3A; color: #FFFDF9; text-decoration: none; font-size: 14px; font-weight: 600">ახალი ჯავშანი</a>
+<button type="button" aria-label="შეტყობინებები (2 ახალი)" style="position: relative; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #DCD2C5; background: transparent; color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: #8E2C3A"></span></button>
+<button type="button" onClick="{{goProfile}}" aria-label="პროფილი" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 4px; border-radius: 999px; border: 1px solid #DCD2C5; background: transparent; color: #1F1A17; cursor: pointer"><span style="width: 36px; height: 36px; border-radius: 50%; background: #EADCBE; color: #4A3A1A; display: inline-flex; align-items: center; justify-content: center; font-weight: 600">{{U.initial}}</span><span style="font-size: 14px; font-weight: 500">{{U.first}}</span></button>
+</div>
+</div>
+</header>
+
+<div style="max-width: 1360px; margin: 0 auto; padding: 28px clamp(20px, 3vw, 40px) 64px; display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+
+<!-- SIDE NAV -->
+<nav aria-label="My Episode" style="flex: 1 1 220px; max-width: 100%; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; flex-direction: column; gap: 4px">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="7">
+<button type="button" onClick="{{t.pick}}" aria-current="{{t.current}}" style="{{t.style}}"><span style="display: inline-flex; width: 20px; justify-content: center; font-size: 13px; font-weight: 700; color: {{t.iconColor}}">{{t.icon}}</span>{{t.label}}<span style="{{t.badgeStyle}}">{{t.badge}}</span></button>
+</sc-for>
+</div>
+<div style="margin-top: 16px; padding: 16px; border-radius: 6px; background: #EFE7DC; font-size: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-weight: 600">დახმარება გჭირდებათ?</span>
+<span style="color: #5E5650">მოგვწერეთ ნებისმიერ სახლს ან სასტუმროს პირდაპირ მათი გვერდიდან.</span>
+</div>
+</nav>
+
+<!-- CONTENT -->
+<main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<!-- ================= OVERVIEW ================= -->
+<sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: clamp(32px, 3.6vw, 48px); font-weight: 300; letter-spacing: -0.025em; line-height: 1.05">გამარჯობა, <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400">{{U.first}}</span></h1>
+<span style="font-size: 14px; color: #5E5650">ორშაბათი, 12 ოქტომბერი</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding: 18px 22px; border-radius: 6px; background: #FFFDF9; border: 1px solid #E4DCD1">
+<span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #F7EDEE; color: #8E2C3A; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg></span>
+<span style="flex: 1 1 360px; font-size: 17px">დღეს ბათუმის სახლში: <strong>ქართული პოლიფონია 21:00-ზე</strong>. თქვენი საყვარელი მაგიდის ზონა თავისუფალია 20:30-ზე.</span>
+<a href="Batumi.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #1F1A17; text-decoration: none; font-size: 14px; font-weight: 600">დაჯავშნა 20:30</a>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px">
+<!-- membership -->
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">Episode Loyalty</span>
+<span style="font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 999px; background: #EADCBE; color: #4A3A1A">{{U.tier}}</span>
+</div>
+<div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 44px; font-weight: 300; letter-spacing: -0.02em; line-height: 1">{{pointsFmt}}</span><span style="color: #5E5650">ქულა</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{progressPct}}" aria-label="პროგრესი Black-მდე" style="height: 8px; border-radius: 4px; background: #EEE7DD; overflow: hidden"><div style="{{progressStyle}}"></div></div>
+<span style="font-size: 14px; color: #5E5650">{{toNextLabel}}</span>
+</div>
+<button type="button" onClick="{{goPoints}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 600; cursor: pointer">ქულები და დონეები</button>
+</div>
+<!-- birthday -->
+<div style="padding: 24px; border-radius: 8px; background: #8E2C3A; color: #FFFDF9; display: flex; flex-direction: column; gap: 14px; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 12px)">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F0D9DC">Birthday</span>
+<span style="font-size: 26px; font-weight: 300; line-height: 1.2">თქვენს დაბადების დღემდე 12 დღეა</span>
+<span style="color: #F7E6E8">დაჯავშნეთ ზეიმი ნებისმიერ Episode-ის სახლში და მიიღეთ 1,500 ბონუს ქულა.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto">
+<a href="Batumi.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #FFFDF9; color: #1F1A17; text-decoration: none; font-size: 14px; font-weight: 600">ზეიმის დაჯავშნა</a>
+<button type="button" onClick="{{goRewards}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(255,253,249,0.6); background: transparent; color: #FFFDF9; font-size: 14px; font-weight: 500; cursor: pointer">Celebration Package</button>
+</div>
+</div>
+</div>
+
+<!-- upcoming -->
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px">
+<h2 style="margin: 0; font-size: 22px; font-weight: 500">მომავალი ჯავშნები</h2>
+<button type="button" onClick="{{goBookings}}" style="min-height: 44px; border: 0; background: none; color: #8E2C3A; font-size: 14px; font-weight: 600; cursor: pointer">ყველას ნახვა</button>
+</div>
+<sc-for list="{{upcomingPreview}}" as="b" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 14px 0; border-top: 1px solid #EEE7DD">
+<span style="{{b.thumbStyle}}" aria-hidden="true"></span>
+<div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">{{b.kindLabel}} · {{b.place}}</span>
+<span style="font-size: 17px; font-weight: 600">{{b.when}}</span>
+<span style="font-size: 14px; color: #5E5650">{{b.detail}}</span>
+</div>
+<span style="{{b.statusStyle}}">{{b.statusLabel}}</span>
+</div>
+</sc-for>
+</div>
+
+<!-- rewards preview + quick -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px">
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 22px; font-weight: 500">თქვენთვის</h2>
+<button type="button" onClick="{{goRewards}}" style="min-height: 44px; border: 0; background: none; color: #8E2C3A; font-size: 14px; font-weight: 600; cursor: pointer">ყველა ჯილდო</button>
+</div>
+<sc-for list="{{rewardsPreview}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 6px; background: #F5F1EA">
+<span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #FFFDF9; color: #8E2C3A; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1"></rect><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-weight: 600">{{r.title}}</span><span style="font-size: 13px; color: #5E5650">{{r.where}} · {{r.until}}</span></span>
+</div>
+</sc-for>
+</div>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 22px; font-weight: 500">სწრაფი მოქმედებები</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<a href="Batumi.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 16px; min-height: 88px; box-sizing: border-box; border-radius: 6px; border: 1px solid #E4DCD1; text-decoration: none"><strong style="font-weight: 600">მაგიდის დაჯავშნა</strong><span style="font-size: 13px; color: #5E5650">3 სახლი</span></a>
+<a href="Magnolia.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 16px; min-height: 88px; box-sizing: border-box; border-radius: 6px; border: 1px solid #E4DCD1; text-decoration: none"><strong style="font-weight: 600">ოთახის დაჯავშნა</strong><span style="font-size: 13px; color: #5E5650">Magnolia · Chateau Mere</span></a>
+<a href="Tbilisi.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 16px; min-height: 88px; box-sizing: border-box; border-radius: 6px; border: 1px solid #E4DCD1; text-decoration: none"><strong style="font-weight: 600">ივენთები</strong><span style="font-size: 13px; color: #5E5650">ვინ მღერის ამ კვირაში</span></a>
+<button type="button" onClick="{{goCard}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px; min-height: 88px; border-radius: 6px; border: 1px solid #E4DCD1; background: transparent; color: #1F1A17; text-align: left; cursor: pointer"><strong style="font-weight: 600">ჩემი ბარათი</strong><span style="font-size: 13px; color: #5E5650">QR · Wallet</span></button>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= BOOKINGS ================= -->
+<sc-if value="{{isBookings}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">ჩემი ჯავშნები</h1>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px">
+<div role="group" aria-label="დრო" style="display: flex; gap: 4px; padding: 4px; background: #EFE7DC; border-radius: 999px">
+<sc-for list="{{whenTabs}}" as="t" hint-placeholder-count="2"><button type="button" onClick="{{t.pick}}" aria-pressed="{{t.onStr}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+</div>
+<div role="group" aria-label="ტიპი" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{kindTabs}}" as="t" hint-placeholder-count="4"><button type="button" onClick="{{t.pick}}" aria-pressed="{{t.onStr}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+</div>
+</div>
+<div style="background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 8px; padding: 8px 24px">
+<sc-if value="{{noBookings}}" hint-placeholder-val="{{false}}"><p style="margin: 0; padding: 24px 0; color: #5E5650">ამ ფილტრით ჯავშნები არ მოიძებნა.</p></sc-if>
+<sc-for list="{{bookingList}}" as="b" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; padding: 18px 0; border-bottom: 1px solid #EEE7DD">
+<span style="{{b.thumbStyle}}" aria-hidden="true"></span>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">{{b.kindLabel}} · {{b.place}}</span>
+<span style="font-size: 18px; font-weight: 600">{{b.when}}</span>
+<span style="font-size: 14px; color: #5E5650">{{b.detail}}</span>
+<span style="font-size: 13px; color: #5E5650">ჯავშნის № {{b.ref}} · {{b.points}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="{{b.statusStyle}}">{{b.statusLabel}}</span>
+<sc-if value="{{b.canManage}}" hint-placeholder-val="{{true}}">
+<button type="button" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 13px; cursor: pointer">კალენდარში</button>
+<a href="{{b.href}}" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 13px">შეცვლა</a>
+<button type="button" onClick="{{b.cancel}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #8E2C3A; font-size: 13px; cursor: pointer">გაუქმება</button>
+</sc-if>
+<sc-if value="{{b.needsReview}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{goReviews}}" style="min-height: 40px; padding: 0 16px; border-radius: 999px; border: 0; background: #8E2C3A; color: #FFFDF9; font-size: 13px; font-weight: 600; cursor: pointer">შეაფასეთ ვიზიტი</button>
+</sc-if>
+<sc-if value="{{b.isPast}}" hint-placeholder-val="{{false}}">
+<a href="{{b.href}}" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 13px">ხელახლა დაჯავშნა</a>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= POINTS ================= -->
+<sc-if value="{{isPoints}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">ქულები და დონეები</h1>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); gap: 12px">
+<div style="padding: 20px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #5E5650">ბალანსი</span><span style="font-size: 30px; font-weight: 400">{{pointsFmt}}</span></div>
+<div style="padding: 20px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #5E5650">ღირებულება</span><span style="font-size: 30px; font-weight: 400">[—] GEL</span></div>
+<div style="padding: 20px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #5E5650">ამ წელს დაგროვდა</span><span style="font-size: 30px; font-weight: 400">{{U.yearEarned}}</span></div>
+<div style="padding: 20px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #5E5650">იწურება 31 დეკ.</span><span style="font-size: 30px; font-weight: 400">{{U.expiring}}</span></div>
+</div>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px"><h2 style="margin: 0; font-size: 22px; font-weight: 500">თქვენი დონე: {{U.tier}}</h2><span style="color: #5E5650; font-size: 15px">{{toNextLabel}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 10px">
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="4">
+<div style="{{t.style}}">
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font-size: 20px; font-weight: 600">{{t.name}}</span><span style="font-size: 12px; font-weight: 600">{{t.flag}}</span></span>
+<span style="font-size: 13px; opacity: 0.85">{{t.req}}</span>
+<span style="font-size: 14px">{{t.perks}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="padding: 8px 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1">
+<h2 style="margin: 16px 0 4px; font-size: 22px; font-weight: 500">ისტორია</h2>
+<sc-for list="{{history}}" as="h" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; padding: 14px 0; border-bottom: 1px solid #EEE7DD">
+<span style="display: flex; flex-direction: column"><span style="font-weight: 500">{{h.title}}</span><span style="font-size: 13px; color: #5E5650">{{h.date}} · {{h.place}}</span></span>
+<span style="{{h.amountStyle}}">{{h.amount}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= REWARDS ================= -->
+<sc-if value="{{isRewards}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">ჯილდოები და ვაუჩერები</h1>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px">
+<sc-for list="{{rewards}}" as="r" hint-placeholder-count="6">
+<article style="padding: 20px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 8px">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #F7EDEE; color: #8E2C3A">{{r.tag}}</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 500">{{r.title}}</h3>
+<span style="font-size: 14px; color: #5E5650">{{r.where}}</span>
+<span style="font-size: 13px; color: #5E5650">{{r.until}}</span>
+<span style="flex: 1"></span>
+<sc-if value="{{r.shown}}" hint-placeholder-val="{{false}}">
+<div style="padding: 12px; border-radius: 6px; background: #F5F1EA; display: flex; flex-direction: column; gap: 2px; text-align: center"><span style="font-size: 12px; color: #5E5650">აჩვენეთ პერსონალს ან გამოიყენეთ ჯავშნისას</span><span style="font-size: 22px; font-weight: 600; letter-spacing: 0.14em">{{r.code}}</span></div>
+</sc-if>
+<button type="button" onClick="{{r.toggle}}" style="min-height: 44px; border-radius: 999px; border: 1px solid #1F1A17; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 600; cursor: pointer">{{r.btn}}</button>
+</article>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px">
+<div style="padding: 24px; border-radius: 8px; background: #8E2C3A; color: #FFFDF9; display: flex; flex-direction: column; gap: 10px; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 12px)">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F0D9DC">Episode Gift Card</span>
+<span style="font-size: 30px; font-weight: 300">ნაშთი: 180 GEL</span>
+<span style="font-size: 14px; color: #F7E6E8">250 GEL-დან · მოქმედებს ყველა სახლში და სასტუმროში</span>
+<a href="Main.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #FFFDF9; color: #1F1A17; text-decoration: none; font-size: 14px; font-weight: 600">გიფტ ბარათის ყიდვა</a>
+</div>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">შენახული შეთავაზებები</span>
+<a href="ChateauMere.dc.html" style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #EEE7DD; text-decoration: none; min-height: 44px; box-sizing: border-box"><span>ღვინის უიკენდი — Chateau Mere</span><span style="color: #5E5650; font-size: 14px">ნახვა</span></a>
+<a href="Magnolia.dc.html" style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; text-decoration: none; min-height: 44px; box-sizing: border-box"><span>Magnolia + თბილისის სახლში</span><span style="color: #5E5650; font-size: 14px">ნახვა</span></a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= CARD ================= -->
+<sc-if value="{{isCard}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">ციფრული ბარათი</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 420px; max-width: 520px; aspect-ratio: 1.6; border-radius: 18px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; color: #2B2112; background-color: #E3CF9F; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 12px)">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span style="font-size: 20px; font-weight: 600; letter-spacing: 0.32em">EPISODE</span><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border: 1px solid rgba(43,33,18,0.5); border-radius: 999px">{{U.tier}}</span></div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+<span style="display: flex; flex-direction: column"><span style="font-size: 24px">{{U.full}}</span><span style="font-size: 14px">{{pointsFmt}} ქულა · {{U.memberId}}</span></span>
+</div>
+</div>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+<div role="img" aria-label="წევრის QR კოდი" style="width: 220px; height: 220px; padding: 14px; box-sizing: border-box; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: grid; grid-template-columns: repeat(21, 1fr)">
+<sc-for list="{{qr}}" as="q" hint-placeholder-count="441"><span style="{{q}}"></span></sc-for>
+</div>
+<span style="color: #5E5650; font-size: 15px; max-width: 320px">აჩვენეთ QR რესტორანში ან რეცეფციაზე — სკანირებისას ავტომატურად გიცნობთ და ქულები დაგერიცხებათ.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" style="min-height: 48px; padding: 0 20px; border-radius: 999px; border: 0; background: #1F1A17; color: #FFFDF9; font-size: 14px; font-weight: 600; cursor: pointer">Apple Wallet</button>
+<button type="button" style="min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 500; cursor: pointer">Google Wallet</button>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= REVIEWS ================= -->
+<sc-if value="{{isReviews}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">ჩემი შეფასებები</h1>
+<sc-if value="{{reviewPending}}" hint-placeholder-val="{{true}}">
+<div style="padding: clamp(20px, 3vw, 32px); border-radius: 8px; background: #FFFDF9; border: 1.5px solid #8E2C3A; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8E2C3A; font-weight: 600">ელოდება შეფასებას · Verified Visit</span>
+<h2 style="margin: 0; font-size: 24px; font-weight: 500">როგორი იყო ქუთაისის სახლში?</h2>
+<span style="color: #5E5650; font-size: 15px">შაბათი, 3 ოქტომბერი · 6 სტუმარი</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{rateRows}}" as="row" hint-placeholder-count="5">
+<div role="group" aria-label="{{row.label}}" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 6px 0">
+<span style="font-size: 15px; min-width: 160px">{{row.label}}</span>
+<span style="display: flex; gap: 2px">
+<sc-for list="{{row.stars}}" as="st" hint-placeholder-count="5"><button type="button" onClick="{{st.pick}}" aria-label="{{st.aria}}" aria-pressed="{{st.onStr}}" style="width: 40px; height: 40px; border: 0; background: transparent; cursor: pointer; padding: 0; display: inline-flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="{{st.fill}}" stroke="{{st.stroke}}" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"></path></svg></button></sc-for>
+</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px">რამდენად ურჩევდით ამ ადგილს მეგობარს? (0–10)</span>
+<div role="group" aria-label="NPS" style="display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{nps}}" as="n" hint-placeholder-count="11"><button type="button" onClick="{{n.pick}}" aria-pressed="{{n.onStr}}" style="{{n.style}}">{{n.v}}</button></sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">რა მოგეწონათ?<textarea rows="3" style="padding: 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 15px; font-weight: 400; resize: vertical"></textarea></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">რის გაუმჯობესებას გვირჩევდით?<textarea rows="3" style="padding: 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 15px; font-weight: 400; resize: vertical"></textarea></label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<button type="button" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px dashed #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; cursor: pointer">+ ფოტო / ვიდეო</button>
+<button type="button" onClick="{{submitReview}}" disabled="{{cantSubmitReview}}" style="{{submitStyle}}">შეფასების გაგზავნა</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{reviewDone}}" hint-placeholder-val="{{false}}">
+<div role="status" style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 22px; font-weight: 500">გმადლობთ! თქვენი შეფასება: {{reviewAvg}} / 5</span>
+<span style="color: #5E5650">{{reviewFollowup}}</span>
+</div>
+</sc-if>
+<div style="padding: 8px 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1">
+<sc-for list="{{pastReviews}}" as="r" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 18px 0; border-bottom: 1px solid #EEE7DD">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px"><span style="font-weight: 600">{{r.place}}</span><span style="font-weight: 600">{{r.score}} / 5</span></div>
+<span style="font-size: 13px; color: #5E5650">{{r.date}} · Verified {{r.kind}}</span>
+<span style="font-size: 15px">{{r.text}}</span>
+<span style="font-size: 14px; color: #5E5650; padding-left: 14px; border-left: 2px solid #E4DCD1">{{r.reply}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- ================= PROFILE ================= -->
+<sc-if value="{{isProfile}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-size: clamp(30px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em">პროფილი და პარამეტრები</h1>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 500">პირადი ინფორმაცია</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">სახელი<input type="text" value="{{U.first}}" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">გვარი<input type="text" value="{{U.last}}" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">ტელეფონი<input type="tel" value="+995 5XX XX XX XX" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">ელფოსტა<input type="email" value="[ელფოსტა]" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">დაბადების თარიღი<input type="text" value="24 ოქტომბერი" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">საყვარელი ადგილი<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400"><option>ბათუმის სახლში</option><option>თბილისის სახლში</option><option>ქუთაისის სახლში</option><option>Hotel Magnolia</option><option>Chateau Mere</option></select></label>
+</div>
+</div>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 500">პრეფერენციები</h2>
+<div role="group" aria-label="პრეფერენციები" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{prefs}}" as="c" hint-placeholder-count="8"><button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.onStr}}" style="{{c.style}}">{{c.label}}</button></sc-for>
+</div>
+</div>
+<div style="padding: 24px; border-radius: 8px; background: #FFFDF9; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0 0 8px; font-size: 20px; font-weight: 500">შეტყობინებები</h2>
+<sc-for list="{{notify}}" as="n" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; border-top: 1px solid #EEE7DD; cursor: pointer">
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span style="font-size: 15px">{{n.label}}</span><span style="font-size: 13px; color: #5E5650">{{n.note}}</span></span>
+<input type="checkbox" role="switch" checked="{{n.on}}" onChange="{{n.toggle}}" style="width: 22px; height: 22px; accent-color: #8E2C3A">
+</label>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" style="min-height: 48px; padding: 0 24px; border-radius: 999px; border: 0; background: #8E2C3A; color: #FFFDF9; font-size: 15px; font-weight: 600; cursor: pointer">ცვლილებების შენახვა</button>
+<a href="Register.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 15px">გასვლა</a>
+</div>
+</div>
+</sc-if>
+
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: 'overview', when: 'upcoming', kind: 'all', cancelled: {}, shown: {},
+      rating: { food: 5, service: 4 }, nps: null, reviewSent: false,
+      prefs: { live: true, wine: true, georgian: true },
+      notify: { remind: true, events: true, offers: true, birthday: true, wa: false }
+    };
+  }
+
+  data() {
+    return {
+      user: { first: 'თოკო', last: '[გვარი]', tier: 'Gold', points: 12480, next: 20000, nextTier: 'Black', yearEarned: '6,920', expiring: '1,200', memberId: 'EP-[0000]' },
+      bookings: [
+        { id: 'b1', kind: 'table', place: 'ბათუმის სახლში', when: 'შაბათი, 17 ოქტომბერი · 20:30', detail: '4 სტუმარი · დაბადების დღე · თემატური საღამო 21:30', ref: 'BS-2417', points: '+ ქულები ვიზიტის შემდეგ', past: false, tone: '#2F4A5A', href: 'Batumi.dc.html' },
+        { id: 'b2', kind: 'hotel', place: 'Hotel Magnolia', when: '23 – 25 ოქტომბერი · 2 ღამე', detail: 'Deluxe Double · 2 მოზრდილი · საუზმით', ref: 'HM-0923', points: 'Book Direct', past: false, tone: '#4B3B4F', href: 'Magnolia.dc.html' },
+        { id: 'b3', kind: 'event', place: 'თბილისის სახლში', when: 'ორშაბათი, 26 ოქტომბერი · 21:00', detail: 'ჯაზის საღამო · რეგისტრაცია 2 ადამიანზე', ref: 'TS-E118', points: 'შეხსენება ჩართულია', past: false, tone: '#5A3A30', href: 'Tbilisi.dc.html' },
+        { id: 'p1', kind: 'table', place: 'ქუთაისის სახლში', when: 'შაბათი, 3 ოქტომბერი · 20:00', detail: '6 სტუმარი · ოჯახური ვახშამი', ref: 'KS-1903', points: '+410 ქულა', past: true, review: true, tone: '#6B5530', href: 'Kutaisi.dc.html' },
+        { id: 'p2', kind: 'table', place: 'ბათუმის სახლში', when: 'კვირა, 20 სექტემბერი · 21:00', detail: '2 სტუმარი · პაემანი', ref: 'BS-1877', points: '+186 ქულა', past: true, tone: '#2F4A5A', href: 'Batumi.dc.html' },
+        { id: 'p3', kind: 'hotel', place: 'Chateau Mere', when: '12 – 14 სექტემბერი · 2 ღამე', detail: 'ოთახი აივნით · ღვინის დეგუსტაცია', ref: 'CM-0912', points: '+1,240 ქულა', past: true, tone: '#3D4A33', href: 'ChateauMere.dc.html' }
+      ],
+      rewards: [
+        { id: 'r1', tag: 'Birthday', title: 'Birthday Gift + 1,500 ქულა', where: 'ნებისმიერი Episode-ის სახლი', until: 'მოქმედებს 24 ოქტ. – 7 ნოემ.', code: 'BDAY-[XXXX]' },
+        { id: 'r2', tag: 'Gold', title: 'Complimentary Wine', where: 'ბათუმის სახლში', until: 'ვადა: 31 ოქტომბერი', code: 'WINE-[XXXX]' },
+        { id: 'r3', tag: 'Gold', title: 'Hotel Upgrade', where: 'Hotel Magnolia', until: 'შემდეგი ვიზიტისთვის', code: 'UPGR-[XXXX]' },
+        { id: 'r4', tag: 'თქვენთვის', title: 'Free Dessert', where: 'თბილისის სახლში', until: 'ვადა: 15 ნოემბერი', code: 'DSRT-[XXXX]' },
+        { id: 'r5', tag: 'ივენთი', title: 'Double Points Night', where: 'ქუთაისის სახლში · პარასკევი', until: 'ვადა: 30 ოქტომბერი', code: 'x2' },
+        { id: 'r6', tag: 'სასტუმრო', title: 'Free Breakfast', where: 'Chateau Mere', until: 'ვადა: 31 დეკემბერი', code: 'BRKF-[XXXX]' }
+      ],
+      history: [
+        { title: 'ვიზიტი · ოჯახური ვახშამი', date: '3 ოქტომბერი', place: 'ქუთაისის სახლში', amount: 410 },
+        { title: 'ქულების გამოყენება · დეგუსტაცია', date: '13 სექტემბერი', place: 'Chateau Mere', amount: -1000 },
+        { title: 'დარჩენა · 2 ღამე', date: '14 სექტემბერი', place: 'Chateau Mere', amount: 1240 },
+        { title: 'ვიზიტი · პაემანი', date: '20 სექტემბერი', place: 'ბათუმის სახლში', amount: 186 },
+        { title: 'Double Points Night', date: '28 აგვისტო', place: 'ბათუმის სახლში', amount: 520 }
+      ],
+      pastReviews: [
+        { place: 'Chateau Mere', date: '15 სექტემბერი', kind: 'Stay', score: '4.8', text: 'აივნიდან ხედი და მარნის ტური — საუკეთესო უიკენდი.', reply: 'მენეჯერის პასუხი: გმადლობთ, თოკო! გელოდებით რთველზე.' },
+        { place: 'ბათუმის სახლში', date: '21 სექტემბერი', kind: 'Visit', score: '4.6', text: 'ცოცხალი მუსიკა შესანიშნავი იყო, მომსახურება — სწრაფი.', reply: 'მენეჯერის პასუხი: მადლობა შეფასებისთვის!' }
+      ]
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const D = this.data();
+    const A = '#8E2C3A';
+    const u = D.user;
+    const fmtN = (n) => n.toLocaleString('en-US');
+
+    const tabDefs = [
+      ['overview', 'მთავარი', '◎'], ['bookings', 'ჯავშნები', '▤'], ['points', 'ქულები და დონე', '★'],
+      ['rewards', 'ჯილდოები', '◇'], ['card', 'ციფრული ბარათი', '▦'], ['reviews', 'შეფასებები', '✎'], ['profile', 'პროფილი', '○']
+    ];
+    const badges = { bookings: '3', rewards: '6', reviews: s.reviewSent ? '' : '1' };
+    const tabs = tabDefs.map(([id, label, icon]) => {
+      const on = s.tab === id;
+      const b = badges[id] || '';
+      return {
+        label, icon, current: on ? 'page' : 'false', badge: b,
+        iconColor: on ? A : '#5E5650',
+        badgeStyle: b ? 'margin-left: auto; font-size: 12px; font-weight: 600; min-width: 22px; height: 22px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; ' + (on ? 'background: ' + A + '; color: #FFFDF9;' : 'background: #EFE7DC; color: #1F1A17;') : 'display: none;',
+        style: 'display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 0 14px; border-radius: 6px; border: 0; font-size: 15px; text-align: left; cursor: pointer; ' + (on ? 'background: #FFFDF9; color: #1F1A17; font-weight: 600; box-shadow: inset 0 0 0 1px #E4DCD1;' : 'background: transparent; color: #1F1A17; font-weight: 500;'),
+        pick: () => this.setState({ tab: id })
+      };
+    });
+    const go = (id) => () => this.setState({ tab: id });
+
+    const kindLabel = { table: 'მაგიდა', hotel: 'სასტუმრო', event: 'ივენთი' };
+    const statusPill = (bg, fg) => 'font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: ' + bg + '; color: ' + fg + ';';
+    const mapB = (b) => {
+      const cancelled = !!s.cancelled[b.id];
+      let label, style;
+      if (cancelled) { label = 'გაუქმებულია'; style = statusPill('#EEE7DD', '#5E5650'); }
+      else if (b.past) { label = 'დასრულდა'; style = statusPill('#EEE7DD', '#1F1A17'); }
+      else { label = 'დადასტურებულია'; style = statusPill('#DDE8D5', '#2C3D22'); }
+      return Object.assign({}, b, {
+        kindLabel: kindLabel[b.kind], statusLabel: label, statusStyle: style,
+        thumbStyle: 'flex: none; width: 72px; height: 72px; border-radius: 6px; background-color: ' + b.tone + '; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 12px);',
+        canManage: !b.past && !cancelled,
+        needsReview: b.past && !!b.review && !s.reviewSent,
+        isPast: b.past,
+        cancel: () => this.setState((st) => ({ cancelled: Object.assign({}, st.cancelled, { [b.id]: true }) }))
+      });
+    };
+    const upcomingPreview = D.bookings.filter((b) => !b.past).map(mapB);
+    const bookingList = D.bookings
+      .filter((b) => (s.when === 'past') === !!b.past)
+      .filter((b) => s.kind === 'all' || b.kind === s.kind)
+      .map(mapB);
+    const seg = (on) => 'min-height: 40px; padding: 0 16px; border-radius: 999px; border: 0; font-size: 14px; cursor: pointer; ' + (on ? 'background: #FFFDF9; color: #1F1A17; font-weight: 600;' : 'background: transparent; color: #5E5650;');
+    const chip = (on) => 'min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 14px; cursor: pointer; ' + (on ? 'background: #1F1A17; color: #FFFDF9; border: 1px solid #1F1A17; font-weight: 600;' : 'background: transparent; color: #1F1A17; border: 1px solid #CBBFAF;');
+    const whenTabs = [['upcoming', 'მომავალი'], ['past', 'წარსული']].map(([id, label]) => ({ label, onStr: s.when === id ? 'true' : 'false', style: seg(s.when === id), pick: () => this.setState({ when: id }) }));
+    const kindTabs = [['all', 'ყველა'], ['table', 'რესტორნები'], ['hotel', 'სასტუმროები'], ['event', 'ივენთები']].map(([id, label]) => ({ label, onStr: s.kind === id ? 'true' : 'false', style: chip(s.kind === id), pick: () => this.setState({ kind: id }) }));
+
+    const pct = Math.round(u.points / u.next * 100);
+    const tierDefs = [
+      { name: 'Member', req: 'რეგისტრაციიდან', perks: 'ქულები · დაბადების დღის საჩუქარი', bg: '#FFFDF9', fg: '#1F1A17', bd: '#E4DCD1' },
+      { name: 'Silver', req: '[X] ქულიდან', perks: 'მეტი ქულა · Welcome drink', bg: '#E7E5E1', fg: '#1F1A17', bd: '#D6D2CB' },
+      { name: 'Gold', req: '[X] ქულიდან', perks: 'Priority Reservation · Room Upgrade · Late Checkout', bg: '#EADCBE', fg: '#3A2D12', bd: '#D9C69C' },
+      { name: 'Black', req: '20,000 ქულიდან', perks: 'Private Invitations · Special Event Access', bg: '#1F1A17', fg: '#FFFDF9', bd: '#1F1A17' }
+    ];
+    const tiers = tierDefs.map((t) => ({
+      name: t.name, req: t.req, perks: t.perks,
+      flag: t.name === u.tier ? 'თქვენ აქ ხართ' : '',
+      style: 'padding: 18px; border-radius: 6px; display: flex; flex-direction: column; gap: 6px; background: ' + t.bg + '; color: ' + t.fg + '; border: ' + (t.name === u.tier ? '2px solid ' + A : '1px solid ' + t.bd) + ';'
+    }));
+    const history = D.history.map((h) => ({
+      title: h.title, date: h.date, place: h.place,
+      amount: (h.amount > 0 ? '+' : '−') + fmtN(Math.abs(h.amount)),
+      amountStyle: 'font-size: 17px; font-weight: 600; color: ' + (h.amount > 0 ? '#2C5A2A' : A) + ';'
+    }));
+
+    const rewards = D.rewards.map((r) => ({
+      tag: r.tag, title: r.title, where: r.where, until: r.until, code: r.code,
+      shown: !!s.shown[r.id],
+      btn: s.shown[r.id] ? 'დამალვა' : 'გამოყენება',
+      toggle: () => this.setState((st) => ({ shown: Object.assign({}, st.shown, { [r.id]: !st.shown[r.id] }) }))
+    }));
+
+    // QR 21x21
+    const N = 21, qr = [];
+    let seed = 7;
+    const finder = (r, c) => {
+      const inBox = (r0, c0) => r >= r0 && r < r0 + 7 && c >= c0 && c < c0 + 7;
+      const boxes = [[0, 0], [0, N - 7], [N - 7, 0]];
+      for (const [r0, c0] of boxes) if (inBox(r0, c0)) {
+        const rr = r - r0, cc = c - c0;
+        return (rr === 0 || rr === 6 || cc === 0 || cc === 6 || (rr >= 2 && rr <= 4 && cc >= 2 && cc <= 4)) ? 1 : 0;
+      }
+      return null;
+    };
+    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
+      let f = finder(r, c);
+      if (f === null) {
+        const nearFinder = (r < 8 && c < 8) || (r < 8 && c > N - 9) || (r > N - 9 && c < 8);
+        seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+        f = nearFinder ? 0 : ((seed >> 16) & 1);
+      }
+      qr.push('background: ' + (f ? '#1F1A17' : 'transparent') + ';');
+    }
+
+    const rateCats = [['food', 'კერძები'], ['service', 'მომსახურება'], ['atmo', 'ატმოსფერო'], ['music', 'მუსიკა / ივენთი'], ['clean', 'სისუფთავე']];
+    const rateRows = rateCats.map(([id, label]) => ({
+      label,
+      stars: [1, 2, 3, 4, 5].map((v) => {
+        const on = (s.rating[id] || 0) >= v;
+        return {
+          aria: label + ': ' + v + ' ვარსკვლავი', onStr: on ? 'true' : 'false',
+          fill: on ? '#C98A1B' : 'none', stroke: on ? '#C98A1B' : '#A39A91',
+          pick: () => this.setState((st) => ({ rating: Object.assign({}, st.rating, { [id]: v }) }))
+        };
+      })
+    }));
+    const rated = rateCats.map(([id]) => s.rating[id]).filter(Boolean);
+    const avg = rated.length ? (rated.reduce((a, b) => a + b, 0) / rated.length) : 0;
+    const allRated = rated.length === rateCats.length;
+    const nps = Array.from({ length: 11 }, (_, v) => ({
+      v, onStr: s.nps === v ? 'true' : 'false',
+      style: 'min-height: 44px; border-radius: 4px; font-size: 15px; cursor: pointer; ' + (s.nps === v ? 'background: ' + A + '; color: #FFFDF9; border: 1px solid ' + A + '; font-weight: 600;' : 'background: #FFFDF9; color: #1F1A17; border: 1px solid #DCD2C5;'),
+      pick: () => this.setState({ nps: v })
+    }));
+    const canSubmit = allRated && s.nps !== null;
+
+    const prefDefs = [['live','ცოცხალი მუსიკა'],['jazz','ჯაზი'],['wine','ღვინო'],['georgian','ქართული სუფრა'],['spa','სპა'],['family','ოჯახური'],['veg','ვეგეტარიანული'],['sport','სპორტი']];
+    const prefs = prefDefs.map(([id, label]) => ({ label, onStr: s.prefs[id] ? 'true' : 'false', style: chip(!!s.prefs[id]) + ' min-height: 44px;', toggle: () => this.setState((st) => ({ prefs: Object.assign({}, st.prefs, { [id]: !st.prefs[id] }) })) }));
+    const notifyDefs = [
+      ['remind', 'ჯავშნის შეხსენება', 'SMS · 24 საათით ადრე'],
+      ['events', 'ივენთების განრიგი', 'როცა თქვენი საყვარელი ჟანრის საღამოა'],
+      ['offers', 'პერსონალური შეთავაზებები', 'ელფოსტა'],
+      ['birthday', 'დაბადების დღის შეთავაზება', '14 დღით ადრე'],
+      ['wa', 'WhatsApp შეტყობინებები', 'ჯავშნის დადასტურება']
+    ];
+    const notify = notifyDefs.map(([id, label, note]) => ({ label, note, on: !!s.notify[id], toggle: () => this.setState((st) => ({ notify: Object.assign({}, st.notify, { [id]: !st.notify[id] }) })) }));
+
+    return {
+      U: { first: u.first, last: u.last, full: u.first + ' ' + u.last, initial: u.first.charAt(0), tier: u.tier, yearEarned: u.yearEarned, expiring: u.expiring, memberId: u.memberId },
+      tabs,
+      isOverview: s.tab === 'overview', isBookings: s.tab === 'bookings', isPoints: s.tab === 'points',
+      isRewards: s.tab === 'rewards', isCard: s.tab === 'card', isReviews: s.tab === 'reviews', isProfile: s.tab === 'profile',
+      goPoints: go('points'), goRewards: go('rewards'), goBookings: go('bookings'), goCard: go('card'), goReviews: go('reviews'), goProfile: go('profile'),
+      pointsFmt: fmtN(u.points),
+      progressPct: pct,
+      progressStyle: 'height: 100%; width: ' + pct + '%; background: #B08A3E; border-radius: 4px;',
+      toNextLabel: fmtN(u.next - u.points) + ' ქულა ' + u.nextTier + '-მდე',
+      upcomingPreview,
+      rewardsPreview: D.rewards.slice(0, 3),
+      whenTabs, kindTabs, bookingList, noBookings: bookingList.length === 0,
+      tiers, history,
+      rewards,
+      qr,
+      reviewPending: !s.reviewSent, reviewDone: s.reviewSent,
+      rateRows, nps,
+      cantSubmitReview: !canSubmit,
+      submitStyle: 'min-height: 48px; padding: 0 24px; border-radius: 999px; border: 0; font-size: 15px; font-weight: 600; ' + (canSubmit ? 'background: ' + A + '; color: #FFFDF9; cursor: pointer;' : 'background: #D9CFC4; color: #5E5650; cursor: not-allowed;'),
+      submitReview: () => this.setState({ reviewSent: true }),
+      reviewAvg: avg.toFixed(1),
+      reviewFollowup: avg >= 4 ? 'მოგეწონათ? გაგვიზიარეთ შეფასება Google-ზე ან Tripadvisor-ზე — ეს ძალიან გვეხმარება.' : 'ბოდიშს გიხდით. თქვენი შეფასება პირდაპირ მენეჯერს გადაეცა და მალე დაგიკავშირდებით.',
+      pastReviews: D.pastReviews,
+      prefs, notify
+    };
+  }
+}
+</script>
+</body>
+</html>

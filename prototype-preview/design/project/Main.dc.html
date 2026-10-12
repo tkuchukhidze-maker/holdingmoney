@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Episode — Homepage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=Noto+Sans+Georgian:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F1EA}
+a{color:#1F1A17}a:hover{color:#8E2C3A}
+select,input,button{font:inherit}
+</style>
+</helmet>
+<div style="background: #F5F1EA; color: #1F1A17; font-family: 'Hanken Grotesk', 'Helvetica Neue', system-ui, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased">
+
+<!-- HEADER -->
+<header style="border-bottom: 1px solid #E4DCD1; background: #FFFDF9">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+<a href="#top" style="display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: #1F1A17">
+<span style="font-size: 22px; font-weight: 600; letter-spacing: 0.32em">EPISODE</span>
+<span style="font-size: 12px; letter-spacing: 0.14em; color: #5E5650; text-transform: uppercase">Holding</span>
+</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px 28px; font-size: 15px; font-weight: 500">
+<a href="#houses" style="text-decoration: none; padding: 10px 0">Restaurants</a>
+<a href="#houses" style="text-decoration: none; padding: 10px 0">Hotels</a>
+<a href="#tonight" style="text-decoration: none; padding: 10px 0">Events</a>
+<a href="#loyalty" style="text-decoration: none; padding: 10px 0">Loyalty</a>
+<a href="#gift" style="text-decoration: none; padding: 10px 0">Gift Cards</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #5E5650">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">City</span>
+<select style="border: 0; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 500; min-height: 44px; cursor: pointer">
+<option>All cities</option><option>Tbilisi</option><option>Batumi</option><option>Kutaisi</option><option>Telavi</option>
+</select>
+</label>
+<a href="MyEpisode.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #1F1A17; color: #FFFDF9; text-decoration: none; font-size: 14px; font-weight: 600">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>
+My Episode</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; margin-bottom: 40px">
+<h1 style="margin: 0; font-size: clamp(44px, 6.4vw, 92px); line-height: 0.98; font-weight: 300; letter-spacing: -0.035em; max-width: 820px; text-wrap: balance">One account. <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; color: {{accent}}">Every</span> experience.</h1>
+<p style="margin: 0; max-width: 380px; font-size: 18px; color: #5E5650; text-wrap: pretty">Three houses, two hotels and a new programme every night — across Tbilisi, Batumi, Kutaisi and Telavi. One profile, one wallet of points, one history.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 20px">
+<!-- Dine -->
+<a href="#houses" style="position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 540px; border-radius: 6px; overflow: hidden; text-decoration: none; color: #FFFDF9; background-color: #4A2A2C; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px)">
+<span style="position: absolute; top: 20px; left: 20px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 10px; border: 1px solid rgba(255,253,249,0.45); border-radius: 999px">Photo · Dining room, evening light</span>
+<div style="padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 16px; background: rgba(31,20,20,0.55)">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #E9D9CF">Restaurants · 3 houses</span>
+<span style="font-size: clamp(34px, 3.6vw, 52px); line-height: 1; font-weight: 300; letter-spacing: -0.02em">Dine at the <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">Houses</span></span>
+<span style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 15px; color: #F1E6DE">
+<span>Tbilisis Sakhlshi</span><span>Batumis Sakhlshi</span><span>Kutaisis Sakhlshi</span>
+</span>
+<span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #FFFDF9; color: #1F1A17; font-weight: 600; font-size: 15px">Book a table
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</div>
+</a>
+<!-- Stay -->
+<a href="#houses" style="position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 540px; border-radius: 6px; overflow: hidden; text-decoration: none; color: #FFFDF9; background-color: #33402F; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px)">
+<span style="position: absolute; top: 20px; left: 20px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 10px; border: 1px solid rgba(255,253,249,0.45); border-radius: 999px">Photo · Chateau Mere vineyard, morning</span>
+<div style="padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 16px; background: rgba(20,26,18,0.55)">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #DCE3D3">Hotels · 2 stays</span>
+<span style="font-size: clamp(34px, 3.6vw, 52px); line-height: 1; font-weight: 300; letter-spacing: -0.02em">Stay with <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">Episode</span></span>
+<span style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 15px; color: #E6EBDF">
+<span>Hotel Magnolia, Tbilisi</span><span>Chateau Mere, Telavi</span>
+</span>
+<span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #FFFDF9; color: #1F1A17; font-weight: 600; font-size: 15px">Book a room
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</div>
+</a>
+</div>
+
+<!-- Booking bar -->
+<div style="margin-top: 20px; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: 8px 8px 20px">
+<div role="tablist" aria-label="What would you like to book?" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 0 0 16px; border-bottom: 1px solid #EEE7DD">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+<button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{isTable}}" hint-placeholder-val="{{true}}">
+<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; align-items: end; padding: 16px 12px 0">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Restaurant
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>Batumis Sakhlshi</option><option>Tbilisis Sakhlshi</option><option>Kutaisis Sakhlshi</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Date
+<input type="text" value="Tonight, 12 Oct" style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Time
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>20:30</option><option>21:00</option><option>21:30</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Guests
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>2 guests</option><option>4 guests</option><option>6 guests</option><option>8+ guests</option></select></label>
+<button type="button" style="min-height: 48px; padding: 0 24px; border: 0; border-radius: 4px; background: {{accent}}; color: #FFFDF9; font-size: 16px; font-weight: 600; cursor: pointer">Find a table</button>
+</form>
+</sc-if>
+
+<sc-if value="{{isRoom}}" hint-placeholder-val="{{false}}">
+<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; align-items: end; padding: 16px 12px 0">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Hotel
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>Hotel Magnolia, Tbilisi</option><option>Chateau Mere, Telavi</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Check-in
+<input type="text" value="Fri, 16 Oct" style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Check-out
+<input type="text" value="Sun, 18 Oct" style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Guests
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>2 adults</option><option>2 adults, 1 child</option><option>1 adult</option></select></label>
+<button type="button" style="min-height: 48px; padding: 0 24px; border: 0; border-radius: 4px; background: {{accent}}; color: #FFFDF9; font-size: 16px; font-weight: 600; cursor: pointer">Check availability</button>
+</form>
+</sc-if>
+
+<sc-if value="{{isEvent}}" hint-placeholder-val="{{false}}">
+<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; align-items: end; padding: 16px 12px 0">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">City
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>All cities</option><option>Tbilisi</option><option>Batumi</option><option>Kutaisi</option><option>Telavi</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">When
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>Tonight</option><option>This weekend</option><option>Next 7 days</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Type
+<select style="min-height: 48px; padding: 0 12px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; letter-spacing: 0; text-transform: none"><option>Any</option><option>Live Music</option><option>Guest Artists</option><option>Wine Dinner</option><option>Theme Nights</option><option>Sports</option></select></label>
+<button type="button" style="min-height: 48px; padding: 0 24px; border: 0; border-radius: 4px; background: {{accent}}; color: #FFFDF9; font-size: 16px; font-weight: 600; cursor: pointer">See events</button>
+</form>
+</sc-if>
+</div>
+</section>
+
+<!-- PERSONAL / SIGN-UP BAND -->
+<section id="my-episode" style="max-width: 1280px; margin: 0 auto; padding: 24px clamp(20px, 4vw, 48px) 0">
+<sc-if value="{{signedIn}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px 40px; padding: 24px 28px; border-radius: 6px; background: #EFE7DC">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">For you, Toko</span>
+<span style="font-size: 20px; line-height: 1.35; text-wrap: pretty">Tonight at Batumis Sakhlshi: Georgian Live Music starts at 21:00. Your favourite table area is free at 20:30.</span>
+</div>
+<div style="flex: 1 1 260px; display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#tonight" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #1F1A17; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 14px">Reserve 20:30</a>
+<a href="#loyalty" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 14px; font-weight: 500">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #B08A3E"></span>Gold · [POINTS] pts</a>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{signedOut}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; padding: 24px 28px; border-radius: 6px; background: #EFE7DC">
+<span style="font-size: 20px; line-height: 1.35; max-width: 640px; text-wrap: pretty">Create your Episode account — earn points at every house and hotel, and get offers made for you.</span>
+<a href="Register.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: #1F1A17; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 14px">Join Episode</a>
+</div>
+</sc-if>
+</section>
+
+<!-- TONIGHT -->
+<section id="tonight" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: {{accent}}; font-weight: 600">What’s happening today</span>
+<h2 style="margin: 0; font-size: clamp(36px, 4.4vw, 60px); line-height: 1; font-weight: 300; letter-spacing: -0.03em">Tonight at <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">Episode</span></h2>
+</div>
+<div role="group" aria-label="Filter by city" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{cities}}" as="c" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{c.selected}}" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{events}}" as="e" hint-placeholder-count="4">
+<article style="display: flex; flex-direction: column; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; overflow: hidden">
+<div style="{{e.photoStyle}}">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{e.photo}}</span>
+<span style="{{e.badgeStyle}}">{{e.status}}</span>
+</div>
+<div style="padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 6px; flex: 1">
+<span style="display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: #5E5650"><span>{{e.type}}</span><span style="font-weight: 600; color: #1F1A17">{{e.time}}</span></span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 500; letter-spacing: -0.01em">{{e.title}}</h3>
+<span style="font-size: 14px; color: #5E5650">{{e.venue}} · {{e.city}}</span>
+<span style="flex: 1"></span>
+<a href="#tonight" style="margin-top: 14px; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 999px; border: 1px solid #1F1A17; text-decoration: none; font-size: 14px; font-weight: 600">{{e.cta}}</a>
+</div>
+</article>
+</sc-for>
+</div>
+<div style="margin-top: 24px; display: flex; justify-content: flex-end">
+<a href="#tonight" style="font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; min-height: 44px">Full events calendar
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</section>
+
+<!-- THE HOUSES & HOTELS -->
+<section id="houses" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: {{accent}}; font-weight: 600">The Episode family</span>
+<h2 style="margin: 0; font-size: clamp(36px, 4.4vw, 60px); line-height: 1; font-weight: 300; letter-spacing: -0.03em">Five places, <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">one</span> host</h2>
+</div>
+<p style="margin: 0; max-width: 400px; color: #5E5650">Each place has its own character. Your account, points and preferences travel with you to all of them.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{places}}" as="p" hint-placeholder-count="5">
+<a href="{{p.href}}" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1F1A17">
+<div style="{{p.photoStyle}}">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{p.photo}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">{{p.kind}} · {{p.city}}</span>
+<span style="font-size: 22px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2">{{p.name}}</span>
+<span lang="ka" style="font-family: 'Noto Sans Georgian', sans-serif; font-size: 14px; color: #5E5650">{{p.ka}}</span>
+<span style="margin-top: 8px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: {{p.ctaColor}}">{{p.cta}}
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- LOYALTY -->
+<section id="loyalty" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: clamp(28px, 4vw, 56px)">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: {{accent}}; font-weight: 600">Episode Loyalty</span>
+<h2 style="margin: 0; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.04; font-weight: 300; letter-spacing: -0.025em">Earn at dinner. <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">Spend</span> on a weekend away.</h2>
+<p style="margin: 0; color: #5E5650; max-width: 460px">Every GEL you spend at any Episode house, hotel or event earns Episode Points — one balance, used anywhere in the holding.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4.5 4.5L19 7"></path></svg><span>Book direct and get Episode benefits you won’t find on booking sites</span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4.5 4.5L19 7"></path></svg><span>A birthday gift and bonus points, every year</span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4.5 4.5L19 7"></path></svg><span>Priority reservations and private invitations as your tier grows</span></li>
+</ul>
+<a href="Register.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #1F1A17; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 15px">Join Episode — it’s free</a>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; align-content: start">
+<div style="padding: 22px; border-radius: 6px; background: #F5F1EA; border: 1px solid #E4DCD1; display: flex; flex-direction: column; gap: 8px; min-height: 150px">
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #5E5650">Tier 1</span>
+<span style="font-size: 26px; font-weight: 500">Member</span>
+<span style="font-size: 14px; color: #5E5650">Points on every visit · Birthday gift · Saved offers</span>
+</div>
+<div style="padding: 22px; border-radius: 6px; background: #E7E5E1; border: 1px solid #D6D2CB; display: flex; flex-direction: column; gap: 8px; min-height: 150px">
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #5E5650">Tier 2</span>
+<span style="font-size: 26px; font-weight: 500">Silver</span>
+<span style="font-size: 14px; color: #5E5650">More points · Welcome drink · Birthday bonus</span>
+</div>
+<div style="padding: 22px; border-radius: 6px; background: #EADCBE; border: 1px solid #D9C69C; display: flex; flex-direction: column; gap: 8px; min-height: 150px">
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #5C4A24">Tier 3</span>
+<span style="font-size: 26px; font-weight: 500">Gold</span>
+<span style="font-size: 14px; color: #5C4A24">Priority reservation · Room upgrade · Late checkout</span>
+</div>
+<div style="padding: 22px; border-radius: 6px; background: #1F1A17; display: flex; flex-direction: column; gap: 8px; min-height: 150px; color: #FFFDF9">
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #CFC6BB">Tier 4</span>
+<span style="font-size: 26px; font-weight: 500">Black</span>
+<span style="font-size: 14px; color: #CFC6BB">Private invitations · Special event access</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- GIFT CARDS -->
+<section id="gift" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 48px)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px">
+<div style="flex: 1 1 360px; min-width: 0; aspect-ratio: 1.6; max-width: 520px; border-radius: 14px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; color: #FFFDF9; background-color: {{accent}}; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 12px)">
+<span style="font-size: 18px; font-weight: 600; letter-spacing: 0.32em">EPISODE</span>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 40px; line-height: 1">Gift Card</span>
+<span style="font-size: 28px; font-weight: 300">250 GEL</span>
+</div>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.04; font-weight: 300; letter-spacing: -0.025em">Give a dinner, a night, or both.</h2>
+<p style="margin: 0; color: #5E5650; max-width: 460px">One Episode Gift Card works at every house and hotel.</p>
+<div role="group" aria-label="Gift card amount" style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 15px; cursor: pointer">100 GEL</button>
+<button type="button" aria-pressed="true" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #1F1A17; background: #1F1A17; color: #FFFDF9; font-size: 15px; cursor: pointer">250 GEL</button>
+<button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 15px; cursor: pointer">500 GEL</button>
+<button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 15px; cursor: pointer">Custom amount</button>
+</div>
+<a href="#gift" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #1F1A17; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 15px">Buy a gift card</a>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid #E4DCD1; background: #EFE7DC">
+<div style="max-width: 1280px; margin: 0 auto; padding: 56px clamp(20px, 4vw, 48px) 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 20px; font-weight: 600; letter-spacing: 0.32em">EPISODE</span>
+<span style="color: #5E5650; font-size: 14px">One account. Every experience.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">Restaurants</span>
+<a href="#houses" style="text-decoration: none">Tbilisis Sakhlshi</a><a href="#houses" style="text-decoration: none">Batumis Sakhlshi</a><a href="#houses" style="text-decoration: none">Kutaisis Sakhlshi</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">Hotels</span>
+<a href="#houses" style="text-decoration: none">Hotel Magnolia</a><a href="#houses" style="text-decoration: none">Chateau Mere</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">Episode</span>
+<a href="#tonight" style="text-decoration: none">Events</a><a href="#loyalty" style="text-decoration: none">Loyalty</a><a href="#gift" style="text-decoration: none">Gift Cards</a><a href="#top" style="text-decoration: none">Corporate</a>
+</div>
+</div>
+<div style="max-width: 1280px; margin: 0 auto; padding: 20px clamp(20px, 4vw, 48px) 32px; border-top: 1px solid #DCD2C5; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #5E5650">
+<span>© Episode Holding</span>
+<span style="display: flex; gap: 16px"><a href="#top" style="text-decoration: none; color: #5E5650">ქართული</a><a href="#top" style="text-decoration: none; color: #5E5650">English</a><a href="#top" style="text-decoration: none; color: #5E5650">Русский</a></span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#8E2C3A","options":["#8E2C3A","#4A5D3F","#2F4A6B","#9A5B2E"]},"signedIn":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":5000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'table', city: 'All' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#8E2C3A';
+    const signedIn = this.props.signedIn ?? true;
+    const tab = this.state.tab;
+    const city = this.state.city;
+
+    const tabBase = 'min-height: 44px; padding: 0 18px; border: 0; border-radius: 4px; font-size: 15px; cursor: pointer; ';
+    const tabs = [
+      { id: 'table', label: 'Book a Table' },
+      { id: 'room', label: 'Book a Room' },
+      { id: 'event', label: 'Events' }
+    ].map((t) => ({
+      ...t,
+      selected: t.id === tab ? 'true' : 'false',
+      style: tabBase + (t.id === tab ? 'background: #F5F1EA; color: #1F1A17; font-weight: 600;' : 'background: transparent; color: #5E5650; font-weight: 500;'),
+      pick: () => this.setState({ tab: t.id })
+    }));
+
+    const chipBase = 'min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; cursor: pointer; ';
+    const cities = ['All', 'Tbilisi', 'Batumi', 'Kutaisi', 'Telavi'].map((c) => ({
+      label: c === 'All' ? 'All cities' : c,
+      selected: c === city ? 'true' : 'false',
+      style: chipBase + (c === city ? 'border: 1px solid #1F1A17; background: #1F1A17; color: #FFFDF9; font-weight: 600;' : 'border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-weight: 500;'),
+      pick: () => this.setState({ city: c })
+    }));
+
+    const tone = { Batumi: '#2F4A5A', Tbilisi: '#5A3A30', Kutaisi: '#6B5530', Telavi: '#3D4A33' };
+    const photoBase = 'position: relative; height: 200px; padding: 16px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px); background-color: ';
+    const badge = {
+      'Few seats left': 'flex: none; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #F3D9A8; color: #4A3410;',
+      'Sold out': 'flex: none; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #FFFDF9; color: #5E5650;',
+      'Tables open': 'flex: none; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #DDE8D5; color: #2C3D22;'
+    };
+    const allEvents = [
+      { city: 'Batumi', venue: 'Batumis Sakhlshi', type: 'Live Music', time: '21:00', title: 'Georgian Live Music', status: 'Few seats left', photo: 'Musicians on stage', cta: 'Reserve a table' },
+      { city: 'Tbilisi', venue: 'Tbilisis Sakhlshi', type: 'Wine Dinner', time: '[20:00]', title: '[Wine dinner title]', status: 'Tables open', photo: 'Wine pairing', cta: 'Reserve a table' },
+      { city: 'Kutaisi', venue: 'Kutaisis Sakhlshi', type: 'Guest Artist', time: '[21:30]', title: '[Guest artist name]', status: 'Tables open', photo: 'Guest artist', cta: 'Reserve a table' },
+      { city: 'Telavi', venue: 'Chateau Mere', type: 'Special Dinner', time: '[19:30]', title: '[Special dinner title]', status: 'Few seats left', photo: 'Cellar dinner', cta: 'Book dinner' },
+      { city: 'Tbilisi', venue: 'Tbilisis Sakhlshi', type: 'Sports Screening', time: '[22:00]', title: '[Match name]', status: 'Sold out', photo: 'Big screen', cta: 'Join waitlist' }
+    ];
+    const events = allEvents
+      .filter((e) => city === 'All' || e.city === city)
+      .slice(0, 4)
+      .map((e) => ({ ...e, photoStyle: photoBase + tone[e.city], badgeStyle: badge[e.status] }));
+
+    const placeBase = 'aspect-ratio: 4 / 5; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; align-items: flex-start; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px); background-color: ';
+    const places = [
+      { kind: 'Restaurant', city: 'Tbilisi', name: 'Tbilisis Sakhlshi', ka: 'თბილისის სახლში', photo: 'Facade', cta: 'Book a table', bg: '#5A3A30' },
+      { kind: 'Restaurant', city: 'Batumi', name: 'Batumis Sakhlshi', ka: 'ბათუმის სახლში', photo: 'Terrace', cta: 'Book a table', bg: '#2F4A5A' },
+      { kind: 'Restaurant', city: 'Kutaisi', name: 'Kutaisis Sakhlshi', ka: 'ქუთაისის სახლში', photo: 'Dining hall', cta: 'Book a table', bg: '#6B5530' },
+      { kind: 'Hotel', city: 'Tbilisi', name: 'Hotel Magnolia', ka: 'სასტუმრო მაგნოლია', photo: 'Suite', cta: 'Book a room', bg: '#4B3B4F' },
+      { kind: 'Hotel', city: 'Telavi', name: 'Chateau Mere', ka: 'შატო მერე', photo: 'Vineyard', cta: 'Book a room', bg: '#3D4A33' }
+    ].map((p) => ({ ...p, href: ({ 'Batumis Sakhlshi': 'Batumi.dc.html', 'Kutaisis Sakhlshi': 'Kutaisi.dc.html', 'Tbilisis Sakhlshi': 'Tbilisi.dc.html', 'Hotel Magnolia': 'Magnolia.dc.html', 'Chateau Mere': 'ChateauMere.dc.html' })[p.name] || '#houses', photoStyle: placeBase + p.bg, ctaColor: p.kind === 'Hotel' ? '#4A5D3F' : accent }));
+
+    return {
+      accent,
+      signedIn,
+      signedOut: !signedIn,
+      tabs,
+      isTable: tab === 'table',
+      isRoom: tab === 'room',
+      isEvent: tab === 'event',
+      cities,
+      events,
+      places
+    };
+  }
+}
+</script>
+</body>
+</html>

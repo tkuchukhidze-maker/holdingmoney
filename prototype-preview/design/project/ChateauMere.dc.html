@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<title>Chateau Mere, Telavi — Episode</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=Noto+Sans+Georgian:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F1EA}
+a{color:#1F1A17}a:hover{color:#4A5D3F}
+select,input,button,textarea{font:inherit}
+.room-card .room-ph{transition:transform .35s ease}
+.room-card:hover .room-ph{transform:scale(1.04)}
+.room-card:hover{box-shadow:0 12px 32px rgba(31,26,23,0.10)}
+@media (max-width: 720px){.cal-cell{min-height:44px!important;padding:4px!important}}
+</style>
+</helmet>
+<div style="background: #F5F1EA; color: #1F1A17; font-family: 'Hanken Grotesk', 'Noto Sans Georgian', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+
+<!-- HEADER -->
+<header style="border-bottom: 1px solid #E4DCD1; background: #FFFDF9">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); min-height: 80px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<a href="#top" style="display: flex; flex-direction: column; text-decoration: none; color: #1F1A17; line-height: 1.15; padding: 8px 0">
+<span style="font-size: 26px; letter-spacing: -0.01em"><span style="font-weight: 500">{{H.namePre}}</span> <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">{{H.nameMain}}</span></span>
+<span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #5E5650">{{H.subline}}</span>
+</a>
+<nav aria-label="მთავარი" style="display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; font-weight: 500">
+<a href="#rooms" style="text-decoration: none; padding: 10px 0">ოთახები</a>
+<a href="#offers" style="text-decoration: none; padding: 10px 0">შეთავაზებები</a>
+<a href="#services" style="text-decoration: none; padding: 10px 0">სერვისები</a>
+<a href="#booking" style="text-decoration: none; padding: 10px 0">დაჯავშნა</a>
+<a href="#reviews" style="text-decoration: none; padding: 10px 0">შეფასებები</a>
+<a href="#contact" style="text-decoration: none; padding: 10px 0">კონტაქტი</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 10px">
+<sc-if value="{{registered}}" hint-placeholder-val="{{false}}">
+<a href="#member" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 14px; font-weight: 500"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{accent}}"></span>My Episode</a>
+</sc-if>
+<sc-if value="{{notRegistered}}" hint-placeholder-val="{{true}}">
+<a href="#member" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 14px; font-weight: 500">შესვლა</a>
+</sc-if>
+<a href="#booking" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: {{accent}}; color: #FFFDF9; text-decoration: none; font-size: 14px; font-weight: 600">ოთახის დაჯავშნა</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="max-width: 1280px; margin: 0 auto; padding: 24px clamp(20px, 4vw, 48px) 0">
+<div style="position: relative; min-height: 600px; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; color: #FFFDF9; background-color: #3D4A33; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px)">
+<span style="align-self: flex-start; margin: 20px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 10px; border: 1px solid rgba(255,253,249,0.45); border-radius: 999px">Photo · {{H.heroPhoto}}</span>
+<div style="padding: clamp(24px, 4vw, 56px); display: flex; flex-direction: column; gap: 28px; background: rgba(22,28,18,0.58)">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #CFDAC4">{{H.eyebrow}}</span>
+<h1 style="margin: 0; font-size: clamp(44px, 6vw, 84px); line-height: 1; font-weight: 300; letter-spacing: -0.03em">{{H.namePre}} <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400">{{H.nameMain}}</span></h1>
+<p style="margin: 0; font-size: 19px; color: #E2E8DA; text-wrap: pretty">{{H.tagline}}</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 1px; background: rgba(255,253,249,0.35); border-radius: 6px; overflow: hidden">
+<a href="#booking" style="display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: #FFFDF9; color: #1F1A17; text-decoration: none; min-height: 48px"><span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Check-in</span><span style="font-size: 17px; font-weight: 500">{{ciLabel}}</span></a>
+<a href="#booking" style="display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: #FFFDF9; color: #1F1A17; text-decoration: none; min-height: 48px"><span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">Check-out</span><span style="font-size: 17px; font-weight: 500">{{coLabel}}</span></a>
+<a href="#booking" style="display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: #FFFDF9; color: #1F1A17; text-decoration: none; min-height: 48px"><span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5650">სტუმრები</span><span style="font-size: 17px; font-weight: 500">{{guestsLabel}}</span></a>
+<a href="#booking" style="display: flex; align-items: center; justify-content: center; padding: 14px 18px; background: {{accent}}; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 16px; min-height: 48px">ხელმისაწვდომობა</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}}; font-weight: 600">შეთავაზებები და პრომოუშენები</span>
+<h2 style="margin: 0; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; font-weight: 300; letter-spacing: -0.025em">მხოლოდ პირდაპირი ჯავშნით</h2>
+</div>
+<p style="margin: 0; max-width: 420px; color: #5E5650">აირჩიეთ შეთავაზება — ის ავტომატურად აისახება თქვენს ჯავშანზე. Episode-ის წევრებს დამატებით ქულები ერიცხებათ.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{offers}}" as="o" hint-placeholder-count="4">
+<article style="{{o.cardStyle}}">
+<div style="{{o.photoStyle}}">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{o.photo}}</span>
+<span style="flex: none; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #FFFDF9; color: #1F1A17">{{o.tag}}</span>
+</div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+<h3 style="margin: 0; font-size: 21px; font-weight: 500; line-height: 1.25">{{o.title}}</h3>
+<p style="margin: 0; color: #5E5650; font-size: 15px">{{o.text}}</p>
+<span style="font-size: 13px; color: #5E5650">{{o.terms}}</span>
+<span style="flex: 1"></span>
+<a href="#booking" onClick="{{o.pick}}" style="{{o.btnStyle}}">{{o.btnLabel}}</a>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}}; font-weight: 600">ოთახები</span>
+<h2 style="margin: 0; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; font-weight: 300; letter-spacing: -0.025em">{{H.roomsTitle}}</h2>
+</div>
+<p style="margin: 0; max-width: 420px; color: #5E5650">{{H.roomsIntro}} დააჭირეთ ოთახს, რომ დეტალურად ნახოთ.</p>
+</div>
+
+<!-- room detail -->
+<sc-if value="{{hasDetail}}" hint-placeholder-val="{{true}}">
+<div id="room-detail" role="region" aria-label="{{D.name}}" style="margin-bottom: 28px; background: #FFFDF9; border: 1.5px solid {{accent}}; border-radius: 6px; padding: clamp(16px, 2.4vw, 28px); display: flex; flex-wrap: wrap; gap: 28px">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="{{D.mainStyle}}">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{D.name}} — {{D.photoLabel}}</span>
+<span style="font-size: 13px; padding: 5px 10px; border-radius: 999px; background: rgba(31,26,23,0.55); color: #FFFDF9">{{D.counter}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<button type="button" aria-label="წინა ფოტო" onClick="{{prevPhoto}}" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,253,249,0.92); color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button type="button" aria-label="შემდეგი ფოტო" onClick="{{nextPhoto}}" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,253,249,0.92); color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+<span></span>
+</div>
+<div role="group" aria-label="ფოტოები" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{D.thumbs}}" as="t" hint-placeholder-count="4">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.selectedStr}}" aria-label="{{t.label}}" style="{{t.style}}"><span style="font-size: 11px; color: #FFFDF9">{{t.label}}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5E5650">{{H.shortName}}</span>
+<h3 style="margin: 0; font-size: clamp(28px, 2.8vw, 38px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1">{{D.name}}</h3>
+</div>
+<button type="button" aria-label="დახურვა" onClick="{{closeDetail}}" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #DCD2C5; background: transparent; color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<p style="margin: 0; color: #5E5650; font-size: 16px; text-wrap: pretty">{{D.long}}</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #EEE7DD; border: 1px solid #EEE7DD; border-radius: 6px; overflow: hidden">
+<div style="background: #FFFDF9; padding: 12px 14px; display: flex; flex-direction: column"><span style="font-size: 12px; color: #5E5650">ფართი</span><span style="font-weight: 500">{{D.size}}</span></div>
+<div style="background: #FFFDF9; padding: 12px 14px; display: flex; flex-direction: column"><span style="font-size: 12px; color: #5E5650">საწოლი</span><span style="font-weight: 500">{{D.beds}}</span></div>
+<div style="background: #FFFDF9; padding: 12px 14px; display: flex; flex-direction: column"><span style="font-size: 12px; color: #5E5650">ხედი</span><span style="font-weight: 500">{{D.view}}</span></div>
+<div style="background: #FFFDF9; padding: 12px 14px; display: flex; flex-direction: column"><span style="font-size: 12px; color: #5E5650">ტევადობა</span><span style="font-weight: 500">{{D.capLabel}}</span></div>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); gap: 8px 16px; font-size: 15px">
+<sc-for list="{{D.amenities}}" as="a" hint-placeholder-count="4">
+<li style="display: flex; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12l4.5 4.5L19 7"></path></svg>{{a}}</li>
+</sc-for>
+</ul>
+<div style="display: flex; align-items: baseline; gap: 8px; padding-top: 4px"><span style="font-size: 24px; font-weight: 600">[ფასი] GEL</span><span style="color: #5E5650">/ ღამე</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#booking" onClick="{{bookDetail}}" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: {{accent}}; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 15px">ამ ოთახის დაჯავშნა</a>
+<a href="#room-detail" onClick="{{nextRoom}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; text-decoration: none; font-size: 15px; font-weight: 500">შემდეგი ოთახი<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{rooms}}" as="r" hint-placeholder-count="4">
+<article class="room-card" style="{{r.cardStyle}}">
+<a href="#room-detail" onClick="{{r.view}}" aria-label="{{r.viewLabel}}" style="display: block; overflow: hidden; text-decoration: none"><div class="room-ph" style="{{r.photoStyle}}"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{r.name}}</span></div></a>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 6px; flex: 1">
+<h3 style="margin: 0; font-size: 21px; font-weight: 500">{{r.name}}</h3>
+<span style="font-size: 15px; color: #5E5650">{{r.desc}}</span>
+<span style="font-size: 14px; color: #5E5650">{{r.capLabel}}</span>
+<span style="flex: 1"></span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px">
+<span style="font-weight: 600">[ფასი] GEL <span style="font-weight: 400; color: #5E5650; font-size: 14px">/ ღამე</span></span>
+<a href="#room-detail" onClick="{{r.view}}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #1F1A17; text-decoration: none; font-size: 14px; font-weight: 600">დეტალურად</a>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px">
+<span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}}; font-weight: 600">სერვისები</span>
+<h2 style="margin: 0; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; font-weight: 300; letter-spacing: -0.025em">{{H.expTitle}}</h2>
+</div>
+<div role="tablist" aria-label="სერვისები" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
+<sc-for list="{{svcTabs}}" as="t" hint-placeholder-count="4">
+<button type="button" role="tab" aria-selected="{{t.selectedStr}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+</sc-for>
+</div>
+<div role="tabpanel" style="display: flex; flex-wrap: wrap; gap: 24px; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: clamp(16px, 2.4vw, 28px)">
+<div style="{{S.photoStyle}}"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid rgba(255,253,249,0.5); border-radius: 999px; color: #FFFDF9">Photo · {{S.photo}}</span></div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-size: 30px; font-weight: 400; letter-spacing: -0.02em">{{S.title}}</h3>
+<p style="margin: 0; color: #5E5650">{{S.intro}}</p>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{S.items}}" as="it" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding: 16px 0; border-top: 1px solid #EEE7DD">
+<div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 17px; font-weight: 600">{{it.name}}</span>
+<span style="font-size: 15px; color: #5E5650">{{it.text}}</span>
+<span style="font-size: 13px; color: #5E5650">{{it.meta}}</span>
+</div>
+<button type="button" onClick="{{it.toggle}}" aria-pressed="{{it.onStr}}" style="{{it.btnStyle}}">{{it.btnLabel}}</button>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<!-- BOOKING ENGINE -->
+<section id="booking" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px) 0">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px">
+<span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}}; font-weight: 600">ოთახის დაჯავშნა</span>
+<h2 style="margin: 0; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; font-weight: 300; letter-spacing: -0.025em">როდის გელოდებით?</h2>
+</div>
+
+<sc-if value="{{notConfirmed}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<form style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<fieldset style="margin: 0; border: 1px solid #E4DCD1; border-radius: 6px; background: #FFFDF9; padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 18px">
+<legend style="padding: 0 8px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">1 · თარიღები და სტუმრები</legend>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<button type="button" aria-label="წინა თვე" onClick="{{prevMonth}}" disabled="{{noPrev}}" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid #DCD2C5; background: transparent; color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<span style="font-size: 20px; font-weight: 500">{{monthLabel}}</span>
+<button type="button" aria-label="შემდეგი თვე" onClick="{{nextMonth}}" disabled="{{noNext}}" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid #DCD2C5; background: transparent; color: #1F1A17; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{weekdays}}" as="w" hint-placeholder-count="7"><span style="font-size: 12px; color: #5E5650; text-align: center; padding: 4px 0">{{w}}</span></sc-for>
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+<sc-if value="{{c.blank}}" hint-placeholder-val="{{false}}"><span aria-hidden="true"></span></sc-if>
+<sc-if value="{{c.isDay}}" hint-placeholder-val="{{true}}">
+<button type="button" class="cal-cell" onClick="{{c.pick}}" disabled="{{c.disabled}}" aria-pressed="{{c.selectedStr}}" aria-label="{{c.aria}}" style="{{c.style}}">{{c.day}}</button>
+</sc-if>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: #5E5650">
+<span>აირჩიეთ ჩასვლის, შემდეგ გასვლის დღე.</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 3px; border: 1px dashed #CBBFAF"></span>სრულად დაკავებულია</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px 32px; padding-top: 6px; border-top: 1px solid #EEE7DD">
+<div style="display: flex; align-items: center; gap: 14px; padding-top: 12px">
+<span style="font-size: 15px; font-weight: 500; min-width: 84px">მოზრდილი</span>
+<div style="display: inline-flex; align-items: center; border: 1px solid #DCD2C5; border-radius: 999px">
+<button type="button" aria-label="მოზრდილის მოკლება" onClick="{{decAdults}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #1F1A17; font-size: 20px; cursor: pointer">−</button>
+<span aria-live="polite" style="min-width: 32px; text-align: center; font-weight: 600">{{adults}}</span>
+<button type="button" aria-label="მოზრდილის დამატება" onClick="{{incAdults}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #1F1A17; font-size: 20px; cursor: pointer">+</button>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding-top: 12px">
+<span style="font-size: 15px; font-weight: 500; min-width: 84px">ბავშვი</span>
+<div style="display: inline-flex; align-items: center; border: 1px solid #DCD2C5; border-radius: 999px">
+<button type="button" aria-label="ბავშვის მოკლება" onClick="{{decKids}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #1F1A17; font-size: 20px; cursor: pointer">−</button>
+<span aria-live="polite" style="min-width: 32px; text-align: center; font-weight: 600">{{kids}}</span>
+<button type="button" aria-label="ბავშვის დამატება" onClick="{{incKids}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #1F1A17; font-size: 20px; cursor: pointer">+</button>
+</div>
+</div>
+</div>
+</fieldset>
+
+<fieldset style="margin: 0; border: 1px solid #E4DCD1; border-radius: 6px; background: #FFFDF9; padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0 8px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">2 · აირჩიეთ ოთახი</legend>
+<sc-for list="{{rooms}}" as="r" hint-placeholder-count="4">
+<div style="display: flex; align-items: stretch; gap: 8px">
+<button type="button" onClick="{{r.pick}}" disabled="{{r.disabled}}" aria-pressed="{{r.selectedStr}}" style="{{r.rowStyle}}">
+<span style="{{r.thumbStyle}}" aria-hidden="true"></span>
+<span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: left">
+<span style="font-size: 18px; font-weight: 600">{{r.name}}</span>
+<span style="font-size: 14px; color: #5E5650">{{r.desc}}</span>
+<span style="font-size: 13px; color: #5E5650">{{r.capLabel}}</span>
+</span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right">
+<span style="font-size: 16px; font-weight: 600">[ფასი] GEL</span>
+<span style="font-size: 13px; color: #5E5650">ღამე · {{r.status}}</span>
+</span>
+</button>
+<a href="#room-detail" onClick="{{r.view}}" aria-label="{{r.viewLabel}}" style="flex: none; width: 52px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #DCD2C5; border-radius: 6px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>
+</div>
+</sc-for>
+</fieldset>
+
+<fieldset style="margin: 0; border: 1px solid #E4DCD1; border-radius: 6px; background: #FFFDF9; padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 18px">
+<legend style="padding: 0 8px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">3 · ვიზიტის მიზანი და დამატებები</legend>
+<div role="group" aria-label="ვიზიტის მიზანი" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 8px">
+<sc-for list="{{purposes}}" as="o" hint-placeholder-count="6">
+<button type="button" onClick="{{o.pick}}" aria-pressed="{{o.selectedStr}}" style="{{o.style}}">{{o.label}}</button>
+</sc-for>
+</div>
+<sc-if value="{{isCelebration}}" hint-placeholder-val="{{false}}">
+<div style="padding: 14px 16px; border-radius: 6px; background: #E9EEE3; font-size: 15px">ზეიმს ერთად მოვამზადებთ — მენეჯერი დაგიკავშირდებათ ოთახის დეკორაციის, ტორტის ან სიურპრიზის დეტალებისთვის.</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{addons}}" as="x" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; font-size: 15px">
+<input type="checkbox" checked="{{x.on}}" onChange="{{x.toggle}}" style="width: 20px; height: 20px; accent-color: {{accent}}">
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span>{{x.label}}</span><span style="font-size: 13px; color: #5E5650">{{x.note}}</span></span>
+</label>
+</sc-for>
+</div>
+<sc-if value="{{hasSvc}}" hint-placeholder-val="{{false}}">
+<div style="padding: 14px 16px; border-radius: 6px; background: #F5F1EA; font-size: 15px">სერვისებიდან დამატებული: <strong>{{svcText}}</strong> · <a href="#services">შეცვლა</a></div>
+</sc-if>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500">სპეციალური მოთხოვნა
+<textarea rows="3" placeholder="მაგ.: ჩასვლის დრო, ბავშვის საწოლი, ალერგია…" style="padding: 12px 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 15px; font-weight: 400; resize: vertical"></textarea></label>
+</fieldset>
+
+<fieldset style="margin: 0; border: 1px solid #E4DCD1; border-radius: 6px; background: #FFFDF9; padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 16px">
+<legend style="padding: 0 8px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">4 · შეთავაზება და სტუმრის ინფორმაცია</legend>
+<sc-if value="{{hasPromo}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; border-radius: 6px; background: #E9EEE3; font-size: 15px">
+<span>გამოყენებულია: <strong>{{promoLabel}}</strong></span>
+<button type="button" onClick="{{clearPromo}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; cursor: pointer">მოხსნა</button>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px">
+<label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">პრომო კოდი<input type="text" value="{{code}}" onChange="{{onCode}}" placeholder="მაგ.: EPISODE" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box; text-transform: uppercase"></label>
+<button type="button" onClick="{{applyCode}}" style="min-height: 48px; padding: 0 20px; border-radius: 4px; border: 1px solid #1F1A17; background: transparent; color: #1F1A17; font-size: 15px; font-weight: 600; cursor: pointer">გამოყენება</button>
+</div>
+<sc-if value="{{codeMsg}}" hint-placeholder-val="{{false}}"><span role="status" style="font-size: 14px; color: #5E5650">{{codeMsg}}</span></sc-if>
+<sc-if value="{{registered}}" hint-placeholder-val="{{false}}">
+<div style="font-size: 15px; padding: 14px 16px; border-radius: 6px; background: #E9EEE3">შესული ხართ My Episode-ში — ჯავშანი დაემატება თქვენს ისტორიას და დაგერიცხებათ ქულები.</div>
+</sc-if>
+<sc-if value="{{notRegistered}}" hint-placeholder-val="{{true}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">სახელი და გვარი<input type="text" autocomplete="name" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">ტელეფონი<input type="tel" autocomplete="tel" placeholder="+995" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">ელფოსტა<input type="email" autocomplete="email" style="min-height: 48px; padding: 0 14px; border: 1px solid #DCD2C5; border-radius: 4px; background: #FFFDF9; color: #1F1A17; font-size: 16px; font-weight: 400; box-sizing: border-box"></label>
+</div>
+</sc-if>
+<span style="font-size: 14px; color: #5E5650">გადახდა: ონლაინ ბარათით ან სასტუმროში · [გაუქმების პირობები]</span>
+</fieldset>
+
+<button type="button" onClick="{{confirm}}" disabled="{{cantBook}}" style="align-self: flex-start; min-height: 52px; padding: 0 32px; border: 0; border-radius: 999px; background: {{accent}}; color: #FFFDF9; font-size: 16px; font-weight: 600; cursor: pointer">ჯავშნის დადასტურება</button>
+</form>
+
+<aside style="flex: 1 1 320px; min-width: 0; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">თქვენი ჯავშანი</span>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">სასტუმრო</span><span style="text-align: right; font-weight: 500">{{H.shortName}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">Check-in</span><span style="text-align: right; font-weight: 500">{{ciLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">Check-out</span><span style="text-align: right; font-weight: 500">{{coLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">ღამეები</span><span style="text-align: right; font-weight: 500">{{nightsLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">სტუმრები</span><span style="text-align: right; font-weight: 500">{{guestsLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">ოთახი</span><span style="text-align: right; font-weight: 500">{{roomLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">მიზანი</span><span style="text-align: right; font-weight: 500">{{purposeLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">დამატებით</span><span style="text-align: right; font-weight: 500">{{extrasText}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #EEE7DD"><span style="color: #5E5650">შეთავაზება</span><span style="text-align: right; font-weight: 500; color: {{accent}}">{{promoShort}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 17px"><span>სულ</span><span style="text-align: right; font-weight: 600">[ფასი] × {{nightsLabel}}</span></div>
+</div>
+<div style="margin-top: 4px; padding: 14px 16px; border-radius: 6px; background: #F5F1EA; font-size: 14px">პირდაპირი ჯავშნით დაგროვდება Episode ქულები — გამოიყენეთ ნებისმიერ სასტუმროში, რესტორანში ან ივენთზე.</div>
+</aside>
+</div>
+</sc-if>
+
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{false}}">
+<div role="status" style="background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: flex-start">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #E9EEE3; color: {{accent}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4.5 4.5L19 7"></path></svg></span>
+<h3 style="margin: 0; font-size: clamp(28px, 3vw, 40px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1">ოთახი დაჯავშნილია</h3>
+<p style="margin: 0; color: #5E5650; font-size: 17px">{{roomLabel}} · {{ciLabel}} — {{coLabel}} ({{nightsLabel}}) · {{guestsLabel}} · {{promoShort}}. დადასტურება გამოგზავნილია SMS-ით და ელფოსტით.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: {{accent}}; color: #FFFDF9; font-size: 14px; font-weight: 600; cursor: pointer">კალენდარში დამატება</button>
+<button type="button" onClick="{{editBooking}}" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 500; cursor: pointer">ჯავშნის შეცვლა</button>
+<button type="button" onClick="{{editBooking}}" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; font-weight: 500; cursor: pointer">გაუქმება</button>
+</div>
+</div>
+<a href="{{H.crossHref}}" style="flex: 1 1 280px; min-width: 0; padding: 20px; border-radius: 6px; background: #F5F1EA; display: flex; flex-direction: column; gap: 8px; text-decoration: none">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">თქვენი ვიზიტისთვის</span>
+<span style="font-size: 20px; font-weight: 500">{{H.crossTitle}}</span>
+<span style="color: #5E5650">{{H.crossText}}</span>
+</a>
+</div>
+</sc-if>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px) 0">
+<div style="background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 40px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}}; font-weight: 600">Episode Experience Score</span>
+<h2 style="margin: 0; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.05; font-weight: 300; letter-spacing: -0.02em">შეფასებები მხოლოდ რეალური სტუმრებისგან</h2>
+</div>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #5E5650"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>Verified Stay — მხოლოდ დასრულებული ვიზიტის შემდეგ</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: 10px">
+<sc-for list="{{scores}}" as="sc" hint-placeholder-count="7">
+<div style="padding: 16px; border-radius: 6px; background: #F5F1EA; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 13px; color: #5E5650">{{sc}}</span>
+<span style="font-size: 24px; font-weight: 500">[—] <span style="font-size: 14px; color: #5E5650">/ 5</span></span>
+</div>
+</sc-for>
+</div>
+<p style="margin: 0; color: #5E5650; font-size: 15px">აქ გამოჩნდება სტუმრების შეფასებები — თარიღით, Verified Stay ნიშნით და მენეჯერის პასუხით.</p>
+</div>
+</section>
+
+<!-- MEMBER -->
+<section id="member" style="max-width: 1280px; margin: 0 auto; padding: 24px clamp(20px, 4vw, 48px) 0">
+<sc-if value="{{notRegistered}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; padding: 24px 28px; border-radius: 6px; background: #1F1A17; color: #FFFDF9">
+<div style="display: flex; flex-direction: column; gap: 4px; max-width: 640px">
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #CFC6BB">My Episode</span>
+<span style="font-size: 20px; line-height: 1.35">ერთი ანგარიში ყველა სასტუმროსა და რესტორანში — ქულები, ჯავშნების ისტორია და დაბადების დღის საჩუქარი.</span>
+</div>
+<button type="button" onClick="{{register}}" style="min-height: 48px; padding: 0 24px; border-radius: 999px; border: 0; background: #FFFDF9; color: #1F1A17; font-weight: 600; font-size: 15px; cursor: pointer">რეგისტრაცია</button>
+</div>
+</sc-if>
+<sc-if value="{{registered}}" hint-placeholder-val="{{false}}">
+<div role="status" style="padding: 24px 28px; border-radius: 6px; background: #1F1A17; color: #FFFDF9; font-size: 20px">მოგესალმებით My Episode-ში! ამ ჯავშნით დაგროვილი ქულები ავტომატურად აისახება თქვენს ანგარიშზე.</div>
+</sc-if>
+</section>
+
+<!-- CONTACT + CHAT -->
+<section id="contact" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 104px) clamp(20px, 4vw, 48px)">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<div style="flex: 999 1 560px; min-width: 0; background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; display: flex; flex-direction: column">
+<div style="padding: 18px 22px; border-bottom: 1px solid #EEE7DD; display: flex; align-items: center; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 50%; background: #3D4A33; color: #FFFDF9; display: inline-flex; align-items: center; justify-content: center; font-weight: 600">{{H.initials}}</span>
+<span style="display: flex; flex-direction: column; line-height: 1.3"><span style="font-weight: 600">მოგვწერეთ — {{H.shortName}}</span><span style="font-size: 13px; color: #4F7A4A">{{H.receptionNote}}</span></span>
+</div>
+<div aria-live="polite" style="flex: 1; min-height: 300px; max-height: 380px; overflow-y: auto; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{chat}}" as="m" hint-placeholder-count="2"><div style="{{m.style}}">{{m.text}}</div></sc-for>
+</div>
+<div style="padding: 0 22px 12px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{quick}}" as="q" hint-placeholder-count="3">
+<button type="button" onClick="{{q.send}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBBFAF; background: transparent; color: #1F1A17; font-size: 14px; cursor: pointer">{{q.label}}</button>
+</sc-for>
+</div>
+<div style="padding: 12px 22px 22px; display: flex; gap: 10px">
+<label style="flex: 1; display: flex"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">შეტყობინება</span>
+<input type="text" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{onDraftKey}}" placeholder="დაწერეთ შეტყობინება…" style="flex: 1; min-height: 48px; padding: 0 16px; border: 1px solid #DCD2C5; border-radius: 999px; background: #FFFDF9; color: #1F1A17; font-size: 15px; box-sizing: border-box"></label>
+<button type="button" aria-label="გაგზავნა" onClick="{{sendDraft}}" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: {{accent}}; color: #FFFDF9; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l16-8-6 16-2-7z"></path></svg></button>
+</div>
+</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">სხვა არხები</span>
+<a href="#contact" style="display: flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.2-4.6A9 9 0 1 1 21 12z"></path></svg>WhatsApp · [ნომერი]</a>
+<a href="#contact" style="display: flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>[ტელეფონი]</a>
+<a href="#contact" style="display: flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>[ელფოსტა]</a>
+</div>
+<div style="background: #FFFDF9; border: 1px solid #E4DCD1; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5650">მისამართი</span>
+<span>{{H.address}}</span>
+<span style="color: #5E5650; font-size: 15px">{{H.addressNote}}</span>
+<div style="height: 150px; border-radius: 4px; padding: 12px; box-sizing: border-box; background-color: #E4DCD1; background-image: repeating-linear-gradient(135deg, rgba(31,26,23,0.05) 0 2px, transparent 2px 16px)"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid #A99D8F; border-radius: 999px; color: #5E5650">რუკა</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid #E4DCD1; background: #EFE7DC">
+<div style="max-width: 1280px; margin: 0 auto; padding: 48px clamp(20px, 4vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 22px"><span style="font-weight: 500">{{H.namePre}}</span> <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic">{{H.nameMain}}</span></span>
+<span style="font-size: 14px; color: #5E5650">{{H.subline}}</span>
+<a href="Main.dc.html" style="font-size: 14px; color: #5E5650; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; gap: 8px">Episode Holding-ის ნაწილი <span style="font-weight: 600; letter-spacing: 0.28em; color: #1F1A17">EPISODE</span></a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px">
+<sc-for list="{{family}}" as="f" hint-placeholder-count="4"><a href="{{f.href}}" style="text-decoration: none; min-height: 32px; display: inline-flex; align-items: center">{{f.label}}</a></sc-for>
+</div>
+</div>
+</footer>
+
+<a href="#contact" aria-label="მოგვწერეთ" style="position: fixed; right: 24px; bottom: 24px; z-index: 10; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 999px; background: {{accent}}; color: #FFFDF9; text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 8px 24px rgba(31,26,23,0.18)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg>მოგვწერეთ</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#4A5D3F","options":["#4A5D3F","#6A3D5E","#8E2C3A","#1F4E63"]},"$preview":{"width":1440,"height":8200}}'>
+class Component extends DCLogic {
+  /*HOTEL-CONFIG-START*/
+  hotel() {
+    const std = ['აივანი კავკასიონის ხედით', 'ანტიკვარული ავეჯი', 'უფასო Wi-Fi', '[კეთილმოწყობა]'];
+    return {
+      namePre: 'Chateau',
+      nameMain: 'Mere',
+      shortName: 'Chateau Mere',
+      initials: 'CM',
+      subline: 'Telavi · Kakheti',
+      eyebrow: 'თელავი · კახეთი',
+      tagline: 'ციხე-სასახლის სტილის სასტუმრო საკუთარი მარნით, რესტორნებით და სპა ცენტრით — ყველა ოთახს აქვს აივანი კავკასიონის ხედით.',
+      heroPhoto: 'ციხე-სასახლე და ვენახი, დილა',
+      roomsTitle: 'ოთახები აივნით',
+      roomsIntro: 'ყველა ოთახს აქვს აივანი კავკასიონის ხედით და ანტიკვარული ავეჯი.',
+      expTitle: 'რესტორნები, სპა, მარანი და კახეთი',
+      address: '[მისამართი], თელავი',
+      addressNote: 'კახეთი · [მანძილი თბილისიდან]',
+      receptionNote: 'Reception',
+      crossHref: '#services',
+      crossTitle: 'რესტორნები, სპა და მარანი',
+      crossText: 'დაამატეთ ვახშამი, სპა პროცედურა ან დეგუსტაცია თქვენს ვიზიტს.',
+      shades: ['#3D4A33', '#4A5D3F', '#55603F', '#5E5A3A'],
+      photos: ['ოთახი', 'საწოლი', 'აივანი და ხედი', 'სააბაზანო'],
+      rooms: [
+        { id: 'r1', name: '[ოთახის ტიპი 1]', desc: 'აივანი კავკასიონის ხედით · ანტიკვარული ავეჯი', long: 'ოთახი ციხე-სასახლეში — აივნიდან კავკასიონის ქედი და ვენახები ჩანს.', size: '[—] მ²', beds: '[საწოლი]', view: 'კავკასიონი', cap: 2, status: 'ხელმისაწვდომია', bg: '#3D4A33', amenities: std },
+        { id: 'r2', name: '[ოთახის ტიპი 2]', desc: 'აივანი კავკასიონის ხედით · ანტიკვარული ავეჯი', long: '[ოთახის აღწერა]', size: '[—] მ²', beds: '[საწოლი]', view: 'კავკასიონი', cap: 2, status: 'ცოტა დარჩა', bg: '#4A5D3F', amenities: std },
+        { id: 'r3', name: '[ოთახის ტიპი 3]', desc: 'აივანი კავკასიონის ხედით · [დამატებითი საწოლი]', long: '[ოთახის აღწერა]', size: '[—] მ²', beds: '[საწოლი]', view: 'კავკასიონი', cap: 3, status: 'ხელმისაწვდომია', bg: '#55603F', amenities: std }
+      ],
+      defaultRoom: 'r1',
+      addons: [
+        { id: 'breakfast', label: 'საუზმე', note: '[ფასი] GEL / პერსონა' },
+        { id: 'early', label: 'ადრეული check-in', note: 'ხელმისაწვდომობის მიხედვით' },
+        { id: 'late', label: 'გვიანი check-out', note: 'Gold და Black წევრებისთვის — უფასოდ' }
+      ],
+      offers: [
+        { id: 'direct', tag: 'Book Direct', title: 'საუკეთესო ფასი პირდაპირ', text: 'დაჯავშნეთ ჩვენს საიტზე — [−X%] და Episode ქულები ყოველ ღამეზე.', terms: 'მოქმედებს მუდმივად', photo: 'ციხე-სასახლე', bg: '#4A5D3F' },
+        { id: 'wine', tag: 'ღვინის უიკენდი', title: '2 ღამე + დეგუსტაცია + ვახშამი', text: 'დეგუსტაცია ჩვენს მარანში და ვახშამი სასტუმროს ღვინით.', terms: '[პაკეტის ფასი] · ვადა: [თარიღამდე]', photo: 'მარანი', bg: '#5E3A3A' },
+        { id: 'spa', tag: 'Spa Escape', title: 'ღამე + სპა პროცედურა', text: 'დასვენება სპა ცენტრში და ღამე კავკასიონის ხედით.', terms: '[პაკეტის ფასი] · ვადა: [თარიღამდე]', photo: 'სპა', bg: '#3A4A4A' },
+        { id: 'rtveli', tag: 'სეზონური', title: 'რთველი Chateau Mere-ში', text: 'სექტემბერში — ყურძნის კრეფა, დაწურვა და სუფრა.', terms: '[ფასი] · სექტემბერი', photo: 'რთველი', bg: '#5E5A3A' }
+      ],
+      promoCodes: { EPISODE: 'Book Direct' },
+      services: [
+        { id: 'restaurants', tab: 'რესტორნები', title: 'რესტორნები და ბარი', intro: 'ქართული სამზარეულო და სასტუმროს საკუთარი ღვინო — რამდენიმე სივრცეში.', photo: 'რესტორანი', bg: '#5E3A3A', items: [
+          { name: '[მთავარი რესტორანი]', text: 'ქართული სამზარეულო, ღვინის შეხამებით', meta: '[საათები]' },
+          { name: '[რესტორანი 2]', text: '[სამზარეულო / კონცეფცია]', meta: '[საათები]' },
+          { name: 'სახურავის ბარი', text: 'ჯაკუზი და ბარი ხედით', meta: '[საათები]' } ] },
+        { id: 'spa', tab: 'სპა ცენტრი', title: 'სპა ცენტრი', intro: 'დასვენება ვენახის და მარნის შემდეგ.', photo: 'სპა ცენტრი', bg: '#3A4A4A', items: [
+          { name: '[მასაჟი]', text: '[ხანგრძლივობა]', meta: '[ფასი] GEL' },
+          { name: '[სპა პროცედურა]', text: '[აღწერა]', meta: '[ფასი] GEL' },
+          { name: '[საუნა / თერმული ზონა]', text: '[აღწერა]', meta: '[საათები]' } ] },
+        { id: 'marani', tab: 'მარანი', title: 'საკუთარი მარანი', intro: 'სასტუმრო თავად აყენებს ღვინოს ტრადიციულ ქართულ მარანში.', photo: 'მარანი', bg: '#55603F', items: [
+          { name: 'ღვინის დეგუსტაცია', text: 'სასტუმროს საკუთარი ღვინო', meta: '[დრო · ფასი]' },
+          { name: 'მარნის ტური', text: 'ტრადიციული ქართული ღვინის დაყენება', meta: '[დრო · ფასი]' },
+          { name: 'რთველი', text: 'ყურძნის კრეფა და დაწურვა', meta: 'სექტემბერი' } ] },
+        { id: 'pool', tab: 'აუზი და ჯაკუზი', title: 'აუზი და ჯაკუზი', intro: 'ღია აუზი ციხე-სასახლის თაღებს შორის და ჯაკუზი სახურავზე.', photo: 'აუზი', bg: '#3D4A33', items: [
+          { name: 'ღია აუზი', text: 'ციხე-სასახლის თაღებს შორის', meta: '[სეზონი და საათები]' },
+          { name: 'სახურავის ჯაკუზი', text: 'ბარით და ხედით', meta: '[საათები]' } ] },
+        { id: 'activities', tab: 'აქტივობები', title: 'კახეთის აქტივობები', intro: 'ორგანიზებას სასტუმრო გაგიწევთ.', photo: 'ცხენით გასეირნება', bg: '#5E5A3A', items: [
+          { name: 'ცხენით გასეირნება', text: 'ახლომდებარე მონასტრებამდე', meta: '[ფასი]' },
+          { name: 'ლაშქრობა', text: 'მონასტრებისა და ვენახების გზებით', meta: '[ფასი]' },
+          { name: '[სხვა აქტივობა]', text: '[აღწერა]', meta: '[ფასი]' } ] }
+      ],
+      scores: ['საერთო', 'ოთახი', 'სისუფთავე', 'ხედი', 'სიმშვიდე', 'პერსონალი', 'საუზმე'],
+      family: [
+        { label: 'Hotel Magnolia', href: 'Magnolia.dc.html' },
+        { label: 'თბილისის სახლში', href: 'Tbilisi.dc.html' },
+        { label: 'ბათუმის სახლში', href: 'Batumi.dc.html' },
+        { label: 'ქუთაისის სახლში', href: 'Kutaisi.dc.html' }
+      ],
+      greeting: 'გამარჯობა! Chateau Mere-ს რეცეფცია გწერთ. რით შეგვიძლია დაგეხმაროთ?',
+      quick: ['სპა ცენტრი', 'ღვინის დეგუსტაცია', 'რთველში მონაწილეობა'],
+      replies: [
+        { re: 'სპა|მასაჟ', text: 'სპა ცენტრის პროცედურები შეგიძლიათ აირჩიოთ „სერვისები → სპა ცენტრი“ განყოფილებაში და დაამატოთ ჯავშანს · [საათები].' },
+        { re: 'დეგუსტ|ღვინ|მარან', text: 'დეგუსტაცია ჩვენს მარანში — [დრო და ფასი]. შეგიძლიათ დაამატოთ ოთახის ჯავშნისას.' },
+        { re: 'აუზ|ჯაკუზ', text: 'გვაქვს ღია აუზი და სახურავზე ჯაკუზი ბარით · [სეზონი და საათები].' },
+        { re: 'რთველ|ყურძ', text: 'სექტემბერში, რთველის დროს, სტუმრებს შეუძლიათ ყურძნის კრეფასა და დაწურვაში მონაწილეობა.' },
+        { re: 'რესტორ|ვახშ', text: 'სასტუმროში რამდენიმე რესტორანია — მაგიდას რეცეფცია დაგიჯავშნით.' },
+        { re: 'check|შესვლ|დრო', text: 'Check-in — [დრო]-დან, check-out — [დრო]-მდე.' }
+      ]
+    };
+  }
+  /*HOTEL-CONFIG-END*/
+
+  constructor(props) {
+    super(props);
+    const H = this.hotel();
+    this.state = {
+      off: 0, ci: '2026-10-16', co: '2026-10-18', adults: 2, kids: 0,
+      room: H.defaultRoom, purpose: 'leisure', addons: {},
+      detail: H.defaultRoom, gIdx: 0,
+      promo: null, code: '', codeMsg: '',
+      svcTab: H.services[0].id, svc: {},
+      confirmed: false, registered: false, draft: '',
+      chat: [{ from: 'house', text: H.greeting }]
+    };
+  }
+
+  pad(n) { return n < 10 ? '0' + n : '' + n; }
+  key(y, m, d) { return y + '-' + this.pad(m + 1) + '-' + this.pad(d); }
+  parse(k) { const p = k.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  full(date) { return date.getDate() % 9 === 0; }
+
+  reply(t) {
+    const H = this.hotel();
+    for (let i = 0; i < H.replies.length; i++) {
+      if (new RegExp(H.replies[i].re, 'i').test(t)) return H.replies[i].text;
+    }
+    return 'გმადლობთ! რეცეფცია მალე გიპასუხებთ.';
+  }
+
+  send(text) {
+    const t = (text == null ? this.state.draft : text).trim();
+    if (!t) return;
+    this.setState((s) => ({ chat: s.chat.concat([{ from: 'me', text: t }]), draft: '' }));
+    setTimeout(() => {
+      this.setState((s) => ({ chat: s.chat.concat([{ from: 'house', text: this.reply(t) }]) }));
+    }, 700);
+  }
+
+  pickDay(k) {
+    const s = this.state;
+    if (!s.ci || s.co) this.setState({ ci: k, co: null });
+    else if (k > s.ci) this.setState({ co: k });
+    else this.setState({ ci: k, co: null });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const H = this.hotel();
+    const accent = this.props.accent ?? '#4A5D3F';
+    const months = ['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'];
+    const wdShort = ['ორშ','სამ','ოთხ','ხუთ','პარ','შაბ','კვი'];
+    const today = new Date(2026, 9, 12);
+    const first = new Date(2026, 9 + s.off, 1);
+    const y = first.getFullYear(), m = first.getMonth();
+    const nDays = new Date(y, m + 1, 0).getDate();
+    const lead = (first.getDay() + 6) % 7;
+    const fmt = (k) => { if (!k) return 'აირჩიეთ'; const d = this.parse(k); return wdShort[(d.getDay() + 6) % 7] + ', ' + d.getDate() + ' ' + months[d.getMonth()]; };
+    const pattern = 'background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 16px); ';
+
+    const cells = [];
+    for (let i = 0; i < lead; i++) cells.push({ blank: true, isDay: false });
+    for (let d = 1; d <= nDays; d++) {
+      const date = new Date(y, m, d);
+      const k = this.key(y, m, d);
+      const past = date < today;
+      const full = !past && this.full(date);
+      const isEnd = k === s.ci || k === s.co;
+      const inRange = s.ci && s.co && k > s.ci && k < s.co;
+      let look;
+      if (isEnd) look = 'background: ' + accent + '; color: #FFFDF9; border: 1px solid ' + accent + '; font-weight: 600;';
+      else if (inRange) look = 'background: #E9EEE3; color: #1F1A17; border: 1px solid #E9EEE3;';
+      else if (past) look = 'background: transparent; color: #A39A91; border: 1px solid transparent; cursor: default;';
+      else if (full) look = 'background: transparent; color: #A39A91; border: 1px dashed #CBBFAF; text-decoration: line-through; cursor: not-allowed;';
+      else look = 'background: #FFFDF9; color: #1F1A17; border: 1px solid #E4DCD1;';
+      cells.push({
+        blank: false, isDay: true, day: d, disabled: past || full,
+        selectedStr: isEnd ? 'true' : 'false',
+        aria: d + ' ' + months[m] + (full ? ', დაკავებულია' : ''),
+        style: 'min-height: 52px; border-radius: 4px; font-size: 15px; cursor: pointer; font-family: inherit; ' + look,
+        pick: () => this.pickDay(k)
+      });
+    }
+
+    const nights = s.ci && s.co ? Math.round((this.parse(s.co) - this.parse(s.ci)) / 86400000) : 0;
+    const total = s.adults + s.kids;
+    const guestsLabel = s.adults + ' მოზრდილი' + (s.kids ? ', ' + s.kids + ' ბავშვი' : '');
+
+    const rooms = H.rooms.map((r, idx) => {
+      const fits = total <= r.cap;
+      const on = r.id === s.room && fits;
+      const viewing = r.id === s.detail;
+      return {
+        name: r.name, desc: r.desc, status: fits ? r.status : 'არ ეტევა',
+        capLabel: 'მაქს. ' + r.cap + ' სტუმარი',
+        viewLabel: r.name + ' — დეტალურად',
+        disabled: !fits, selectedStr: on ? 'true' : 'false',
+        cardStyle: 'display: flex; flex-direction: column; background: #FFFDF9; border-radius: 6px; overflow: hidden; transition: box-shadow .3s ease; ' + (viewing ? 'border: 1.5px solid ' + accent + ';' : 'border: 1px solid #E4DCD1;'),
+        rowStyle: 'flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; padding: 12px; border-radius: 6px; cursor: pointer; font-family: inherit; color: #1F1A17; ' +
+          (on ? 'background: #E9EEE3; border: 1.5px solid ' + accent + ';' : fits ? 'background: #FFFDF9; border: 1px solid #DCD2C5;' : 'background: #FFFDF9; border: 1px dashed #DCD2C5; opacity: 0.55; cursor: not-allowed;'),
+        thumbStyle: 'flex: none; width: 88px; height: 64px; border-radius: 4px; background-color: ' + r.bg + '; ' + pattern,
+        photoStyle: 'height: 220px; padding: 14px; box-sizing: border-box; display: flex; align-items: flex-start; ' + pattern + 'background-color: ' + r.bg + ';',
+        pick: () => this.setState({ room: r.id }),
+        view: () => this.setState({ detail: r.id, gIdx: 0 })
+      };
+    });
+    const roomObj = H.rooms.find((r) => r.id === s.room && total <= r.cap);
+
+    const dIdx = H.rooms.findIndex((r) => r.id === s.detail);
+    const dr = dIdx >= 0 ? H.rooms[dIdx] : null;
+    const shades = [dr ? dr.bg : H.shades[0]].concat(H.shades);
+    const D = dr ? {
+      name: dr.name, long: dr.long, size: dr.size, beds: dr.beds, view: dr.view,
+      capLabel: 'მაქს. ' + dr.cap + ' სტუმარი', amenities: dr.amenities,
+      photoLabel: H.photos[s.gIdx], counter: (s.gIdx + 1) + ' / ' + H.photos.length,
+      mainStyle: 'aspect-ratio: 16 / 10; border-radius: 6px; padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; ' + pattern + 'background-color: ' + shades[s.gIdx % shades.length] + ';',
+      thumbs: H.photos.map((p, i) => ({
+        label: p, selectedStr: i === s.gIdx ? 'true' : 'false',
+        style: 'aspect-ratio: 4 / 3; border-radius: 4px; cursor: pointer; display: flex; align-items: flex-end; padding: 6px; font-family: inherit; ' + pattern + 'background-color: ' + shades[i % shades.length] + '; ' + (i === s.gIdx ? 'border: 2px solid ' + accent + '; outline: 2px solid #FFFDF9; outline-offset: -4px;' : 'border: 2px solid transparent; opacity: 0.8;'),
+        pick: () => this.setState({ gIdx: i })
+      }))
+    } : { thumbs: [], amenities: [] };
+
+    const pList = [
+      { id: 'leisure', label: 'დასვენება' },
+      { id: 'business', label: 'საქმიანი ვიზიტი' },
+      { id: 'romantic', label: 'რომანტიკული' },
+      { id: 'celebration', label: 'დაბადების დღე / იუბილე' },
+      { id: 'family', label: 'ოჯახთან ერთად' },
+      { id: 'other', label: 'სხვა' }
+    ];
+    const purposes = pList.map((o) => {
+      const on = o.id === s.purpose;
+      return {
+        label: o.label, selectedStr: on ? 'true' : 'false',
+        style: 'min-height: 52px; padding: 0 16px; border-radius: 6px; font-size: 15px; text-align: left; cursor: pointer; ' +
+          (on ? 'background: #E9EEE3; color: #1F1A17; border: 1.5px solid ' + accent + '; font-weight: 600;' : 'background: #FFFDF9; color: #1F1A17; border: 1px solid #DCD2C5;'),
+        pick: () => this.setState({ purpose: on ? null : o.id })
+      };
+    });
+    const pObj = pList.find((o) => o.id === s.purpose);
+    const addons = H.addons.map((x) => ({
+      label: x.label, note: x.note, on: !!s.addons[x.id],
+      toggle: () => this.setState((st) => ({ addons: Object.assign({}, st.addons, { [x.id]: !st.addons[x.id] }) }))
+    }));
+    const pickedAddons = H.addons.filter((x) => s.addons[x.id]).map((x) => x.label);
+
+    const offers = H.offers.map((o) => {
+      const on = s.promo === o.id;
+      return {
+        tag: o.tag, title: o.title, text: o.text, terms: o.terms, photo: o.photo,
+        cardStyle: 'display: flex; flex-direction: column; background: #FFFDF9; border-radius: 6px; overflow: hidden; ' + (on ? 'border: 1.5px solid ' + accent + ';' : 'border: 1px solid #E4DCD1;'),
+        photoStyle: 'height: 170px; padding: 14px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; ' + pattern + 'background-color: ' + o.bg + ';',
+        btnLabel: on ? 'არჩეულია ✓' : 'შეთავაზების არჩევა',
+        btnStyle: 'margin-top: 12px; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 600; ' + (on ? 'background: ' + accent + '; color: #FFFDF9; border: 1px solid ' + accent + ';' : 'border: 1px solid #1F1A17; color: #1F1A17;'),
+        pick: () => this.setState({ promo: o.id, confirmed: false, codeMsg: '' })
+      };
+    });
+    const promoObj = H.offers.find((o) => o.id === s.promo);
+
+    const svcActive = H.services.find((x) => x.id === s.svcTab) || H.services[0];
+    const svcTabs = H.services.map((x) => {
+      const on = x.id === svcActive.id;
+      return {
+        label: x.tab, selectedStr: on ? 'true' : 'false',
+        style: 'min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 15px; cursor: pointer; ' + (on ? 'background: #1F1A17; color: #FFFDF9; border: 1px solid #1F1A17; font-weight: 600;' : 'background: transparent; color: #1F1A17; border: 1px solid #CBBFAF;'),
+        pick: () => this.setState({ svcTab: x.id })
+      };
+    });
+    const S = {
+      title: svcActive.title, intro: svcActive.intro, photo: svcActive.photo,
+      photoStyle: 'flex: 1 1 360px; min-height: 320px; border-radius: 6px; padding: 14px; box-sizing: border-box; ' + pattern + 'background-color: ' + svcActive.bg + ';',
+      items: svcActive.items.map((it) => {
+        const k = svcActive.id + ':' + it.name;
+        const on = !!s.svc[k];
+        return {
+          name: it.name, text: it.text, meta: it.meta, onStr: on ? 'true' : 'false',
+          btnLabel: on ? 'დამატებულია ✓' : 'ჯავშანში დამატება',
+          btnStyle: 'min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'background: ' + accent + '; color: #FFFDF9; border: 1px solid ' + accent + ';' : 'background: transparent; color: #1F1A17; border: 1px solid #1F1A17;'),
+          toggle: () => this.setState((st) => ({ svc: Object.assign({}, st.svc, { [k]: !st.svc[k] }) }))
+        };
+      })
+    };
+    const svcPicked = Object.keys(s.svc).filter((k) => s.svc[k]).map((k) => k.split(':')[1]);
+    const extras = pickedAddons.concat(svcPicked);
+
+    const bubbleBase = 'max-width: 78%; padding: 10px 14px; font-size: 15px; line-height: 1.45; ';
+    const chat = s.chat.map((msg) => ({
+      text: msg.text,
+      style: bubbleBase + (msg.from === 'me'
+        ? 'align-self: flex-end; background: ' + accent + '; color: #FFFDF9; border-radius: 16px 16px 4px 16px;'
+        : 'align-self: flex-start; background: #F1ECE4; color: #1F1A17; border-radius: 16px 16px 16px 4px;')
+    }));
+
+    return {
+      H, accent,
+      weekdays: wdShort,
+      monthLabel: months[m] + ' ' + y,
+      noPrev: s.off <= 0, noNext: s.off >= 2,
+      prevMonth: () => this.setState({ off: Math.max(0, s.off - 1) }),
+      nextMonth: () => this.setState({ off: Math.min(2, s.off + 1) }),
+      cells,
+      ciLabel: fmt(s.ci), coLabel: fmt(s.co),
+      nightsLabel: nights ? nights + ' ღამე' : '—',
+      adults: s.adults, kids: s.kids, guestsLabel,
+      decAdults: () => this.setState((st) => ({ adults: Math.max(1, st.adults - 1) })),
+      incAdults: () => this.setState((st) => ({ adults: Math.min(6, st.adults + 1) })),
+      decKids: () => this.setState((st) => ({ kids: Math.max(0, st.kids - 1) })),
+      incKids: () => this.setState((st) => ({ kids: Math.min(4, st.kids + 1) })),
+      rooms,
+      roomLabel: roomObj ? roomObj.name : 'აირჩიეთ ოთახი',
+      hasDetail: !!dr, D,
+      prevPhoto: () => this.setState((st) => ({ gIdx: (st.gIdx + H.photos.length - 1) % H.photos.length })),
+      nextPhoto: () => this.setState((st) => ({ gIdx: (st.gIdx + 1) % H.photos.length })),
+      closeDetail: () => this.setState({ detail: null }),
+      nextRoom: () => this.setState({ detail: H.rooms[(dIdx + 1) % H.rooms.length].id, gIdx: 0 }),
+      bookDetail: () => this.setState({ room: s.detail, confirmed: false, adults: dr && s.adults + s.kids > dr.cap ? Math.min(s.adults, dr.cap) : s.adults, kids: dr && s.adults + s.kids > dr.cap ? 0 : s.kids }),
+      purposes, purposeLabel: pObj ? pObj.label : '—',
+      isCelebration: s.purpose === 'celebration',
+      addons,
+      extrasText: extras.length ? extras.join(', ') : '—',
+      hasSvc: svcPicked.length > 0, svcText: svcPicked.join(', '),
+      offers,
+      hasPromo: !!promoObj,
+      promoLabel: promoObj ? promoObj.tag + ' — ' + promoObj.title : '',
+      promoShort: promoObj ? promoObj.title : 'არ არის',
+      clearPromo: () => this.setState({ promo: null }),
+      code: s.code, codeMsg: s.codeMsg,
+      onCode: (e) => this.setState({ code: e.target.value }),
+      applyCode: () => {
+        const c = s.code.trim().toUpperCase();
+        const tag = H.promoCodes[c];
+        const o = tag ? H.offers.find((x) => x.tag === tag) : null;
+        if (o) this.setState({ promo: o.id, codeMsg: 'კოდი „' + c + '“ გამოყენებულია.' });
+        else this.setState({ codeMsg: c ? 'კოდი „' + c + '“ ვერ მოიძებნა.' : 'შეიყვანეთ კოდი.' });
+      },
+      svcTabs, S,
+      scores: H.scores,
+      family: H.family,
+      cantBook: !(nights > 0 && roomObj),
+      confirm: () => this.setState({ confirmed: true }),
+      editBooking: () => this.setState({ confirmed: false }),
+      confirmed: s.confirmed, notConfirmed: !s.confirmed,
+      registered: s.registered, notRegistered: !s.registered,
+      register: () => this.setState({ registered: true }),
+      chat,
+      quick: H.quick.map((q) => ({ label: q, send: () => this.send(q) })),
+      draft: s.draft,
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      onDraftKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.send(); } },
+      sendDraft: () => this.send()
+    };
+  }
+}
+</script>
+</body>
+</html>
