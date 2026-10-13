@@ -2,6 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { screenFromPath } from './src/screen-routes.js';
 
 // Resolve relative to this file, not process.cwd(): Cloud may launch from repo root.
 const appRoot = dirname(fileURLToPath(import.meta.url));
@@ -47,7 +48,7 @@ const server = createServer(async (req, res) => {
     // Laravel Cloud readiness probes may use /, /up, /health or /healthz.
     // All are answered by the same built index file: no false success if
     // deployment assets are missing.
-    const relativePath = ['/', '/up', '/health', '/healthz'].includes(pathname)
+    const relativePath = (['/', '/screens', '/up', '/health', '/healthz'].includes(pathname) || screenFromPath(pathname) !== null)
       ? '/index.html'
       : pathname;
     full = resolve(root, '.' + relativePath);

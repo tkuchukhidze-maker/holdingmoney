@@ -49,6 +49,17 @@ test('Cloud start command answers readiness probes and serves all approved scree
       assert.equal(response.status, 200, route + ' did not return 200: ' + stderr);
       assert.match(response.headers.get('content-type') || '', /text\/html/);
     }
+    const publicPages = [
+      '/screens', '/restaurants/batumi', '/restaurants/kutaisi',
+      '/restaurants/tbilisi', '/hotels/magnolia', '/hotels/chateau-mere',
+      '/register', '/my-episode', '/admin', '/account', '/places/batumi',
+    ];
+    for (const path of publicPages) {
+      const response = await requestAfterStartup('http://127.0.0.1:' + port + path);
+      assert.equal(response.status, 200, path + ': direct navigation failed');
+      assert.match(response.headers.get('content-type') || '', /text\/html/);
+    }
+    assert.equal((await requestAfterStartup('http://127.0.0.1:' + port + '/not-a-page')).status, 404);
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');
