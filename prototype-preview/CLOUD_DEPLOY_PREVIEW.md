@@ -26,3 +26,18 @@ The actual Laravel foundation is developed in GitHub PR #10 at `tkuchukhidze-mak
 The Phase 1 PR is **not a complete hospitality platform**. Do not merge it into the existing production Next.js branch or run it against live data. Phases 2–8 still require backend models, OTP, reservations, admin, integrations and operational deployment.
 
 For the Laravel Cloud dashboard link provided in this chat, the user must authorize access or use Cloud UI to create staging and configure runtime/build. There is no authenticated Laravel Cloud management integration in this conversation. Do not share login credentials or tokens in chat.
+
+
+## Node readiness and port settings (October 2026)
+
+The Preview HTTP server (not the Laravel PHP app) binds to `0.0.0.0` on Laravel Cloud's injected `PORT` environment variable. If no `PORT` is injected, it uses port `3000`, matching the startup/readiness port indicated by the October 13 Cloud deployment diagnosis.
+
+- Runtime: Node.js 22
+- Application directory: `/prototype-preview`
+- Build: `npm ci && npm run build`
+- Start command: `npm start` (`node server.mjs`)
+- Readiness: GET `/`, `/up`, `/health`, or `/healthz` returns 200 **when** `dist/index.html` exists.
+- The server resolves `dist/` relative to its file, not to the current working directory, so it works with Cloud monorepo deployments.
+- Local test: `npm run test:cloud` validates all nine screens, builds assets, starts the real HTTP server and probes all readiness routes.
+
+If Cloud still fails at **Updating environment stack**, open the deployment details and inspect the actual **Deployment logs** and **application startup logs**, not only AI diagnosis. Confirm Cloud routes its health probe to the injected `PORT` (or explicitly set `PORT=3000` in environment settings when Cloud supports it) and that the build artifacts are present in the deploy image. A Cloud infrastructure/update failure cannot be verified or resolved from a GitHub commit alone. Never assume a successful Build means a successful Deploy.
