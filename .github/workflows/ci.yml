@@ -77,3 +77,5 @@ jobs:
           test -f dist/project/Magnolia.dc.html
           test -f dist/project/Main.dc.html
           test -f dist/assets/main.js
+      - name: Probe Cloud HTTP readiness and approved preview assets
+        run: npm run test:readiness

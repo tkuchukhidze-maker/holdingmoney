@@ -15,7 +15,9 @@
     "test:smoke": "node tests/smoke.mjs",
     "test": "npm run check && npm run validate && npm run build && npm run test:smoke",
     "start": "node server.mjs",
-    "check:design": "node tests/validate-designs.mjs"
+    "check:design": "node tests/validate-designs.mjs",
+    "test:readiness": "node --test tests/readiness.mjs",
+    "test:cloud": "npm run check && npm run validate && npm run build && npm run test:readiness"
   },
   "dependencies": {
     "react": "19.2.8",
