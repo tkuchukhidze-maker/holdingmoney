@@ -5,13 +5,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { compileScreen, h } from './dc-parse.js';
+import { isKnownScreen, screenPath } from './screen-routes.js';
 
-const BASE = 'project/';
+const BASE = '/project/';
 
-/** "Batumi.dc.html" -> "?screen=Batumi"; anything else unchanged. */
+/** Rewrite approved screen links without changing source prototypes. */
 export function rewriteHref(href) {
-  const m = href.match(/^(?:\.\/|\/)?([A-Za-z0-9_-]+)\.dc\.html(#.*)?$/);
-  return m ? '?screen=' + encodeURIComponent(m[1]) : href;
+  const m = href.match(/^(?:\.\/|\/)?([A-Za-z0-9_-]+)\.dc\.html(#[^?]*)?$/);
+  if (!m || !isKnownScreen(m[1])) return href;
+  return screenPath(m[1]) + (m[2] || '');
 }
 
 class ErrorBoundary extends React.Component {
@@ -52,7 +54,7 @@ function viewerBar(canvas, current) {
   nav.setAttribute('aria-label', 'Prototype viewer');
   nav.className = 'dcv-bar';
   const home = document.createElement('a');
-  home.href = './';
+  home.href = '/screens';
   home.textContent = 'Screens';
   const sel = document.createElement('select');
   sel.setAttribute('aria-label', 'Go to screen');
@@ -64,7 +66,7 @@ function viewerBar(canvas, current) {
     if (name === current) opt.selected = true;
     sel.appendChild(opt);
   }
-  sel.addEventListener('change', () => { location.search = '?screen=' + encodeURIComponent(sel.value); });
+  sel.addEventListener('change', () => { window.location.assign(screenPath(sel.value)); });
   nav.append(home, sel);
   document.body.appendChild(nav);
 }
@@ -103,7 +105,7 @@ export async function renderIndex() {
     const name = file.replace(/\.dc\.html$/, '');
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = '?screen=' + encodeURIComponent(name);
+    a.href = screenPath(name);
     a.textContent = (canvas.boards[file] && canvas.boards[file].title) || name;
     const code = document.createElement('code');
     code.textContent = 'design/project/' + file;
