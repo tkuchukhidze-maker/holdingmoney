@@ -24,7 +24,7 @@ it('prefills verified contacts for the currently signed-in Episode user', functi
     $this->actingAs($user)
         ->getJson('/api/customer/profile?user_id=99999')
         ->assertOk()
-        ->assertHeader('Cache-Control', 'private, no-store, max-age=0')
+        ->assertHeader('Cache-Control', 'max-age=0, no-store, private')
         ->assertJson([
             'authenticated' => true,
             'firstName' => 'ნინო',
