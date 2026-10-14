@@ -44,3 +44,9 @@
 .ec-footer a:hover{text-decoration:underline}
 @media(max-width:940px){.ec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.ec-header{align-items:flex-start;padding:20px 22px}.ec-nav{width:100%;justify-content:space-between;gap:8px}.ec-container{padding:24px 18px 66px}.ec-breadcrumb{margin-bottom:42px}.ec-intro p{line-height:1.7}.ec-grid{grid-template-columns:1fr;gap:18px}.ec-art{height:215px}.ec-card-body{padding:21px}.ec-filters{gap:7px}.ec-filter{padding:10px 17px}.ec-footer{padding:24px 18px}}
+
+.ec-selected-venue{position:relative;z-index:20;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 25px;background:#203C33;color:#FFFDF9;padding:13px max(22px,calc((100vw - 1220px)/2));font:500 14px/1.6 'Noto Sans Georgian',system-ui,sans-serif}
+.ec-selected-venue a{color:#F7E6C7;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+.ec-selected-venue a:hover{color:#FFFDF9}
+.ec-selected-venue a:focus-visible{outline:2px solid #FFFDF9;outline-offset:4px}
+@media(max-width:600px){.ec-selected-venue{padding:12px 18px;font-size:13px}}
