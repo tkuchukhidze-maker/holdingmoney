@@ -40,3 +40,17 @@ export function screenPath(screen) {
 export function isKnownScreen(screen) {
   return Object.prototype.hasOwnProperty.call(SCREEN_PATHS, screen);
 }
+
+/** Category routes always come before individual venue pages. */
+export const COLLECTION_PATHS = Object.freeze({
+  restaurants: '/restaurants',
+  hotels: '/hotels',
+});
+
+export function collectionFromPath(pathname) {
+  const path = (pathname.replace(/\/+$/, '') || '/').toLowerCase();
+  for (const [kind, route] of Object.entries(COLLECTION_PATHS)) {
+    if (route === path) return kind;
+  }
+  return null;
+}
