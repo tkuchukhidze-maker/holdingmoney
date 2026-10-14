@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { menuFor } from './menu-data.js';
 import { draftLines, draftTotal, makeRequestText, readDraft, saveDraft } from './menu-cart.js';
+import { fetchCustomerProfile, contactFromProfile } from './customer-profile.js';
 
 const GROUPS = [
   { key: 'food', name: 'კერძები' },
@@ -20,6 +21,17 @@ export function RestaurantMenu({ slug }) {
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState('2');
   const [notes, setNotes] = useState('');
+  const [contact, setContact] = useState({ fullName: '', phone: '', email: '' });
+  const [accountProfile, setAccountProfile] = useState(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchCustomerProfile(fetch, { signal: controller.signal }).then((profile) => {
+      if (controller.signal.aborted) return;
+      setAccountProfile(profile);
+      if (profile) setContact((current) => contactFromProfile(profile, current));
+    });
+    return () => controller.abort();
+  }, []);
   const [feedback, setFeedback] = useState('');
 
   const lines = useMemo(() => draftLines(slug, quantities), [slug, quantities]);
@@ -45,7 +57,7 @@ export function RestaurantMenu({ slug }) {
     setFeedback('');
   };
   const clear = () => { setQuantities(saveDraft(slug, {})); setFeedback('მენიუს მონახაზი გასუფთავებულია.'); };
-  const details = { date, time, guests, notes };
+  const details = { date, time, guests, notes, ...contact };
   const compose = () => {
     if (!lines.length) { setFeedback('აირჩიეთ მინიმუმ ერთი კერძი.'); return null; }
     return makeRequestText(slug, quantities, details);
@@ -125,6 +137,10 @@ export function RestaurantMenu({ slug }) {
             <div className="ecm-total"><span>მენიუს საორიენტაციო ჯამი</span><strong>{fmt(sum)}</strong></div>
             <div className="ecm-draftfields">
               <h3>ჯავშნის მონაცემები</h3>
+              {accountProfile ? <p className="ecm-profile-note" role="status">შესული ხართ როგორც <strong>{accountProfile.fullName}</strong> — პროფილის საკონტაქტო მონაცემები ავტომატურად ჩაიწერა. საჭიროების შემთხვევაში შეგიძლიათ შეცვალოთ.</p> : <p className="ecm-profile-note">თუ Episode ანგარიშში შესული ხართ, თქვენი სახელი, გვარი და დადასტურებული კონტაქტები ავტომატურად შეივსება. სხვა შემთხვევაში შეავსეთ საკონტაქტო მონაცემები.</p>}
+              <label>სახელი და გვარი<input type="text" autoComplete="name" value={contact.fullName} onChange={e => setContact(c => ({ ...c, fullName: e.target.value }))} maxLength={240} placeholder="სახელი და გვარი" /></label>
+              <label>ტელეფონი<input type="tel" autoComplete="tel" value={contact.phone} onChange={e => setContact(c => ({ ...c, phone: e.target.value }))} maxLength={32} placeholder="+995 ..." /></label>
+              <label>ელფოსტა<input type="email" autoComplete="email" value={contact.email} onChange={e => setContact(c => ({ ...c, email: e.target.value }))} maxLength={254} placeholder="example@email.com" /></label>
               <label>თარიღი<input type="date" value={date} onChange={e => setDate(e.target.value)} /></label>
               <label>დრო<input type="time" value={time} onChange={e => setTime(e.target.value)} /></label>
               <label>სტუმრების რაოდენობა<input type="number" min="1" max="100" value={guests} onChange={e => setGuests(e.target.value)} /></label>
