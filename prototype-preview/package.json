@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "node scripts/build.mjs --serve",
     "build": "node scripts/build.mjs",
-    "check": "node --check src/dc-parse.js && node --check src/dc-runtime.js && node --check src/main.js && node --check scripts/build.mjs && node --check tests/validate-designs.mjs && node --check tests/smoke.mjs && node --check src/venue-collections.js && node --check src/screen-routes.js && node --check src/site-landing-links.js && node --check src/booking-context.js && node --check src/menu-data.js && node --check src/menu-cart.js && node --check src/customer-profile.js && node --check src/daily-offers.js && node --check src/mobile-nav.js",
+    "check": "node --check src/dc-parse.js && node --check src/dc-runtime.js && node --check src/main.js && node --check scripts/build.mjs && node --check tests/validate-designs.mjs && node --check tests/smoke.mjs && node --check src/venue-collections.js && node --check src/screen-routes.js && node --check src/site-landing-links.js && node --check src/booking-context.js && node --check src/menu-data.js && node --check src/menu-cart.js && node --check src/customer-profile.js && node --check src/daily-offers.js && node --check src/mobile-nav.js && node --check src/venue-gallery.js",
     "validate": "node tests/validate-designs.mjs",
     "test:smoke": "node tests/smoke.mjs",
     "test": "npm run test:cloud && npm run test:smoke",
