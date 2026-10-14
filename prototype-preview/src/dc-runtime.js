@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client';
 import { compileScreen, h } from './dc-parse.js';
 import { isKnownScreen, screenPath } from './screen-routes.js';
 import { prepareSiteNavigation } from './site-landing-links.js';
+import { injectVenueOffer } from './venue-offer-section.js';
 import { preventFakeBookingConfirmation, showVenueContext, venueForScreen } from './booking-context.js';
 import { fetchCustomerProfile, prefillBookingDom } from './customer-profile.js';
 
@@ -88,7 +89,7 @@ export async function mountScreen(screen) {
     const res = await fetch(BASE + screen + '.dc.html');
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
-    const content = preventFakeBookingConfirmation(screen, prepareSiteNavigation(screen, src));
+    const content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
     const scr = compileScreen(content, { rewriteHref });
     document.title = scr.title || screen;
     document.body.dataset.episodeScreen = screen;
