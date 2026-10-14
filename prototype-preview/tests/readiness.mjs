@@ -57,7 +57,8 @@ test('Cloud start command answers readiness probes and serves all approved scree
       assert.match(response.headers.get('content-type') || '', /text\/html/);
     }
     const publicPages = [
-      '/screens', '/restaurants', '/hotels', '/restaurants/batumi', '/restaurants/kutaisi',
+      '/screens', '/restaurants', '/hotels',
+      '/restaurants/batumi/menu', '/restaurants/kutaisi/menu', '/restaurants/tbilisi/menu', '/restaurants/batumi', '/restaurants/kutaisi',
       '/restaurants/tbilisi', '/hotels/magnolia', '/hotels/chateau-mere',
       '/register', '/my-episode', '/admin', '/account', '/places/batumi',
     ];
@@ -82,6 +83,13 @@ test('Cloud start command answers readiness probes and serves all approved scree
       assert.equal(image.status, 200, 'restaurant branch logo failed: ' + logo);
       assert.match(image.headers.get('content-type') || '', /image\/png/);
     }
+    const menuCSS = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/restaurant-menu.css');
+    assert.equal(menuCSS.status, 200);
+    assert.ok((menuCSS.headers.get('content-type') || '').includes('text/css'));
+    assert.match(await menuCSS.text(), /ecm-basket/);
+    const compiledMenu = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/main.js');
+    assert.equal(compiledMenu.status, 200);
+    assert.match(await compiledMenu.text(), /Batumis|ბათუმის სახლში/);
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');

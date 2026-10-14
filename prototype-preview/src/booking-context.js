@@ -1,3 +1,4 @@
+import { draftLines, draftTotal, readDraft } from './menu-cart.js';
 // A customer's Episode profile is global; a reservation belongs to one venue.
 // Route determines the selected venue. Never infer the booking destination
 // from the signed-in customer's profile or the last venue visited.
@@ -41,7 +42,27 @@ export function showVenueContext(screen, documentRoot = document) {
   const link = documentRoot.createElement('a');
   link.href = venue.collection;
   link.textContent = venue.kind === 'restaurant' ? 'სხვა რესტორნის არჩევა →' : 'სხვა სასტუმროს არჩევა →';
-  el.append(text, link);
+  const actions = documentRoot.createElement('span');
+  actions.className = 'ecm-venue-actions';
+  if (venue.kind === 'restaurant') {
+    const slug = screen.toLowerCase();
+    const selected = draftLines(slug, readDraft(slug));
+    const menu = documentRoot.createElement('a');
+    menu.className = 'ecm-menu-link';
+    menu.href = venue.route + '/menu';
+    menu.textContent = 'სრული მენიუ და კერძების არჩევა ↗';
+    actions.append(menu);
+    if (selected.length) {
+      const pill = documentRoot.createElement('span');
+      pill.className = 'ecm-draftpill';
+      const count = selected.reduce((total, line) => total + line.quantity, 0);
+      pill.textContent = 'შერჩეული მენიუ: ' + count + ' ერთეული · ' +
+        draftTotal(selected).toLocaleString('ka-GE') + ' ₾ (მონახაზი)';
+      actions.append(pill);
+    }
+  }
+  actions.append(link);
+  el.append(text, actions);
   documentRoot.getElementById('root').before(el);
   return el;
 }
