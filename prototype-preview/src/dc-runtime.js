@@ -91,6 +91,7 @@ export async function mountScreen(screen) {
     const content = preventFakeBookingConfirmation(screen, prepareSiteNavigation(screen, src));
     const scr = compileScreen(content, { rewriteHref });
     document.title = scr.title || screen;
+    document.body.dataset.episodeScreen = screen;
     injectHead(scr.links, scr.styles, screen);
     showVenueContext(screen);
     createRoot(rootEl).render(h(ErrorBoundary, null, h(BookingProfileBridge, { screen, Component: scr.Component, props: { ...scr.defaultProps, signedIn: false } })));

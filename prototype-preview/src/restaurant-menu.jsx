@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { menuFor } from './menu-data.js';
+import { giftPreview, offerForVenue } from './daily-offers.js';
 import { draftLines, draftTotal, makeRequestText, readDraft, saveDraft } from './menu-cart.js';
 import { fetchCustomerProfile, contactFromProfile } from './customer-profile.js';
 
@@ -35,6 +36,9 @@ export function RestaurantMenu({ slug }) {
   const [feedback, setFeedback] = useState('');
 
   const lines = useMemo(() => draftLines(slug, quantities), [slug, quantities]);
+  const offer = offerForVenue(slug);
+  const khinkaliCount = lines.filter((line) => line.itemId.startsWith('khinkali-')).reduce((n, line) => n + line.quantity, 0);
+  const illustrativeGifts = giftPreview(khinkaliCount, offer);
   const sum = draftTotal(lines);
   const totalCount = lines.reduce((n, item) => n + item.quantity, 0);
   const sections = useMemo(() => {
@@ -105,6 +109,20 @@ export function RestaurantMenu({ slug }) {
         <div><div className="ecm-kicker">EPISODE RESTAURANT MENU</div><h1>{menu.name}</h1><p>სრული მენიუ · {menu.city}</p></div>
         <a className="ecm-outline" href={'/restaurants/' + slug + '#booking'}>ჯავშნის ფორმაზე დაბრუნება <span aria-hidden="true">↗</span></a>
       </div>
+      <div className="ecm-photo-hero">
+        <img src={slug === 'batumi' ? '/photos/batumi.webp' : slug === 'kutaisi' ? '/photos/kutaisi.webp' : '/photos/holding-interiors.webp'} alt={'საილუსტრაციო ფოტო — ' + menu.name} loading="eager" fetchPriority="high"/>
+        <span>Episode Holding · {menu.city} · საილუსტრაციო ფოტო</span>
+      </div>
+      {offer && <section className="ecm-offer-preview" id="daily-offer" aria-label="დღის შეთავაზების პროექტი">
+        <img src="/photos/holding-interiors.webp" alt="საილუსტრაციო ფოტო — რესტორნის გარემო" loading="lazy" />
+        <div>
+          <span className="ecm-not-live">შეთავაზების პროექტი — ჯერ არ მოქმედებს</span>
+          <strong>{offer.title}</strong>
+          <p>{offer.startTime}–{offer.endTime} · {offer.subtitle}</p>
+          {khinkaliCount > 0 && <p>არჩეული ხინკალი: {khinkaliCount} · პირობითი საჩუქარი: {illustrativeGifts} ლუდი (მხოლოდ მაგალითი)</p>}
+          <small>თარიღები, ფილიალის მონაწილეობა, პორცია და პირობები დასადასტურებელია. ალკოჰოლი მხოლოდ სრულწლოვნებისთვის. საჩუქარი კალათას არ ემატება და ფასს არ ცვლის.</small>
+        </div>
+      </section>}
       {!menu.sections.length ? <section className="ecm-empty">
         <h2>ამ ფილიალის სრული მენიუ ჯერ არ არის ატვირთული</h2>
         <p>კერძებსა და ფასებს არ ვაკოპირებთ სხვა რესტორნიდან. მენიუ გამოჩნდება მხოლოდ ამ ფილიალისთვის დამტკიცებული მონაცემების დამატების შემდეგ.</p>
@@ -130,7 +148,7 @@ export function RestaurantMenu({ slug }) {
               </div>)}</div>
             </section>) : <div className="ecm-noresults">ამ კატეგორიაში ამ სახელით კერძი ვერ მოიძებნა.</div>}
           </div>
-          <aside className="ecm-basket" aria-label="მენიუს არჩევანი">
+          <aside id="menu-basket" className="ecm-basket" aria-label="მენიუს არჩევანი">
             <div className="ecm-basket-head"><h2>მენიუს მონახაზი</h2><span>{totalCount} ერთეული</span></div>
             <div className="ecm-selected"><strong>არჩეული ფილიალი</strong><p>{menu.name} · {menu.city}</p></div>
             {lines.length ? <ul className="ecm-lines">{lines.map(l => <li key={l.itemId}><span>{l.name} × {l.quantity}</span><b>{fmt(l.lineTotal)}</b></li>)}</ul> : <p className="ecm-placeholder">კერძების ან სასმელების დასამატებლად დააჭირეთ „+“-ს.</p>}
@@ -159,6 +177,9 @@ export function RestaurantMenu({ slug }) {
           </aside>
         </div>
       </>}
+      {!!menu.sections.length && <a href="#menu-basket" className="ecm-mobile-cart" aria-label="არჩეული მენიუს კალათის ნახვა">
+        <span>კალათა · {totalCount} ერთეული</span><strong>{fmt(sum)} ↑</strong>
+      </a>}
     </main>
     <footer className="ecm-footer">© Episode Holding · <a href="/restaurants">ყველა რესტორანი</a></footer>
   </div>;
