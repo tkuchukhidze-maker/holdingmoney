@@ -85,7 +85,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
     }
     const menuCSS = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/restaurant-menu.css');
     assert.equal(menuCSS.status, 200);
-    assert.match(menuCSS.headers.get('content-type') || '', /text\\/css/);
+    assert.ok((menuCSS.headers.get('content-type') || '').includes('text/css'));
     assert.match(await menuCSS.text(), /ecm-basket/);
     const compiledMenu = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/main.js');
     assert.equal(compiledMenu.status, 200);
