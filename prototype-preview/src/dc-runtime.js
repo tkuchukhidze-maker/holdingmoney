@@ -6,6 +6,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { compileScreen, h } from './dc-parse.js';
 import { isKnownScreen, screenPath } from './screen-routes.js';
+import { prepareSiteNavigation } from './site-landing-links.js';
 
 const BASE = '/project/';
 
@@ -55,7 +56,7 @@ export async function mountScreen(screen) {
     const res = await fetch(BASE + screen + '.dc.html');
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
-    const scr = compileScreen(src, { rewriteHref });
+    const scr = compileScreen(prepareSiteNavigation(screen, src), { rewriteHref });
     document.title = scr.title || screen;
     injectHead(scr.links, scr.styles, screen);
     createRoot(rootEl).render(h(ErrorBoundary, null, h(scr.Component, screen === 'Main' ? { ...scr.defaultProps, signedIn: false } : scr.defaultProps)));
