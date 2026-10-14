@@ -1,0 +1,96 @@
+import { menuFor, menuItem } from './menu-data.js';
+
+const VERSION = 1;
+const MAX_QUANTITY = 30;
+const MAX_DIFFERENT_ITEMS = 80;
+
+export function draftStorageKey(slug) {
+  return 'episode:menu-draft:v1:' + slug;
+}
+
+export function sanitizeDraft(slug, raw) {
+  const menu = menuFor(slug);
+  if (!menu) return {};
+  const source = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  const safe = {};
+  for (const [id, count] of Object.entries(source).slice(0, 400)) {
+    if (Object.keys(safe).length >= MAX_DIFFERENT_ITEMS) break;
+    const qty = Number(count);
+    if (!menuItem(menu, id) || !Number.isInteger(qty) || qty <= 0) continue;
+    safe[id] = Math.min(qty, MAX_QUANTITY);
+  }
+  return safe;
+}
+
+export function readDraft(slug, storage) {
+  const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
+  if (!target) return {};
+  try {
+    const obj = JSON.parse(target.getItem(draftStorageKey(slug)) || '{}');
+    return sanitizeDraft(slug, obj?.version === VERSION ? obj.items : {});
+  } catch {
+    return {};
+  }
+}
+
+export function saveDraft(slug, quantities, storage) {
+  const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
+  const items = sanitizeDraft(slug, quantities);
+  if (target) {
+    try {
+      target.setItem(draftStorageKey(slug), JSON.stringify({ version: VERSION, items }));
+    } catch {
+      // The user can still view/edit the current in-memory cart if storage
+      // is disabled. Never store names, phones, or emails in browser storage.
+    }
+  }
+  return items;
+}
+
+export function draftLines(slug, quantities) {
+  const menu = menuFor(slug);
+  if (!menu) return [];
+  const safe = sanitizeDraft(slug, quantities);
+  const lines = [];
+  for (const section of menu.sections) {
+    for (const item of section.items) {
+      const qty = safe[item.id] || 0;
+      if (qty) lines.push({
+        itemId: item.id, name: item.name, quantity: qty,
+        unitPrice: item.price, lineTotal: Math.round(item.price * qty * 100) / 100,
+        section: section.title,
+      });
+    }
+  }
+  return lines;
+}
+
+export function draftTotal(lines) {
+  return Math.round(lines.reduce((total, line) => total + line.lineTotal, 0) * 100) / 100;
+}
+
+export function makeRequestText(slug, quantities, details = {}) {
+  const menu = menuFor(slug);
+  if (!menu) throw new Error('Unknown restaurant');
+  const lines = draftLines(slug, quantities);
+  if (!lines.length) throw new Error('No dishes selected');
+  const f = (v) => String(v || 'არ არის მითითებული').trim().slice(0, 240);
+  const money = (n) => Number(n).toFixed(2);
+  const parts = [
+    'EPISODE HOLDING — ჯავშნისა და წინასწარი მენიუს მოთხოვნის მონახაზი',
+    'რესტორანი: ' + menu.name + ' · ' + menu.city,
+    'თარიღი: ' + f(details.date),
+    'დრო: ' + f(details.time),
+    'სტუმრები: ' + f(details.guests),
+    '',
+    'შერჩეული კერძები / სასმელები:',
+    ...lines.map((line) => line.name + ' × ' + line.quantity + ' — ' + money(line.lineTotal) + ' ₾'),
+    '',
+    'მენიუს თანხის ჯამი (საორიენტაციო): ' + money(draftTotal(lines)) + ' ₾',
+    'შენიშვნა: ' + f(details.notes),
+    '',
+    'ეს არის სტუმრის მომზადებული მოთხოვნა და არა დადასტურებული ჯავშანი.',
+    'ფასი, ხელმისაწვდომობა და მომსახურების პირობები საჭიროებს რესტორნის დადასტურებას.',
+  ];
+  return parts.join('\n');
+}
