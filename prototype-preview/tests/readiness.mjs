@@ -57,7 +57,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
       assert.match(response.headers.get('content-type') || '', /text\/html/);
     }
     const publicPages = [
-      '/screens', '/restaurants/batumi', '/restaurants/kutaisi',
+      '/screens', '/restaurants', '/hotels', '/restaurants/batumi', '/restaurants/kutaisi',
       '/restaurants/tbilisi', '/hotels/magnolia', '/hotels/chateau-mere',
       '/register', '/my-episode', '/admin', '/account', '/places/batumi',
     ];
@@ -73,6 +73,15 @@ test('Cloud start command answers readiness probes and serves all approved scree
     assert.ok(html.includes('src="/assets/main.js"'), "Nested routes must load assets from the domain root");
     assert.match(html, /name="robots" content="noindex, nofollow"/);
     assert.ok(!html.includes("Episode Holding — Prototypes"));
+    const stylesheet = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/venue-collections.css');
+    assert.equal(stylesheet.status, 200);
+    assert.match(stylesheet.headers.get('content-type') || '', /text\/css/);
+    assert.match(await stylesheet.text(), /ec-grid/);
+    for (const logo of ['batumis-sakhlshi.png', 'kutaisis-sakhlshi.png']) {
+      const image = await requestAfterStartup('http://127.0.0.1:' + port + '/brand/' + logo);
+      assert.equal(image.status, 200, 'restaurant branch logo failed: ' + logo);
+      assert.match(image.headers.get('content-type') || '', /image\/png/);
+    }
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');
