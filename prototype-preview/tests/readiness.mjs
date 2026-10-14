@@ -60,6 +60,12 @@ test('Cloud start command answers readiness probes and serves all approved scree
       assert.match(response.headers.get('content-type') || '', /text\/html/);
     }
     assert.equal((await requestAfterStartup('http://127.0.0.1:' + port + '/not-a-page')).status, 404);
+    const homepage = await requestAfterStartup('http://127.0.0.1:' + port + '/');
+    const html = await homepage.text();
+    assert.match(html, /<title>Episode Holding —/);
+    assert.match(html, /src="\\/assets\\/main\\.js"/);
+    assert.match(html, /name="robots" content="noindex, nofollow"/);
+    assert.doesNotMatch(html, /<title>Episode Holding — Prototypes<\\/title>/);
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');
