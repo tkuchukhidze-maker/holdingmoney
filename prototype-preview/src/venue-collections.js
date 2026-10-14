@@ -70,16 +70,6 @@ export function VenueCollection({ kind }) {
           }, entry),
         ),
       ),
-      kind === 'restaurants' ? React.createElement('section', { className: 'ec-offer-highlight', 'aria-label': 'დღის შეთავაზების პროექტი' },
-        React.createElement('img', { src: '/photos/holding-interiors.webp', alt: 'საილუსტრაციო ფოტო — ქართული რესტორნის გარემო', loading: 'lazy' }),
-        React.createElement('div', { className: 'ec-offer-copy' },
-          React.createElement('span', { className: 'ec-offer-status' }, 'შეთავაზების პროექტი — ჯერ არ მოქმედებს'),
-          React.createElement('h2', null, 'ხინკლის შუადღე'),
-          React.createElement('p', null, '12:00–17:00 · 5 ხინკალზე 1 ლუდი საჩუქრად'),
-          React.createElement('small', null, 'ფილიალები, მოქმედების თარიღები და პირობები დასადასტურებელია. ალკოჰოლი მხოლოდ სრულწლოვნებისთვის.'),
-          React.createElement('a', { href: '/restaurants/batumi/menu#daily-offer' }, 'მენიუსა და კამპანიის ნახვა →'),
-        ),
-      ) : null,
       React.createElement('section', { className: 'ec-grid', 'aria-label': collection.label },
         ...visible.map((venue) =>
           React.createElement('a', {

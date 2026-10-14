@@ -1,4 +1,3 @@
-import { offerForVenue } from './daily-offers.js';
 import { createGalleryTrigger } from './venue-gallery.js';
 import { draftLines, draftTotal, readDraft } from './menu-cart.js';
 // A customer's Episode profile is global; a reservation belongs to one venue.
@@ -68,33 +67,5 @@ export function showVenueContext(screen, documentRoot = document) {
   actions.append(link);
   el.append(text, actions);
   documentRoot.getElementById('root').before(el);
-  if (venue.kind === 'restaurant') {
-    const offer = offerForVenue(screen.toLowerCase());
-    if (offer) {
-      const card = documentRoot.createElement('section');
-      card.className = 'ec-deal-invenue';
-      card.setAttribute('aria-label', 'დღის შეთავაზების პროექტი');
-      const image = documentRoot.createElement('img');
-      image.src = '/photos/holding-interiors.webp';
-      image.alt = 'საილუსტრაციო ფოტო — რესტორნის გარემო';
-      image.loading = 'lazy';
-      const body = documentRoot.createElement('div');
-      const label = documentRoot.createElement('span');
-      label.dataset.offerStatus = offer.status;
-      label.textContent = 'კამპანიის პროექტი — ჯერ არ მოქმედებს';
-      const title = documentRoot.createElement('h2');
-      title.textContent = offer.title;
-      const detail = documentRoot.createElement('p');
-      detail.textContent = offer.startTime + '–' + offer.endTime + ' · ' + offer.subtitle;
-      const conditions = documentRoot.createElement('small');
-      conditions.textContent = 'ფილიალის მონაწილეობა და პირობები დასადასტურებელია; ალკოჰოლი მხოლოდ სრულწლოვნებისთვის.';
-      const link = documentRoot.createElement('a');
-      link.href = venue.route + '/menu#daily-offer';
-      link.textContent = 'მენიუს ნახვა →';
-      body.append(label, title, detail, conditions);
-      card.append(image, body, link);
-      documentRoot.getElementById('root').before(card);
-    }
-  }
   return el;
 }
