@@ -20,6 +20,7 @@ We adapt interaction principles, **not Airbnb branding, design assets or proprie
 - Cards become one column on phone; text and images scale to width; large touch areas; reduced motion respected.
 - Persistent four-tab mobile navigation (Home, Restaurants, Hotels, My Episode). My Episode still points to its demo until the Laravel auth backend is operational.
 - On full restaurant menu: category tabs, search and live quantity controls; sticky cart shortcut above mobile navigation; menu cart belongs only to chosen venue.
+- Every restaurant and hotel has an optional **photo tour** opened from its venue banner, with keyboard arrow/escape navigation, close button, thumbnails and photo counter. The images remain labeled illustrative.
 - All photo and icon content must have alt text/labels suitable for screen readers; keyboard focus visible.
 - No booking or promotion is confirmed without a real server transaction.
 
