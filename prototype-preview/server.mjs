@@ -18,7 +18,10 @@ const types = {
   '.jpg': 'image/jpeg',
 };
 const port = Number(process.env.PORT ?? '3000');
-const host = process.env.HOST || '0.0.0.0';
+// Cloud's readiness checks connect via IPv6. Listen on the IPv6 wildcard,
+// which also accepts IPv4 on dual-stack Linux (ipv6Only: false).
+// HOST is optional for local troubleshooting; production defaults to ::.
+const host = process.env.HOST || '::';
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error('PORT must be an integer from 1 to 65535');
 }
@@ -82,6 +85,6 @@ server.on('error', (error) => {
   console.error('Episode preview server failed to start:', error);
   process.exitCode = 1;
 });
-server.listen(port, host, () => {
+server.listen({ port, host, ipv6Only: false }, () => {
   console.log('Episode preview listening at http://' + host + ':' + port + ' (assets: ' + root + ')');
 });
