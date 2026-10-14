@@ -6,7 +6,7 @@ import { makeRequestText } from '../src/menu-cart.js';
 const profile = { authenticated: true, firstName: 'ნინო', lastName: 'კაპანაძე', email: 'nino@example.test', phone: '+995599112233' };
 
 test('autofill only accepts authenticated, complete profile data', () => {
-  assert.equal(normalizedCustomerProfile({ authenticated: false, ...profile }), null);
+  assert.equal(normalizedCustomerProfile({ ...profile, authenticated: false }), null);
   assert.equal(normalizedCustomerProfile({ authenticated: true, firstName: '', lastName: '' }), null);
   assert.deepEqual(normalizedCustomerProfile(profile), {
     firstName: 'ნინო', lastName: 'კაპანაძე', fullName: 'ნინო კაპანაძე', email: 'nino@example.test', phone: '+995599112233',
