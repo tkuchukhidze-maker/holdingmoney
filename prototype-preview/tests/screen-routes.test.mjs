@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { SCREEN_PATHS, screenFromPath, screenPath, isKnownScreen } from '../src/screen-routes.js';
+import { SCREEN_PATHS, COLLECTION_PATHS, screenFromPath, screenPath, isKnownScreen, collectionFromPath } from '../src/screen-routes.js';
 
 test('every approved screen has a unique public URL, with Main at the root', () => {
   assert.equal(Object.keys(SCREEN_PATHS).length, 9);
@@ -28,4 +28,16 @@ test('the viewer does not route unknown names into arbitrary files', () => {
   assert.equal(isKnownScreen('../README'), false);
   assert.equal(isKnownScreen('Foo'), false);
   assert.equal(screenPath('Foo'), '/');
+});
+
+test('restaurants and hotels category routes are separate from their individual venues', () => {
+  assert.equal(collectionFromPath('/restaurants'), 'restaurants');
+  assert.equal(collectionFromPath('/hotels'), 'hotels');
+  assert.equal(collectionFromPath('/restaurants/'), 'restaurants');
+  assert.equal(collectionFromPath('/hotels/'), 'hotels');
+  assert.equal(collectionFromPath('/restaurants/batumi'), null);
+  assert.equal(collectionFromPath('/hotels/magnolia'), null);
+  assert.equal(screenFromPath('/restaurants'), null);
+  assert.equal(screenFromPath('/hotels'), null);
+  assert.deepEqual(Object.keys(COLLECTION_PATHS).sort(), ['hotels', 'restaurants']);
 });
