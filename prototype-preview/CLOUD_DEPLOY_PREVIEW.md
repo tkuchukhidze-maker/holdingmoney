@@ -41,3 +41,15 @@ The Preview HTTP server (not the Laravel PHP app) binds to `0.0.0.0` on Laravel 
 - Local test: `npm run test:cloud` validates all nine screens, builds assets, starts the real HTTP server and probes all readiness routes.
 
 If Cloud still fails at **Updating environment stack**, open the deployment details and inspect the actual **Deployment logs** and **application startup logs**, not only AI diagnosis. Confirm Cloud routes its health probe to the injected `PORT` (or explicitly set `PORT=3000` in environment settings when Cloud supports it) and that the build artifacts are present in the deploy image. A Cloud infrastructure/update failure cannot be verified or resolved from a GitHub commit alone. Never assume a successful Build means a successful Deploy.
+
+
+## IPv6 readiness fix — 14 October 2026
+
+Laravel Cloud's deployment AI diagnosis reported that the Node app was reachable on IPv4 `0.0.0.0:3000` but its health probes use IPv6. The updated server binds to the IPv6 wildcard **`::`**, enabling IPv6 and, on normal Linux dual-stack hosts, IPv4 via `ipv6Only: false`. It continues to use Cloud's injected `PORT` (fallback 3000).
+
+- Do not set `HOST=0.0.0.0` in Laravel Cloud. If a `HOST` variable exists, remove it or set `HOST=::`.
+- Start command: `npm start`; application directory: `prototype-preview`; build: `npm ci && npm run build`.
+- CI now probes `http://[::1]:PORT/`, `/up`, `/health`, and `/healthz` **and** their IPv4 equivalents.
+- GitHub CI tests the code path; only a successful Laravel Cloud Deployment proves production readiness. If deployment continues failing, inspect actual Deployment logs / Monitoring logs before any further code changes.
+
+This project is still a public-facing UI with approved prototype content; real hotel/restaurant bookings, payment, user accounts and staff permissioned dashboards are not implemented by this Node viewer.
