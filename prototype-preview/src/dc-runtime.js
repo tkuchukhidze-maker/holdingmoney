@@ -49,39 +49,16 @@ async function loadCanvas() {
   return res.json();
 }
 
-function viewerBar(canvas, current) {
-  const nav = document.createElement('nav');
-  nav.setAttribute('aria-label', 'Prototype viewer');
-  nav.className = 'dcv-bar';
-  const home = document.createElement('a');
-  home.href = '/screens';
-  home.textContent = 'Screens';
-  const sel = document.createElement('select');
-  sel.setAttribute('aria-label', 'Go to screen');
-  for (const file of canvas.order) {
-    const name = file.replace(/\.dc\.html$/, '');
-    const opt = document.createElement('option');
-    opt.value = name;
-    opt.textContent = (canvas.boards[file] && canvas.boards[file].title) || name;
-    if (name === current) opt.selected = true;
-    sel.appendChild(opt);
-  }
-  sel.addEventListener('change', () => { window.location.assign(screenPath(sel.value)); });
-  nav.append(home, sel);
-  document.body.appendChild(nav);
-}
-
 export async function mountScreen(screen) {
   const rootEl = document.getElementById('root');
   try {
-    const [res, canvas] = await Promise.all([fetch(BASE + screen + '.dc.html'), loadCanvas()]);
+    const res = await fetch(BASE + screen + '.dc.html');
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
     const scr = compileScreen(src, { rewriteHref });
     document.title = scr.title || screen;
     injectHead(scr.links, scr.styles, screen);
-    createRoot(rootEl).render(h(ErrorBoundary, null, h(scr.Component, scr.defaultProps)));
-    viewerBar(canvas, screen);
+    createRoot(rootEl).render(h(ErrorBoundary, null, h(scr.Component, screen === 'Main' ? { ...scr.defaultProps, signedIn: false } : scr.defaultProps)));
   } catch (e) {
     rootEl.innerHTML = '';
     const pre = document.createElement('pre');
