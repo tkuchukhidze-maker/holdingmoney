@@ -78,4 +78,4 @@ jobs:
           test -f dist/project/Main.dc.html
           test -f dist/assets/main.js
       - name: Probe Cloud HTTP readiness and approved preview assets
-        run: npm run test:routes && npm run test:readiness
+        run: npm run test:routes && npm run test:venues && npm run test:booking && npm run test:readiness
