@@ -63,7 +63,7 @@ test('390px phone: all three restaurant and both hotel calendars render as compa
         const days = [...document.querySelectorAll(selector + ' .cal-cell')];
         const calendar = days[0]?.closest('[style*="grid-template-columns: repeat(7,"]');
         const styles = calendar && getComputedStyle(calendar);
-        const columns = styles?.gridTemplateColumns.trim().split(/\\s+/) || [];
+        const columns = styles?.gridTemplateColumns.trim().split(' ').filter(Boolean) || [];
         const first = days[0]?.getBoundingClientRect();
         const seventh = days[6]?.getBoundingClientRect();
         const width = window.innerWidth;
