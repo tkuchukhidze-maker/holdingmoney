@@ -16,6 +16,8 @@ fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(path.join(dist, 'assets'), { recursive: true });
 fs.cpSync(path.join(root, 'design', 'project'), path.join(dist, 'project'), { recursive: true });
 fs.copyFileSync(path.join(root, 'index.html'), path.join(dist, 'index.html'));
+fs.copyFileSync(path.join(root, 'src', 'venue-collections.css'), path.join(dist, 'assets', 'venue-collections.css'));
+fs.cpSync(path.join(root, 'assets', 'brand'), path.join(dist, 'brand'), { recursive: true });
 
 const options = {
   entryPoints: [path.join(root, 'src', 'main.js')],

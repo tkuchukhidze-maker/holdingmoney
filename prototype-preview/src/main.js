@@ -1,12 +1,16 @@
 import { mountScreen, renderIndex } from './dc-runtime.js';
-import { isKnownScreen, screenFromPath } from './screen-routes.js';
+import { isKnownScreen, screenFromPath, collectionFromPath } from './screen-routes.js';
+import { mountCollection } from './venue-collections.js';
 
 const currentUrl = new URL(window.location.href);
+const collection = collectionFromPath(currentUrl.pathname);
 const screen = currentUrl.searchParams.get('screen') || screenFromPath(currentUrl.pathname);
 
 if (currentUrl.pathname === '/screens') {
   // Internal design inventory — never the public homepage.
   renderIndex();
+} else if (collection) {
+  mountCollection(collection);
 } else if (screen && isKnownScreen(screen)) {
   const notice = document.createElement('div');
   notice.className = 'episode-status';
