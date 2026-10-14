@@ -37,7 +37,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
   // deployment can be launched by the platform.
   const app = spawn(process.execPath, [resolve(previewRoot, 'server.mjs')], {
     cwd: repositoryRoot,
-    env: { ...process.env, PORT: String(port), HOST: '127.0.0.1' },
+    env: { ...process.env, PORT: String(port), HOST: '::' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let stderr = '';
@@ -47,6 +47,13 @@ test('Cloud start command answers readiness probes and serves all approved scree
     for (const route of ['/', '/up', '/health', '/healthz']) {
       const response = await requestAfterStartup('http://127.0.0.1:' + port + route);
       assert.equal(response.status, 200, route + ' did not return 200: ' + stderr);
+      assert.match(response.headers.get('content-type') || '', /text\/html/);
+    }
+    // Laravel Cloud uses IPv6 for its readiness probe. The same listener
+    // must respond over both IPv6 and IPv4 (Linux dual-stack).
+    for (const route of ['/', '/up', '/health', '/healthz']) {
+      const response = await requestAfterStartup('http://[::1]:' + port + route);
+      assert.equal(response.status, 200, 'IPv6 readiness failed at ' + route + ': ' + stderr);
       assert.match(response.headers.get('content-type') || '', /text\/html/);
     }
     const publicPages = [
