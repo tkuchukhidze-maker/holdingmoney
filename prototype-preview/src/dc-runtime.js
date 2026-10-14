@@ -7,7 +7,8 @@ import { createRoot } from 'react-dom/client';
 import { compileScreen, h } from './dc-parse.js';
 import { isKnownScreen, screenPath } from './screen-routes.js';
 import { prepareSiteNavigation } from './site-landing-links.js';
-import { preventFakeBookingConfirmation, showVenueContext } from './booking-context.js';
+import { preventFakeBookingConfirmation, showVenueContext, venueForScreen } from './booking-context.js';
+import { fetchCustomerProfile, prefillBookingDom } from './customer-profile.js';
 
 const BASE = '/project/';
 
@@ -51,6 +52,36 @@ async function loadCanvas() {
   return res.json();
 }
 
+/** Authenticated-only autofill. In the Node-only preview the auth endpoint
+ * returns 404, so the page remains a guest form. Never synthesize a profile. */
+function BookingProfileBridge({ screen, Component, props }) {
+  React.useEffect(() => {
+    if (!venueForScreen(screen)) return undefined;
+    const controller = new AbortController();
+    const root = document.getElementById('root');
+    let observer;
+    fetchCustomerProfile(fetch, { signal: controller.signal }).then((profile) => {
+      if (!profile || controller.signal.aborted || !root) return;
+      const fill = () => {
+        prefillBookingDom(root, profile);
+        const booking = root.querySelector('#booking');
+        if (!booking || booking.querySelector('.ecm-profile-loaded')) return;
+        const note = document.createElement('div');
+        note.className = 'ecm-profile-loaded';
+        note.setAttribute('role', 'status');
+        note.textContent = 'Episode პროფილიდან შევსებულია: ' + profile.fullName +
+          '. თქვენი მონაცემები შეგიძლიათ შეცვალოთ.';
+        booking.prepend(note);
+      };
+      fill();
+      observer = new MutationObserver(fill);
+      observer.observe(root, { childList: true, subtree: true });
+    });
+    return () => { controller.abort(); observer?.disconnect(); };
+  }, [screen]);
+  return h(Component, props);
+}
+
 export async function mountScreen(screen) {
   const rootEl = document.getElementById('root');
   try {
@@ -62,7 +93,7 @@ export async function mountScreen(screen) {
     document.title = scr.title || screen;
     injectHead(scr.links, scr.styles, screen);
     showVenueContext(screen);
-    createRoot(rootEl).render(h(ErrorBoundary, null, h(scr.Component, { ...scr.defaultProps, signedIn: false })));
+    createRoot(rootEl).render(h(ErrorBoundary, null, h(BookingProfileBridge, { screen, Component: scr.Component, props: { ...scr.defaultProps, signedIn: false } })));
   } catch (e) {
     rootEl.innerHTML = '';
     const pre = document.createElement('pre');
