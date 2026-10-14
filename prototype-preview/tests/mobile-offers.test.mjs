@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DAILY_OFFERS, giftPreview, isOfferLive, offerForVenue } from '../src/daily-offers.js';
 import { MOBILE_TABS, mobileCurrentTab } from '../src/mobile-nav.js';
+import { photosForVenue } from '../src/venue-gallery.js';
 
 test('campaign is explicitly a draft and venue-specific across restaurants', () => {
   assert.deepEqual(Object.keys(DAILY_OFFERS).sort(), ['batumi', 'kutaisi', 'tbilisi']);
@@ -36,4 +37,13 @@ test('mobile navigation shows all core routes and highlights the right category'
   assert.equal(mobileCurrentTab('/hotels/magnolia'), '/hotels');
   assert.equal(mobileCurrentTab('/register'), '/my-episode');
   assert.equal(mobileCurrentTab('/'), '/');
+});
+
+test('every restaurant and hotel has a locally served illustrative photo tour', () => {
+  for (const name of ['Batumi', 'Kutaisi', 'Tbilisi', 'Magnolia', 'ChateauMere']) {
+    const photos = photosForVenue(name);
+    assert.ok(photos.length >= 2, 'Expected at least two gallery photos: ' + name);
+    assert.ok(photos.every(src => src.startsWith('/photos/') && src.endsWith('.webp')));
+  }
+  assert.deepEqual(photosForVenue('Unknown'), []);
 });
