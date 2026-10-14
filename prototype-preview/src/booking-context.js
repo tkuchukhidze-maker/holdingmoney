@@ -1,4 +1,5 @@
 import { offerForVenue } from './daily-offers.js';
+import { createGalleryTrigger } from './venue-gallery.js';
 import { draftLines, draftTotal, readDraft } from './menu-cart.js';
 // A customer's Episode profile is global; a reservation belongs to one venue.
 // Route determines the selected venue. Never infer the booking destination
@@ -62,6 +63,8 @@ export function showVenueContext(screen, documentRoot = document) {
       actions.append(pill);
     }
   }
+  const gallery = createGalleryTrigger(screen, documentRoot);
+  if (gallery) actions.append(gallery);
   actions.append(link);
   el.append(text, actions);
   documentRoot.getElementById('root').before(el);
