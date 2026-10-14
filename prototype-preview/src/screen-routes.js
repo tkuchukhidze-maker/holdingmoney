@@ -54,3 +54,17 @@ export function collectionFromPath(pathname) {
   }
   return null;
 }
+
+/** Restaurant menu pages are venue-specific; never serve another venue's menu. */
+export const MENU_PATHS = Object.freeze({
+  batumi: '/restaurants/batumi/menu',
+  kutaisi: '/restaurants/kutaisi/menu',
+  tbilisi: '/restaurants/tbilisi/menu',
+});
+export function menuFromPath(pathname) {
+  const path = (pathname.replace(/\/+$/, '') || '/').toLowerCase();
+  for (const [slug, route] of Object.entries(MENU_PATHS)) {
+    if (route === path) return slug;
+  }
+  return null;
+}
