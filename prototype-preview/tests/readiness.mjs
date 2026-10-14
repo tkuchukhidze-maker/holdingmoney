@@ -90,6 +90,16 @@ test('Cloud start command answers readiness probes and serves all approved scree
     const compiledMenu = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/main.js');
     assert.equal(compiledMenu.status, 200);
     assert.match(await compiledMenu.text(), /Batumis|ბათუმის სახლში/);
+    const mobileCss = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/mobile-experience.css');
+    assert.equal(mobileCss.status, 200);
+    assert.ok((mobileCss.headers.get('content-type') || '').includes('text/css'));
+    assert.match(await mobileCss.text(), /episode-mobile-nav/);
+    for (const photo of ['batumi.webp', 'kutaisi.webp', 'magnolia.webp', 'holding-interiors.webp', 'editorial.webp']) {
+      const response = await requestAfterStartup('http://127.0.0.1:' + port + '/photos/' + photo);
+      assert.equal(response.status, 200, 'Missing venue photo: ' + photo);
+      assert.ok((response.headers.get('content-type') || '').includes('image/webp'));
+      assert.ok(Number(response.headers.get('content-length') || 1) > 0);
+    }
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');

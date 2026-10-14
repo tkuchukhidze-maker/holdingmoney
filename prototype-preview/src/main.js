@@ -2,8 +2,10 @@ import { mountScreen, renderIndex } from './dc-runtime.js';
 import { isKnownScreen, screenFromPath, collectionFromPath, menuFromPath } from './screen-routes.js';
 import { mountCollection } from './venue-collections.js';
 import { mountRestaurantMenu } from './restaurant-menu.jsx';
+import { mountMobileNavigation } from './mobile-nav.js';
 
 const currentUrl = new URL(window.location.href);
+mountMobileNavigation(document, currentUrl.pathname);
 const collection = collectionFromPath(currentUrl.pathname);
 const menuSlug = menuFromPath(currentUrl.pathname);
 const screen = currentUrl.searchParams.get('screen') || screenFromPath(currentUrl.pathname);
