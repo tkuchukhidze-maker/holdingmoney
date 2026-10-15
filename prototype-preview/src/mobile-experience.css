@@ -169,3 +169,15 @@ body[data-episode-screen="Main"] #root [style*="height: 200px"][style*="backgrou
   #calendar [style*="grid-template-columns: repeat(7,"]>span,
   #booking [style*="grid-template-columns: repeat(7,"]>span{font-size:9px!important}
 }
+
+.episode-mobile-nav,.episode-mobile-nav *{box-sizing:border-box}
+.episode-mobile-nav a:focus-visible{outline:3px solid #24543e;outline-offset:-3px}
+/* Compact icon pills keep the navigation readable without oversized tiles. */
+@media(max-width:744px){
+  .episode-mobile-nav{min-height:calc(72px + env(safe-area-inset-bottom,0px));padding:5px 8px calc(5px + env(safe-area-inset-bottom,0px));gap:4px}
+  .episode-mobile-nav a{gap:3px;min-height:60px;color:#646b65;letter-spacing:0}
+  .episode-mobile-nav a[aria-current="page"]{background:transparent;color:#214b3d}
+  .episode-mobile-icon{box-sizing:border-box;width:44px;height:32px;padding:4px 10px;border-radius:12px}
+  .episode-mobile-nav a[aria-current="page"] .episode-mobile-icon{background:#e7f0e9}
+  .episode-mobile-label{font-size:clamp(9px,2.6vw,11px);line-height:1.4}
+}
