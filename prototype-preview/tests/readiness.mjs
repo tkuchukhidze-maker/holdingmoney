@@ -71,7 +71,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
     const homepage = await requestAfterStartup('http://127.0.0.1:' + port + '/');
     const html = await homepage.text();
     assert.match(html, /<title>Episode Holding —/);
-    assert.ok(html.includes('src="/assets/main.js"'), "Nested routes must load assets from the domain root");
+    assert.match(html, /src="\/assets\/main\.[a-f0-9]{12}\.js"/, 'HTML must load the content-addressed bundle');
     assert.match(html, /name="robots" content="noindex, nofollow"/);
     assert.ok(!html.includes("Episode Holding — Prototypes"));
     const stylesheet = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/venue-collections.css');

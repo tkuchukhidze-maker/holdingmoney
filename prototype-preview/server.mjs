@@ -30,6 +30,8 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 const headers = {
   'X-Content-Type-Options': 'nosniff',
   'Cache-Control': 'no-store',
+  'CDN-Cache-Control': 'no-store',
+  'Surrogate-Control': 'no-store',
   'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
 };
 

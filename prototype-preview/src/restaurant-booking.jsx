@@ -5,10 +5,21 @@ import { readPlan, savePlan, draftLines, draftTotal, readDraft, saveDraft, MAX_Q
 import { MenuPlanner } from './menu-planner.jsx';
 import { OCCASIONS } from './menu-planner.js';
 
+export function initialBookingDetails(slug, search = '') {
+  const plan = readPlan(slug);
+  const params = new URLSearchParams(search);
+  const guests = Number(params.get('guests'));
+  const time = params.get('time') || '';
+  const date = params.get('date') || '';
+  return { fullName: '', phone: '', email: '', notes: '', ...plan,
+    guests: String(Number.isInteger(guests) && guests >= 1 && guests <= 100 ? guests : plan.guests),
+    date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '',
+    time: /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time) ? time : '' };
+}
 export function RestaurantBooking({ slug }) {
   const menu = menuFor(slug);
   const [quantities, setQuantities] = useState(() => readDraft(slug));
-  const [details, setDetails] = useState(() => ({ fullName: '', phone: '', email: '', date: '', time: '', notes: '', ...readPlan(slug), guests: String(readPlan(slug).guests) }));
+  const [details, setDetails] = useState(() => initialBookingDetails(slug, window.location.search));
   const [stage, setStage] = useState('details');
   const [error, setError] = useState('');
   const [receipt, setReceipt] = useState(null);

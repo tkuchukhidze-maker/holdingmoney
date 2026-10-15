@@ -28,7 +28,8 @@
     "test:e2e": "node --test tests/mobile-layout.e2e.mjs",
     "test:ux": "node --test tests/platform-ux.e2e.mjs",
     "test:booking-flow": "node --test tests/booking-flow.e2e.mjs",
-    "test:planner": "node --test tests/menu-planner.test.mjs tests/booking-api.test.mjs"
+    "test:planner": "node --test tests/menu-planner.test.mjs tests/booking-api.test.mjs",
+    "test:home": "node --test tests/home-modern.e2e.mjs"
   },
   "dependencies": {
     "react": "19.2.8",

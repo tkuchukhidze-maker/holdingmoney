@@ -1,3 +1,4 @@
+import { mountHome } from './home.jsx';
 import { mountRestaurantBooking } from './restaurant-booking.jsx';
 import { installPageExperience, renderUnavailableAccount, renderPageError } from './page-experience.js';
 import { mountScreen, renderIndex } from './dc-runtime.js';
@@ -26,6 +27,8 @@ if (['Register', 'MyEpisode', 'Admin'].includes(screen)) {
   mountRestaurantMenu(menuSlug);
 } else if (collection) {
   mountCollection(collection);
+} else if (screen === 'Main') {
+  mountHome();
 } else if (screen && isKnownScreen(screen)) {
   const notice = document.createElement('div');
   notice.className = 'episode-status';

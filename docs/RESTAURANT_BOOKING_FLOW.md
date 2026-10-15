@@ -83,3 +83,20 @@ Cloud readiness and all browser checks, passed.
 To disable intake, remove Node `BOOKING_API_URL` while preserving the database.
 Reverting frontend code does not require dropping the booking table. Back up any
 real requests before considering a migration rollback.
+
+## Modern home and release consistency
+
+The public `/` now renders `home.jsx`: a compact Georgian header, restaurant/hotel
+choice cards and a real quick-booking form. Restaurant/date/time/guest selections
+carry into the booking request page; there is no hard-coded "Tonight, 12 Oct".
+The original approved Main design remains archived and validated separately.
+
+Production HTML points to content-addressed JS/CSS filenames. Every build writes
+`dist/version.json` with the active asset manifest. Page/design responses and CDN
+headers prohibit stale caching. The legacy unversioned assets remain available
+for diagnostics but are not referenced by production HTML. This prevents cached
+old icon bundles being reused under the same URL; it does not control manual
+Cloud rollbacks or deployments of another Git branch.
+
+The modern-home browser check covers 320/390/744/1280px layouts, SVG navigation,
+asset versions, restaurant booking prefills and selected-hotel routing.

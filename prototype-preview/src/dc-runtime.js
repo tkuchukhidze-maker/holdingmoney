@@ -13,6 +13,7 @@ import { preventFakeBookingConfirmation, showVenueContext, venueForScreen } from
 import { fetchCustomerProfile, prefillBookingDom } from './customer-profile.js';
 
 const BASE = '/project/';
+const release = document.querySelector('meta[name="episode-release"]')?.content || 'dev';
 
 /** Rewrite approved screen links without changing source prototypes. */
 export function rewriteHref(href) {
@@ -49,7 +50,7 @@ function injectHead(links, styles, screen) {
 }
 
 async function loadCanvas() {
-  const res = await fetch(BASE + 'canvas.json');
+  const res = await fetch(BASE + 'canvas.json?v=' + release, { cache: 'no-store' });
   if (!res.ok) throw new Error('canvas.json not found');
   return res.json();
 }
@@ -87,7 +88,7 @@ function BookingProfileBridge({ screen, Component, props }) {
 export async function mountScreen(screen) {
   const rootEl = document.getElementById('root');
   try {
-    const res = await fetch(BASE + screen + '.dc.html');
+    const res = await fetch(BASE + screen + '.dc.html?v=' + release, { cache: 'no-store' });
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
     let content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
