@@ -41,7 +41,7 @@ class BookingRequestController extends Controller
 
             return $this->receipt($existing);
         }
-        if ($data['date'].' '.$data['time'] <= now('Asia/Tbilisi')->format('Y-m-d H:i')) {
+        if (now('Asia/Tbilisi')->format('Y-m-d H:i') >= $data['date'].' '.$data['time']) {
             throw ValidationException::withMessages(['date' => 'აირჩიეთ მომავალი თარიღი და დრო.']);
         }
 
@@ -53,7 +53,7 @@ class BookingRequestController extends Controller
         $totalCents = 0;
         foreach ($data['menu'] as $index => $selection) {
             $item = $items->get($selection['itemId']);
-            if (!$item) {
+            if (! $item) {
                 throw ValidationException::withMessages(["menu.$index.itemId" => 'კერძი ამ ფილიალის მენიუში არ მოიძებნა.']);
             }
             $unitCents = (int) round($item['price'] * 100);

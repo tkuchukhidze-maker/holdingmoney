@@ -17,7 +17,7 @@ Artisan::command('booking:requests {reference?} {--venue=}', function () {
     }
     if ($this->argument('reference')) {
         $row = $query->where('reference', $this->argument('reference'))->first();
-        if (!$row) {
+        if (! $row) {
             $this->error('Request not found.');
 
             return 1;
