@@ -1,3 +1,4 @@
+import { renderPageError } from './page-experience.js';
 /**
  * dc-runtime.js — browser side of the standalone prototype viewer.
  * Loads design/project/<Screen>.dc.html, compiles it with dc-parse.js and mounts it.
@@ -12,6 +13,7 @@ import { preventFakeBookingConfirmation, showVenueContext, venueForScreen } from
 import { fetchCustomerProfile, prefillBookingDom } from './customer-profile.js';
 
 const BASE = '/project/';
+const release = document.querySelector('meta[name="episode-release"]')?.content || 'dev';
 
 /** Rewrite approved screen links without changing source prototypes. */
 export function rewriteHref(href) {
@@ -26,7 +28,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.error) {
       return h('pre', { style: { padding: 24, color: '#7A1F1F', whiteSpace: 'pre-wrap', font: '13px/1.5 ui-monospace, monospace' } },
-        'Render error: ' + String(this.state.error && this.state.error.stack || this.state.error));
+        'გვერდის ჩვენება ვერ მოხერხდა. გთხოვთ განაახლოთ გვერდი.');
     }
     return this.props.children;
   }
@@ -48,7 +50,7 @@ function injectHead(links, styles, screen) {
 }
 
 async function loadCanvas() {
-  const res = await fetch(BASE + 'canvas.json');
+  const res = await fetch(BASE + 'canvas.json?v=' + release, { cache: 'no-store' });
   if (!res.ok) throw new Error('canvas.json not found');
   return res.json();
 }
@@ -86,22 +88,22 @@ function BookingProfileBridge({ screen, Component, props }) {
 export async function mountScreen(screen) {
   const rootEl = document.getElementById('root');
   try {
-    const res = await fetch(BASE + screen + '.dc.html');
+    const res = await fetch(BASE + screen + '.dc.html?v=' + release, { cache: 'no-store' });
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
-    const content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
-    const scr = compileScreen(content, { rewriteHref });
+    let content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
+    if (['Batumi', 'Kutaisi', 'Tbilisi'].includes(screen)) {
+      content = content.replace(/<section id="booking"[\s\S]*?<\/section>/, `<section id="booking" class="episode-message"><h2>დაგეგმეთ თქვენი სუფრა</h2><p>შეადგინეთ მენიუ ან გააგზავნეთ ჯავშნის მოთხოვნა მენიუს გარეშე.</p><a href="/restaurants/${screen.toLowerCase()}/book">ჯავშნის მოთხოვნა და მენიუს შედგენა</a></section>`);
+    }
+    const scr = compileScreen(content, { rewriteHref, hidePhotos: true });
     document.title = scr.title || screen;
     document.body.dataset.episodeScreen = screen;
     injectHead(scr.links, scr.styles, screen);
     showVenueContext(screen);
     createRoot(rootEl).render(h(ErrorBoundary, null, h(BookingProfileBridge, { screen, Component: scr.Component, props: { ...scr.defaultProps, signedIn: false } })));
   } catch (e) {
-    rootEl.innerHTML = '';
-    const pre = document.createElement('pre');
-    pre.style.cssText = 'padding:24px;color:#7A1F1F;white-space:pre-wrap;font:13px/1.5 ui-monospace,monospace';
-    pre.textContent = String(e && e.stack || e);
-    rootEl.appendChild(pre);
+    console.error('Screen could not be loaded', e);
+    renderPageError(rootEl);
   }
 }
 
@@ -127,5 +129,5 @@ export async function renderIndex() {
     ul.appendChild(li);
   }
   wrap.append(h1, p, ul);
-  rootEl.appendChild(wrap);
+  rootEl.replaceChildren(wrap);
 }

@@ -2,6 +2,7 @@
 //   dist/index.html, dist/assets/main.js (React + runtime bundle), dist/project/* (design files)
 // Usage: node scripts/build.mjs [--serve] [--port=5173]
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as esbuild from 'esbuild';
@@ -19,8 +20,8 @@ fs.copyFileSync(path.join(root, 'index.html'), path.join(dist, 'index.html'));
 fs.copyFileSync(path.join(root, 'src', 'venue-collections.css'), path.join(dist, 'assets', 'venue-collections.css'));
 fs.copyFileSync(path.join(root, 'src', 'restaurant-menu.css'), path.join(dist, 'assets', 'restaurant-menu.css'));
 fs.copyFileSync(path.join(root, 'src', 'mobile-experience.css'), path.join(dist, 'assets', 'mobile-experience.css'));
+fs.copyFileSync(path.join(root, 'src', 'modern-site.css'), path.join(dist, 'assets', 'modern-site.css'));
 fs.cpSync(path.join(root, 'assets', 'brand'), path.join(dist, 'brand'), { recursive: true });
-fs.cpSync(path.join(root, 'assets', 'photos'), path.join(dist, 'photos'), { recursive: true });
 
 const options = {
   entryPoints: [path.join(root, 'src', 'main.js')],
@@ -42,5 +43,22 @@ if (serve) {
   // Design files are copied once at start; restart after editing design/ files.
 } else {
   await esbuild.build(options);
+  // Each release uses content-addressed URLs. Legacy aliases stay available
+  // for external diagnostics, but HTML never refers to their mutable content.
+  let html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const manifest = {};
+  for (const name of ['main.js', 'venue-collections.css', 'restaurant-menu.css', 'mobile-experience.css', 'modern-site.css']) {
+    const bytes = fs.readFileSync(path.join(dist, 'assets', name));
+    const hash = createHash('sha256').update(bytes).digest('hex').slice(0, 12);
+    const extension = path.extname(name);
+    const fingerprinted = name.slice(0, -extension.length) + '.' + hash + extension;
+    fs.writeFileSync(path.join(dist, 'assets', fingerprinted), bytes);
+    manifest[name] = '/assets/' + fingerprinted;
+    html = html.replaceAll('/assets/' + name, manifest[name]);
+  }
+  const version = createHash('sha256').update(JSON.stringify(manifest)).digest('hex').slice(0, 16);
+  html = html.replace('</head>', '<meta name="episode-release" content="' + version + '">\n</head>');
+  fs.writeFileSync(path.join(dist, 'index.html'), html);
+  fs.writeFileSync(path.join(dist, 'version.json'), JSON.stringify({ version, assets: manifest }));
   console.log('Built to ' + path.relative(root, dist) + '/');
 }

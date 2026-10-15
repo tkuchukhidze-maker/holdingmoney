@@ -1,0 +1,941 @@
+{
+  "batumi": {
+    "venueKey": "restaurant:batumi",
+    "name": "ბათუმის სახლში",
+    "city": "ბათუმი",
+    "currency": "GEL",
+    "serviceIncluded": true,
+    "source": "Owner-provided food, bar and wine PDF menus",
+    "verifiedCurrent": false,
+    "sections": [
+      {
+        "id": "appetizers",
+        "title": "აპეტაიზერი",
+        "group": "food",
+        "items": [
+          {
+            "id": "appetizers-1",
+            "name": "ქართული ყველის დაფა",
+            "price": 35
+          },
+          {
+            "id": "appetizers-2",
+            "name": "ხრაშუნა სულგუნის ჩხირები",
+            "price": 24
+          },
+          {
+            "id": "appetizers-3",
+            "name": "ნადუღი პიტნით",
+            "price": 15
+          },
+          {
+            "id": "appetizers-4",
+            "name": "ეკალა",
+            "price": 30
+          },
+          {
+            "id": "appetizers-5",
+            "name": "სეზონური ფხალის ნაირსახეობა",
+            "price": 30
+          },
+          {
+            "id": "appetizers-6",
+            "name": "მწნილის ნაირსახეობა",
+            "price": 15
+          },
+          {
+            "id": "appetizers-7",
+            "name": "ლავაშის ჩიფსები",
+            "price": 7
+          },
+          {
+            "id": "appetizers-8",
+            "name": "ქათმის ბატი-ბუტი",
+            "price": 20
+          },
+          {
+            "id": "appetizers-9",
+            "name": "იმერული ყველი",
+            "price": 17
+          },
+          {
+            "id": "appetizers-10",
+            "name": "სულგუნი",
+            "price": 24
+          },
+          {
+            "id": "appetizers-11",
+            "name": "შებოლილი სულგუნი",
+            "price": 26
+          }
+        ]
+      },
+      {
+        "id": "cold",
+        "title": "ცივი კერძები",
+        "group": "food",
+        "items": [
+          {
+            "id": "cold-1",
+            "name": "კიტრი პომიდვრის სალათი გლეხურად",
+            "price": 15
+          },
+          {
+            "id": "cold-2",
+            "name": "კიტრი პომიდვრის სალათი კახური ზეთით",
+            "price": 17
+          },
+          {
+            "id": "cold-3",
+            "name": "კიტრი პომიდვრის სალათი ნიგვზით და ჯონჯოლით",
+            "price": 20
+          },
+          {
+            "id": "cold-4",
+            "name": "გებჟალიის სალათი",
+            "price": 30
+          },
+          {
+            "id": "cold-5",
+            "name": "ღორის კუჭმაჭი ტყემლით",
+            "price": 25
+          },
+          {
+            "id": "cold-6",
+            "name": "მწყემსური სალათი",
+            "price": 30
+          },
+          {
+            "id": "cold-7",
+            "name": "ლობიოს სალათი",
+            "price": 20
+          }
+        ]
+      },
+      {
+        "id": "main",
+        "title": "მთავარი კერძები",
+        "group": "food",
+        "items": [
+          {
+            "id": "main-1",
+            "name": "რაჭული გობი",
+            "price": 125
+          },
+          {
+            "id": "main-2",
+            "name": "იმერული გობი",
+            "price": 110
+          },
+          {
+            "id": "main-3",
+            "name": "ამოლესილი ლობიო, მჟავის სალათით და კეცის მჭადით",
+            "price": 16
+          },
+          {
+            "id": "main-4",
+            "name": "ვარია წითელ ტყემალში",
+            "price": 45
+          },
+          {
+            "id": "main-5",
+            "name": "იმერული კუპატი ბროწეულის სოუსით",
+            "price": 35
+          },
+          {
+            "id": "main-6",
+            "name": "ხბოს ჩაშუშული საფერავში გამომცხვარი პიურეთი",
+            "price": 35
+          },
+          {
+            "id": "main-7",
+            "name": "ხბოს ოჯახური",
+            "price": 28
+          },
+          {
+            "id": "main-8",
+            "name": "ღორის ოჯახური",
+            "price": 26
+          },
+          {
+            "id": "main-9",
+            "name": "საქონლის სუკის ოსტრი პიურეთი",
+            "price": 40
+          },
+          {
+            "id": "main-10",
+            "name": "აფხაზურა, მეგრული აჯიკის პიურეთი და წითელი ღვინის სოუსით",
+            "price": 38
+          },
+          {
+            "id": "main-11",
+            "name": "წიწილა შქმერულად",
+            "price": 45
+          },
+          {
+            "id": "main-12",
+            "name": "შემწვარი გულ-ღვიძლი",
+            "price": 22
+          },
+          {
+            "id": "main-13",
+            "name": "შემწვარი კალმახი",
+            "price": 24
+          },
+          {
+            "id": "main-14",
+            "name": "ტაფის აჯაფსანდალი",
+            "price": 18
+          },
+          {
+            "id": "main-15",
+            "name": "კარტოფილი სახლურად",
+            "price": 15
+          },
+          {
+            "id": "main-16",
+            "name": "გამომცხვარი საქონლის ნეკნები გრილზე",
+            "price": 65
+          },
+          {
+            "id": "main-17",
+            "name": "ხბოს ნეკნები",
+            "price": 65
+          },
+          {
+            "id": "main-18",
+            "name": "ტაფაზე შებრაწული წიწილა კენკრაში გამომცხვარი მსხლით",
+            "price": 65
+          },
+          {
+            "id": "main-19",
+            "name": "ხაშლამა ნიახურის პიურეთი და გამომცხვარი ნიორით",
+            "price": 65
+          }
+        ]
+      },
+      {
+        "id": "soups",
+        "title": "წვნიანები",
+        "group": "food",
+        "items": [
+          {
+            "id": "soups-1",
+            "name": "ხინკლუკას წვნიანი შებოლილი სულგუნით",
+            "price": 23
+          },
+          {
+            "id": "soups-2",
+            "name": "ხინკლის წვნიანი ტყლაპით",
+            "price": 15
+          },
+          {
+            "id": "soups-3",
+            "name": "ჩიხირთმა სოფლის დედლით",
+            "price": 18
+          },
+          {
+            "id": "soups-4",
+            "name": "სუპ-ხარჩო",
+            "price": 28
+          },
+          {
+            "id": "soups-5",
+            "name": "სოკოს წვნიანი",
+            "price": 15
+          },
+          {
+            "id": "soups-6",
+            "name": "ხაში",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "id": "bakery",
+        "title": "ჩვენთან გამომცხვარი",
+        "group": "food",
+        "items": [
+          {
+            "id": "bakery-1",
+            "name": "კეცის ხაჭაპური",
+            "price": 25
+          },
+          {
+            "id": "bakery-2",
+            "name": "ტაფის ხაჭაპური",
+            "price": 22
+          },
+          {
+            "id": "bakery-3",
+            "name": "ჭახრაკინა",
+            "price": 22
+          },
+          {
+            "id": "bakery-4",
+            "name": "ჭვიშტარი პიტნით",
+            "price": 10
+          },
+          {
+            "id": "bakery-5",
+            "name": "მჭადი კეცზე",
+            "price": 5
+          },
+          {
+            "id": "bakery-6",
+            "name": "ლობიანი",
+            "price": 16
+          },
+          {
+            "id": "bakery-7",
+            "name": "ლობიანი ლორითა და ჯონჯოლით",
+            "price": 22
+          },
+          {
+            "id": "bakery-8",
+            "name": "სახლური პიცა",
+            "price": 32
+          },
+          {
+            "id": "bakery-9",
+            "name": "სახლური პური",
+            "price": 5
+          }
+        ]
+      },
+      {
+        "id": "grill",
+        "title": "მაყალი",
+        "group": "food",
+        "items": [
+          {
+            "id": "grill-1",
+            "name": "ღორის მწვადი",
+            "price": 27
+          },
+          {
+            "id": "grill-2",
+            "name": "ხბოს მწვადი",
+            "price": 40
+          },
+          {
+            "id": "grill-3",
+            "name": "ქათმის მწვადი",
+            "price": 20
+          },
+          {
+            "id": "grill-4",
+            "name": "შერეული ქაბაბი საწებელში",
+            "price": 26
+          },
+          {
+            "id": "grill-5",
+            "name": "ქაბაბი ბებოს ლავაშში",
+            "price": 26
+          }
+        ]
+      },
+      {
+        "id": "khinkali",
+        "title": "ხინკალი",
+        "group": "food",
+        "items": [
+          {
+            "id": "khinkali-1",
+            "name": "ქალაქური",
+            "price": 2.4
+          },
+          {
+            "id": "khinkali-2",
+            "name": "მთიულური",
+            "price": 2.4
+          },
+          {
+            "id": "khinkali-3",
+            "name": "ყველის ხინკალი",
+            "price": 4
+          },
+          {
+            "id": "khinkali-4",
+            "name": "სოკოს ხინკალი",
+            "price": 2.1
+          },
+          {
+            "id": "khinkali-5",
+            "name": "კარტოფილის ხინკალი",
+            "price": 1.8
+          }
+        ]
+      },
+      {
+        "id": "snacks",
+        "title": "სახლური ხემსი",
+        "group": "food",
+        "items": [
+          {
+            "id": "snacks-1",
+            "name": "კუპატის ხვეულა",
+            "price": 17
+          },
+          {
+            "id": "snacks-2",
+            "name": "ქაბაბის ხვეულა",
+            "price": 17
+          },
+          {
+            "id": "snacks-3",
+            "name": "ქათმის სტეიკის ხვეულა",
+            "price": 16
+          },
+          {
+            "id": "snacks-4",
+            "name": "ქათმის სტეიკის ბოქსი",
+            "price": 16
+          },
+          {
+            "id": "snacks-5",
+            "name": "კუბდარი ბაგეტში",
+            "price": 17
+          }
+        ]
+      },
+      {
+        "id": "sauces",
+        "title": "სოუსები",
+        "group": "food",
+        "items": [
+          {
+            "id": "sauces-1",
+            "name": "ტყემალი",
+            "price": 5
+          },
+          {
+            "id": "sauces-2",
+            "name": "საწებელი",
+            "price": 5
+          },
+          {
+            "id": "sauces-3",
+            "name": "ბაჟე",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "id": "desserts",
+        "title": "დესერტები",
+        "group": "food",
+        "items": [
+          {
+            "id": "desserts-1",
+            "name": "მთის თაფლიანი ნამცხვარი",
+            "price": 10
+          },
+          {
+            "id": "desserts-2",
+            "name": "სახლური დესერტი",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "id": "soft-drinks",
+        "title": "უალკოჰოლო სასმელები",
+        "group": "bar",
+        "items": [
+          {
+            "id": "soft-drinks-1",
+            "name": "წყალი",
+            "price": 3
+          },
+          {
+            "id": "soft-drinks-2",
+            "name": "წვენი",
+            "price": 6
+          },
+          {
+            "id": "soft-drinks-3",
+            "name": "ტონიკი",
+            "price": 6
+          },
+          {
+            "id": "soft-drinks-4",
+            "name": "მინერალური წყალი",
+            "price": 4
+          },
+          {
+            "id": "soft-drinks-5",
+            "name": "ლიმონათი",
+            "price": 6
+          },
+          {
+            "id": "soft-drinks-6",
+            "name": "სახლური ლიმონათი",
+            "price": 20
+          }
+        ]
+      },
+      {
+        "id": "coffee-tea",
+        "title": "ყავა და ჩაი",
+        "group": "bar",
+        "items": [
+          {
+            "id": "coffee-tea-1",
+            "name": "ჩაი (შავი, მწვანე, ხილის)",
+            "price": 7
+          },
+          {
+            "id": "coffee-tea-2",
+            "name": "ესპრესო",
+            "price": 6
+          },
+          {
+            "id": "coffee-tea-3",
+            "name": "ამერიკანო",
+            "price": 7
+          },
+          {
+            "id": "coffee-tea-4",
+            "name": "კაპუჩინო",
+            "price": 8
+          },
+          {
+            "id": "coffee-tea-5",
+            "name": "ლატე",
+            "price": 10
+          },
+          {
+            "id": "coffee-tea-6",
+            "name": "ცივი ყავა",
+            "price": 12
+          },
+          {
+            "id": "coffee-tea-7",
+            "name": "ცივი ყავა ნაყინით",
+            "price": 14
+          },
+          {
+            "id": "coffee-tea-8",
+            "name": "ცივი ჩაი (არომატებით)",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "id": "spirits",
+        "title": "ალკოჰოლური სასმელები",
+        "group": "bar",
+        "items": [
+          {
+            "id": "spirits-1",
+            "name": "Stolichnaya 1 L",
+            "price": 140
+          },
+          {
+            "id": "spirits-2",
+            "name": "Stolichnaya 0.5 L",
+            "price": 70
+          },
+          {
+            "id": "spirits-3",
+            "name": "Absolut 1 L",
+            "price": 150
+          },
+          {
+            "id": "spirits-4",
+            "name": "Absolut 0.5 L",
+            "price": 75
+          },
+          {
+            "id": "spirits-5",
+            "name": "Olmeca",
+            "price": 200
+          },
+          {
+            "id": "spirits-6",
+            "name": "Captain Morgan Dark",
+            "price": 210
+          },
+          {
+            "id": "spirits-7",
+            "name": "Bacardi White",
+            "price": 200
+          },
+          {
+            "id": "spirits-8",
+            "name": "Gordon’s",
+            "price": 200
+          },
+          {
+            "id": "spirits-9",
+            "name": "Jameson",
+            "price": 240
+          }
+        ]
+      },
+      {
+        "id": "beer",
+        "title": "ლუდი",
+        "group": "bar",
+        "items": [
+          {
+            "id": "beer-1",
+            "name": "შავი ლომი",
+            "price": 10
+          },
+          {
+            "id": "beer-2",
+            "name": "ბავარია",
+            "price": 8
+          },
+          {
+            "id": "beer-3",
+            "name": "პაულანერი",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "id": "mixed",
+        "title": "მიქს სასმელები",
+        "group": "bar",
+        "items": [
+          {
+            "id": "mixed-1",
+            "name": "არაყი / რედ ბული",
+            "price": 15
+          },
+          {
+            "id": "mixed-2",
+            "name": "არაყი / წვენი",
+            "price": 12
+          },
+          {
+            "id": "mixed-3",
+            "name": "იაგერი / ენერგეტიკული",
+            "price": 15
+          },
+          {
+            "id": "mixed-4",
+            "name": "იაგერი / წვენი",
+            "price": 13
+          },
+          {
+            "id": "mixed-5",
+            "name": "კუბა ლიბრე",
+            "price": 18
+          },
+          {
+            "id": "mixed-6",
+            "name": "მოჰიტო",
+            "price": 20
+          },
+          {
+            "id": "mixed-7",
+            "name": "ტეკილა სანრაიზი",
+            "price": 20
+          },
+          {
+            "id": "mixed-8",
+            "name": "ჯინ ტონიკი",
+            "price": 22
+          },
+          {
+            "id": "mixed-9",
+            "name": "ბლუ ლაგუნა",
+            "price": 25
+          },
+          {
+            "id": "mixed-10",
+            "name": "ლონგ აილენდ ენერჯი",
+            "price": 30
+          },
+          {
+            "id": "mixed-11",
+            "name": "ლონგ აილენდ აის თი",
+            "price": 27
+          },
+          {
+            "id": "mixed-12",
+            "name": "ვისკი კოლა",
+            "price": 21
+          }
+        ]
+      },
+      {
+        "id": "classic-cocktails",
+        "title": "კლასიკური კოქტეილები",
+        "group": "bar",
+        "items": [
+          {
+            "id": "classic-cocktails-1",
+            "name": "ნეგრონი",
+            "price": 25
+          },
+          {
+            "id": "classic-cocktails-2",
+            "name": "ბულვარდიე",
+            "price": 27
+          },
+          {
+            "id": "classic-cocktails-3",
+            "name": "ოლდ ფეშენი",
+            "price": 27
+          },
+          {
+            "id": "classic-cocktails-4",
+            "name": "ვისკი საუერი",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "id": "signature-cocktails",
+        "title": "საავტორო კოქტეილები",
+        "group": "bar",
+        "items": [
+          {
+            "id": "signature-cocktails-1",
+            "name": "სოფია",
+            "price": 30
+          },
+          {
+            "id": "signature-cocktails-2",
+            "name": "ტედი",
+            "price": 30
+          },
+          {
+            "id": "signature-cocktails-3",
+            "name": "მარაკუია",
+            "price": 30
+          },
+          {
+            "id": "signature-cocktails-4",
+            "name": "ვაშლის ფერია",
+            "price": 30
+          },
+          {
+            "id": "signature-cocktails-5",
+            "name": "კიტრის და ბაზილიკის სმეში",
+            "price": 30
+          },
+          {
+            "id": "signature-cocktails-6",
+            "name": "ტყემლიანი",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "id": "white-wine",
+        "title": "თეთრი ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "white-wine-1",
+            "name": "თელიანი ველი — ხიხვი",
+            "price": 55
+          },
+          {
+            "id": "white-wine-2",
+            "name": "თელიანი ველი — ცოლიკაური",
+            "price": 55
+          },
+          {
+            "id": "white-wine-3",
+            "name": "ფრენდს ვაინი — წინანდალი",
+            "price": 55
+          },
+          {
+            "id": "white-wine-4",
+            "name": "ფრენდს ვაინი — ქისი",
+            "price": 55
+          },
+          {
+            "id": "white-wine-5",
+            "name": "კახური ევროპული თეთრი",
+            "price": 35
+          },
+          {
+            "id": "white-wine-6",
+            "name": "ვინივერია — ქისი",
+            "price": 60
+          },
+          {
+            "id": "white-wine-7",
+            "name": "ვინივერია — ცოლიკაური",
+            "price": 55
+          },
+          {
+            "id": "white-wine-8",
+            "name": "ჩელტი — კრახუნა",
+            "price": 60
+          },
+          {
+            "id": "white-wine-9",
+            "name": "ჩელტი — წინანდალი",
+            "price": 70
+          },
+          {
+            "id": "white-wine-10",
+            "name": "ქართული მზე — რქაწითელი",
+            "price": 60
+          },
+          {
+            "id": "white-wine-11",
+            "name": "თელიანი ველი — წინანდალი",
+            "price": 55
+          },
+          {
+            "id": "white-wine-12",
+            "name": "ევროპული კახური თეთრი",
+            "price": 35
+          }
+        ]
+      },
+      {
+        "id": "qvevri-white",
+        "title": "ქვევრის თეთრი ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "qvevri-white-1",
+            "name": "ჩელტი — ქისი ქვევრი",
+            "price": 65
+          },
+          {
+            "id": "qvevri-white-2",
+            "name": "გლეხური — ქისი ქვევრი",
+            "price": 60
+          },
+          {
+            "id": "qvevri-white-3",
+            "name": "გლეხური — რქაწითელი ქვევრი",
+            "price": 60
+          }
+        ]
+      },
+      {
+        "id": "red-wine",
+        "title": "წითელი ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "red-wine-1",
+            "name": "თელიანი ველი — საფერავი",
+            "price": 50
+          },
+          {
+            "id": "red-wine-2",
+            "name": "ვინივერია — საფერავი",
+            "price": 55
+          },
+          {
+            "id": "red-wine-3",
+            "name": "ორგო — Cuvée",
+            "price": 65
+          },
+          {
+            "id": "red-wine-4",
+            "name": "კახური საფერავი",
+            "price": 35
+          }
+        ]
+      },
+      {
+        "id": "semi-sweet-red",
+        "title": "ნახევრად ტკბილი წითელი ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "semi-sweet-red-1",
+            "name": "ფრენდს ვაინი — ქინძმარაული",
+            "price": 65
+          },
+          {
+            "id": "semi-sweet-red-2",
+            "name": "ფრენდს ვაინი — ხვანჭკარა",
+            "price": 65
+          },
+          {
+            "id": "semi-sweet-red-3",
+            "name": "ქართული მზე — ქინძმარაული",
+            "price": 55
+          },
+          {
+            "id": "semi-sweet-red-4",
+            "name": "სამეფო ხვანჭკარა — ხვანჭკარა",
+            "price": 90
+          }
+        ]
+      },
+      {
+        "id": "semi-sweet-white",
+        "title": "ნახევრად ტკბილი თეთრი ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "semi-sweet-white-1",
+            "name": "სამეფო ღვინო — ტვიში",
+            "price": 90
+          },
+          {
+            "id": "semi-sweet-white-2",
+            "name": "თელიანი ველი — ტვიში",
+            "price": 60
+          }
+        ]
+      },
+      {
+        "id": "rose",
+        "title": "როზე",
+        "group": "wine",
+        "items": [
+          {
+            "id": "rose-1",
+            "name": "თელიანი ველი — საფერავი როზე",
+            "price": 50
+          }
+        ]
+      },
+      {
+        "id": "sparkling",
+        "title": "ცქრიალა ღვინო",
+        "group": "wine",
+        "items": [
+          {
+            "id": "sparkling-1",
+            "name": "პროსეკო",
+            "price": 80
+          },
+          {
+            "id": "sparkling-2",
+            "name": "თელიანი ველი ცქრიალა ღვინო",
+            "price": 50
+          }
+        ]
+      }
+    ]
+  },
+  "kutaisi": {
+    "venueKey": "restaurant:kutaisi",
+    "name": "ქუთაისის სახლში",
+    "city": "ქუთაისი",
+    "currency": "GEL",
+    "serviceIncluded": null,
+    "source": null,
+    "verifiedCurrent": false,
+    "sections": []
+  },
+  "tbilisi": {
+    "venueKey": "restaurant:tbilisi",
+    "name": "თბილისის სახლში",
+    "city": "თბილისი",
+    "currency": "GEL",
+    "serviceIncluded": null,
+    "source": null,
+    "verifiedCurrent": false,
+    "sections": []
+  }
+}

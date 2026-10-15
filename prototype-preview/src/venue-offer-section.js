@@ -4,9 +4,9 @@ import { offerForVenue } from './daily-offers.js';
 // any approved *.dc.html design file. An offer is owned by ONE venue and
 // appears only on that venue's page, never in the holding restaurant directory.
 const RESTAURANTS = Object.freeze({
-  Batumi: { slug: 'batumi', photo: '/photos/batumi.webp', name: 'ბათუმის სახლში' },
-  Kutaisi: { slug: 'kutaisi', photo: '/photos/kutaisi.webp', name: 'ქუთაისის სახლში' },
-  Tbilisi: { slug: 'tbilisi', photo: '/photos/holding-interiors.webp', name: 'თბილისის სახლში' },
+  Batumi: { slug: 'batumi', name: 'ბათუმის სახლში' },
+  Kutaisi: { slug: 'kutaisi', name: 'ქუთაისის სახლში' },
+  Tbilisi: { slug: 'tbilisi', name: 'თბილისის სახლში' },
 });
 
 export function injectVenueOffer(screen, source) {
@@ -26,9 +26,6 @@ export function injectVenueOffer(screen, source) {
   const block = `
 <!-- Venue-specific daily offer (website only; approved prototype intact) -->
 <section id="daily-offer" class="ec-venue-offer" aria-label="დღის შეთავაზება">
-  <div class="ec-venue-offer-photo">
-    <img src="${venue.photo}" alt="საილუსტრაციო ფოტო — ${venue.name}" loading="lazy" decoding="async">
-  </div>
   <div class="ec-venue-offer-content">
     <span class="ec-venue-offer-eyebrow">${label}</span>
     <h2>${offer.title}</h2>

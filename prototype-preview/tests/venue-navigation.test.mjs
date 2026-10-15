@@ -57,3 +57,13 @@ test('hotels remain a separate choice page', () => {
   assert.ok(html.includes('შატო მერე'));
   assert.ok(!html.includes('ბათუმის სახლში'));
 });
+
+test('venue menus open the correct full menu and registration cannot fake sign-in', () => {
+  const sample = '<a href="#menu">Menu</a><a href="#register">Account</a><button type="button" onClick="{{register}}" style="color:red">რეგისტრაცია</button>';
+  for (const screen of ['Batumi', 'Kutaisi', 'Tbilisi']) {
+    const result = prepareSiteNavigation(screen, sample);
+    assert.ok(result.includes('href="/restaurants/' + screen.toLowerCase() + '/menu"'));
+    assert.ok(!result.includes('onClick="{{register}}"'));
+    assert.ok(!result.includes('href="#register"'));
+  }
+});

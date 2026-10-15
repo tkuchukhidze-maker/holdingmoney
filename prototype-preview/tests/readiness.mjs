@@ -71,7 +71,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
     const homepage = await requestAfterStartup('http://127.0.0.1:' + port + '/');
     const html = await homepage.text();
     assert.match(html, /<title>Episode Holding —/);
-    assert.ok(html.includes('src="/assets/main.js"'), "Nested routes must load assets from the domain root");
+    assert.match(html, /src="\/assets\/main\.[a-f0-9]{12}\.js"/, 'HTML must load the content-addressed bundle');
     assert.match(html, /name="robots" content="noindex, nofollow"/);
     assert.ok(!html.includes("Episode Holding — Prototypes"));
     const stylesheet = await requestAfterStartup('http://127.0.0.1:' + port + '/assets/venue-collections.css');
@@ -96,9 +96,7 @@ test('Cloud start command answers readiness probes and serves all approved scree
     assert.match(await mobileCss.text(), /episode-mobile-nav/);
     for (const photo of ['batumi.webp', 'kutaisi.webp', 'magnolia.webp', 'holding-interiors.webp', 'editorial.webp']) {
       const response = await requestAfterStartup('http://127.0.0.1:' + port + '/photos/' + photo);
-      assert.equal(response.status, 200, 'Missing venue photo: ' + photo);
-      assert.ok((response.headers.get('content-type') || '').includes('image/webp'));
-      assert.ok(Number(response.headers.get('content-length') || 1) > 0);
+      assert.equal(response.status, 404, 'Unpublished photo is still served: ' + photo);
     }
     const head = await requestAfterStartup('http://127.0.0.1:' + port + '/', { method: 'HEAD' });
     assert.equal(head.status, 200);

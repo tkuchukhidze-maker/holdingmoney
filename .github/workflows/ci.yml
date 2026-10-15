@@ -39,11 +39,11 @@ jobs:
       - name: Validate PHP configuration
         run: composer validate --no-check-publish
       - name: PHP style
-        run: vendor/bin/pint --test
+        run: vendor/bin/pint --test -v
       - name: PHP tests (Pest)
         run: php artisan test
       - name: Install frontend
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: ESLint
         run: npm run lint
       - name: TypeScript
@@ -65,7 +65,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install isolated viewer dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Validate markup and interactions
         run: npm run check && npm run validate
       - name: Build nine approved previews
@@ -80,6 +80,6 @@ jobs:
       - name: Install Chromium for real mobile layout tests
         run: npx playwright install chromium --with-deps
       - name: Verify phone-size restaurant/hotel calendars and promo placement in browser
-        run: npm run test:e2e
+        run: npm run test:e2e && npm run test:ux && npm run test:booking-flow && npm run test:home
       - name: Probe Cloud HTTP readiness and approved preview assets
-        run: npm run test:routes && npm run test:venues && npm run test:booking && npm run test:menu && npm run test:profile && npm run test:mobile && npm run test:layout && npm run test:readiness
+        run: npm run test:planner && npm run test:routes && npm run test:venues && npm run test:booking && npm run test:menu && npm run test:profile && npm run test:mobile && npm run test:layout && npm run test:readiness

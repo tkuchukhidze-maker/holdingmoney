@@ -25,15 +25,15 @@ const base = 'http://127.0.0.1:' + server.address().port + '/';
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 
 const cases = [
-  ['Main', 'One account.', async (pg) => { await pg.getByRole('tab', { name: 'Book a Room' }).click(); await pg.getByText('Check availability').waitFor(); }],
+  ['Main', 'ახალი მოგონება?', async (pg) => { await pg.getByRole('button', { name: 'ოთახი', exact: true }).click(); await pg.getByRole('button', { name: 'სასტუმროს ნახვა' }).waitFor(); }],
   ['Batumi', 'ვინ მღერის დღეს?', async (pg) => { await pg.locator('button[aria-label^="17 ოქტომბერი"]').click(); await pg.getByText('შაბათი, 17 ოქტომბერი').first().waitFor(); }],
   ['Kutaisi', 'ქუთაისის სახლში', async (pg) => { await pg.getByRole('button', { name: 'დღეს ვინ მღერის?' }).click(); await pg.getByText('დღეს, 12 ოქტომბერს').waitFor({ timeout: 3000 }); }],
-  ['Tbilisi', 'თბილისის სახლში', async (pg) => { await pg.getByRole('button', { name: 'ჯავშნის დადასტურება' }).click(); await pg.getByText('მაგიდა დაჯავშნილია').waitFor(); }],
-  ['Magnolia', 'Magnolia', async (pg) => { await pg.getByRole('button', { name: 'შემდეგი ფოტო' }).click(); await pg.getByText('2 / 4').waitFor(); }],
+  ['Tbilisi', 'თბილისის სახლში', async (pg) => { await pg.getByRole('link', { name: 'ჯავშნის მოთხოვნა და მენიუს შედგენა' }).waitFor(); }],
+  ['Magnolia', 'Magnolia', async (pg) => { if (await pg.getByRole('button', { name: 'შემდეგი ფოტო' }).count()) throw new Error('Unpublished gallery controls still visible'); }],
   ['ChateauMere', 'Chateau', async (pg) => { await pg.getByRole('tab', { name: 'სპა ცენტრი' }).click(); await pg.getByRole('heading', { name: 'სპა ცენტრი' }).waitFor(); }],
-  ['Register', 'შექმენით ანგარიში', async (pg) => { await pg.getByPlaceholder('5XX XX XX XX').fill('599123456'); await pg.getByRole('button', { name: 'კოდის გაგზავნა' }).click(); await pg.getByText('შეიყვანეთ კოდი').waitFor(); }],
-  ['MyEpisode', 'გამარჯობა', async (pg) => { await pg.getByRole('button', { name: /ჯავშნები/ }).first().click(); await pg.getByRole('heading', { name: 'ჩემი ჯავშნები' }).waitFor(); }],
-  ['Admin', 'Control Center', async (pg) => { await pg.getByLabel('ნახვა როგორც').selectOption('nino'); await pg.getByText('ობიექტის მენეჯერი').first().waitFor(); if (await pg.getByRole('button', { name: 'ობიექტები და ბაზები' }).count()) throw new Error('venue manager can see Venues module'); }]
+  ['Register', 'My Episode', async (pg) => { await pg.getByText('ანგარიშის შექმნა და შესვლა ჯერ არ არის გააქტიურებული.', { exact: false }).waitFor(); }],
+  ['MyEpisode', 'My Episode', async (pg) => { if (await pg.getByText('გამარჯობა, თოკო').count()) throw new Error('Guest must not see a fabricated account'); }],
+  ['Admin', 'მართვის პანელი მიუწვდომელია', async (pg) => { if (await pg.getByLabel('ნახვა როგორც').count()) throw new Error('Public preview must not offer role switching'); }]
 ];
 
 let failed = 0;

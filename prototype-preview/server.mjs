@@ -1,8 +1,9 @@
+import { handleBookingRequest } from './src/booking-api.mjs';
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { screenFromPath, collectionFromPath, menuFromPath } from './src/screen-routes.js';
+import { screenFromPath, collectionFromPath, menuFromPath, bookingFromPath } from './src/screen-routes.js';
 
 // Resolve relative to this file, not process.cwd(): Cloud may launch from repo root.
 const appRoot = dirname(fileURLToPath(import.meta.url));
@@ -29,10 +30,13 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 const headers = {
   'X-Content-Type-Options': 'nosniff',
   'Cache-Control': 'no-store',
+  'CDN-Cache-Control': 'no-store',
+  'Surrogate-Control': 'no-store',
   'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
 };
 
 const server = createServer(async (req, res) => {
+  if ((req.url || '').split('?')[0] === '/api/booking-requests') return handleBookingRequest(req, res);
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.writeHead(405, { Allow: 'GET, HEAD' });
     res.end('Method Not Allowed');
@@ -51,7 +55,7 @@ const server = createServer(async (req, res) => {
     // Laravel Cloud readiness probes may use /, /up, /health or /healthz.
     // All are answered by the same built index file: no false success if
     // deployment assets are missing.
-    const relativePath = (['/', '/screens', '/up', '/health', '/healthz'].includes(pathname) || screenFromPath(pathname) !== null || collectionFromPath(pathname) !== null || menuFromPath(pathname) !== null)
+    const relativePath = (['/', '/screens', '/up', '/health', '/healthz'].includes(pathname) || screenFromPath(pathname) !== null || collectionFromPath(pathname) !== null || menuFromPath(pathname) !== null || bookingFromPath(pathname) !== null)
       ? '/index.html'
       : pathname;
     full = resolve(root, '.' + relativePath);

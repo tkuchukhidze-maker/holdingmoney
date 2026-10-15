@@ -11,9 +11,9 @@ export const VENUE_COLLECTIONS = Object.freeze({
     summary: 'აღმოაჩინეთ Episode Holding-ის რესტორნები. აირჩიეთ სასურველი ქალაქი და გადადით რესტორნის გვერდზე.',
     action: 'რესტორნის ნახვა',
     venues: [
-      { slug: 'batumi', photo: '/photos/batumi.webp', name: 'ბათუმის სახლში', latin: 'Batumis Sakhlshi', city: 'ბათუმი', href: '/restaurants/batumi', theme: 'batumi', logo: '/brand/batumis-sakhlshi.png' },
-      { slug: 'kutaisi', photo: '/photos/kutaisi.webp', name: 'ქუთაისის სახლში', latin: 'Kutaisis Sakhlshi', city: 'ქუთაისი', href: '/restaurants/kutaisi', theme: 'kutaisi', logo: '/brand/kutaisis-sakhlshi.png' },
-      { slug: 'tbilisi', photo: '/photos/holding-interiors.webp', name: 'თბილისის სახლში', latin: 'Tbilisis Sakhlshi', city: 'თბილისი', href: '/restaurants/tbilisi', theme: 'tbilisi', logo: null },
+      { slug: 'batumi', name: 'ბათუმის სახლში', latin: 'Batumis Sakhlshi', city: 'ბათუმი', href: '/restaurants/batumi', theme: 'batumi', logo: '/brand/batumis-sakhlshi.png' },
+      { slug: 'kutaisi', name: 'ქუთაისის სახლში', latin: 'Kutaisis Sakhlshi', city: 'ქუთაისი', href: '/restaurants/kutaisi', theme: 'kutaisi', logo: '/brand/kutaisis-sakhlshi.png' },
+      { slug: 'tbilisi', name: 'თბილისის სახლში', latin: 'Tbilisis Sakhlshi', city: 'თბილისი', href: '/restaurants/tbilisi', theme: 'tbilisi', logo: null },
     ],
   },
   hotels: {
@@ -23,8 +23,8 @@ export const VENUE_COLLECTIONS = Object.freeze({
     summary: 'აღმოაჩინეთ Episode Holding-ის სასტუმროები და გახსენით სასურველი ობიექტის გვერდი.',
     action: 'სასტუმროს ნახვა',
     venues: [
-      { slug: 'magnolia', photo: '/photos/magnolia.webp', name: 'სასტუმრო მაგნოლია', latin: 'Hotel Magnolia', city: 'თბილისი', href: '/hotels/magnolia', theme: 'magnolia', logo: null },
-      { slug: 'chateau-mere', photo: '/photos/editorial.webp', name: 'შატო მერე', latin: 'Chateau Mere', city: 'თელავი', href: '/hotels/chateau-mere', theme: 'chateau', logo: null },
+      { slug: 'magnolia', name: 'სასტუმრო მაგნოლია', latin: 'Hotel Magnolia', city: 'თბილისი', href: '/hotels/magnolia', theme: 'magnolia', logo: null },
+      { slug: 'chateau-mere', name: 'შატო მერე', latin: 'Chateau Mere', city: 'თელავი', href: '/hotels/chateau-mere', theme: 'chateau', logo: null },
     ],
   },
 });
@@ -79,9 +79,7 @@ export function VenueCollection({ kind }) {
             'aria-label': venue.name + ' — ' + collection.action,
           },
             React.createElement('div', { className: 'ec-art' },
-              React.createElement('img', { className: 'ec-cover', src: venue.photo, alt: 'საილუსტრაციო ფოტო — ' + venue.city, loading: 'lazy', decoding: 'async' }),
               React.createElement('span', { className: 'ec-city-pill' }, venue.city),
-              React.createElement('span', { className: 'ec-photo-caption' }, 'საილუსტრაციო ფოტო'),
               venue.logo
                 ? React.createElement('img', { className: 'ec-brand-logo', src: venue.logo, alt: venue.name + ' — ლოგო', loading: 'lazy' })
                 : React.createElement('div', { className: 'ec-brand-initial', 'aria-hidden': 'true' }, venue.latin),
