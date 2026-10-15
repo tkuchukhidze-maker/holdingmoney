@@ -47,3 +47,11 @@ test('every restaurant and hotel has a locally served illustrative photo tour', 
   }
   assert.deepEqual(photosForVenue('Unknown'), []);
 });
+
+test('mobile category handles aliases, casing and avoids false prefix matches', () => {
+  assert.equal(mobileCurrentTab('/places/batumi'), '/restaurants');
+  assert.equal(mobileCurrentTab('/HOTELS/MAGNOLIA/'), '/hotels');
+  assert.equal(mobileCurrentTab('/account'), '/my-episode');
+  assert.equal(mobileCurrentTab('/restaurants-missing'), null);
+  assert.equal(mobileCurrentTab('/admin'), null);
+});

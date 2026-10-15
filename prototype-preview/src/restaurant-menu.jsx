@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { menuFor } from './menu-data.js';
 import { giftPreview, offerForVenue } from './daily-offers.js';
@@ -34,6 +34,9 @@ export function RestaurantMenu({ slug }) {
     return () => controller.abort();
   }, []);
   const [feedback, setFeedback] = useState('');
+  const detailsForm = useRef(null);
+  const [clearedDraft, setClearedDraft] = useState(null);
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Tbilisi' });
 
   const lines = useMemo(() => draftLines(slug, quantities), [slug, quantities]);
   const offer = offerForVenue(slug);
@@ -59,11 +62,14 @@ export function RestaurantMenu({ slug }) {
       return saveDraft(slug, next);
     });
     setFeedback('');
+    setClearedDraft(null);
   };
-  const clear = () => { setQuantities(saveDraft(slug, {})); setFeedback('მენიუს მონახაზი გასუფთავებულია.'); };
+  const clear = () => { setClearedDraft(quantities); setQuantities(saveDraft(slug, {})); setFeedback('მენიუს მონახაზი გასუფთავებულია.'); };
+  const undoClear = () => { setQuantities(saveDraft(slug, clearedDraft)); setClearedDraft(null); setFeedback('მენიუს არჩევანი აღდგენილია.'); };
   const details = { date, time, guests, notes, ...contact };
   const compose = () => {
     if (!lines.length) { setFeedback('აირჩიეთ მინიმუმ ერთი კერძი.'); return null; }
+    if (!detailsForm.current?.reportValidity()) return null;
     return makeRequestText(slug, quantities, details);
   };
   const copy = async () => {
@@ -153,22 +159,23 @@ export function RestaurantMenu({ slug }) {
             <div className="ecm-selected"><strong>არჩეული ფილიალი</strong><p>{menu.name} · {menu.city}</p></div>
             {lines.length ? <ul className="ecm-lines">{lines.map(l => <li key={l.itemId}><span>{l.name} × {l.quantity}</span><b>{fmt(l.lineTotal)}</b></li>)}</ul> : <p className="ecm-placeholder">კერძების ან სასმელების დასამატებლად დააჭირეთ „+“-ს.</p>}
             <div className="ecm-total"><span>მენიუს საორიენტაციო ჯამი</span><strong>{fmt(sum)}</strong></div>
-            <div className="ecm-draftfields">
+            <form ref={detailsForm} className="ecm-draftfields" onSubmit={e => e.preventDefault()}>
               <h3>ჯავშნის მონაცემები</h3>
               {accountProfile ? <p className="ecm-profile-note" role="status">შესული ხართ როგორც <strong>{accountProfile.fullName}</strong> — პროფილის საკონტაქტო მონაცემები ავტომატურად ჩაიწერა. საჭიროების შემთხვევაში შეგიძლიათ შეცვალოთ.</p> : <p className="ecm-profile-note">თუ Episode ანგარიშში შესული ხართ, თქვენი სახელი, გვარი და დადასტურებული კონტაქტები ავტომატურად შეივსება. სხვა შემთხვევაში შეავსეთ საკონტაქტო მონაცემები.</p>}
               <label>სახელი და გვარი<input type="text" autoComplete="name" value={contact.fullName} onChange={e => setContact(c => ({ ...c, fullName: e.target.value }))} maxLength={240} placeholder="სახელი და გვარი" /></label>
               <label>ტელეფონი<input type="tel" autoComplete="tel" value={contact.phone} onChange={e => setContact(c => ({ ...c, phone: e.target.value }))} maxLength={32} placeholder="+995 ..." /></label>
               <label>ელფოსტა<input type="email" autoComplete="email" value={contact.email} onChange={e => setContact(c => ({ ...c, email: e.target.value }))} maxLength={254} placeholder="example@email.com" /></label>
-              <label>თარიღი<input type="date" value={date} onChange={e => setDate(e.target.value)} /></label>
+              <label>თარიღი<input type="date" min={today} value={date} onChange={e => setDate(e.target.value)} /></label>
               <label>დრო<input type="time" value={time} onChange={e => setTime(e.target.value)} /></label>
-              <label>სტუმრების რაოდენობა<input type="number" min="1" max="100" value={guests} onChange={e => setGuests(e.target.value)} /></label>
+              <label>სტუმრების რაოდენობა<input type="number" required step="1" inputMode="numeric" min="1" max="100" value={guests} onChange={e => setGuests(e.target.value)} /></label>
               <label>შენიშვნა<textarea rows="2" maxLength="240" placeholder="მაგ., ალერგენები, კერძების მირთმევის დრო" value={notes} onChange={e => setNotes(e.target.value)}/></label>
-            </div>
+            </form>
             <p className="ecm-disclaimer">ეს არის ჯავშანთან გასაგზავნი მენიუს <strong>მონახაზი</strong>. მოთხოვნა რესტორანში ავტომატურად არ იგზავნება და ჯავშანს არ ქმნის.</p>
             <div className="ecm-actions">
               <button type="button" onClick={copy} disabled={!lines.length}>მოთხოვნის კოპირება</button>
               <button type="button" className="ecm-secondary" onClick={share} disabled={!lines.length}>მოთხოვნის გაზიარება</button>
-              <button type="button" className="ecm-textbutton" onClick={() => setShowText(v => !v)} disabled={!lines.length}>{showText ? 'ტექსტის დამალვა' : 'ტექსტის ჩვენება'}</button>
+              <button type="button" className="ecm-textbutton" onClick={() => { if (showText || compose()) setShowText(v => !v); }} disabled={!lines.length}>{showText ? 'ტექსტის დამალვა' : 'ტექსტის ჩვენება'}</button>
+              {clearedDraft && <button type="button" className="ecm-secondary" onClick={undoClear}>გასუფთავების გაუქმება</button>}
               <button type="button" className="ecm-textbutton ecm-clear" onClick={clear} disabled={!lines.length}>არჩევანის გასუფთავება</button>
             </div>
             {feedback && <p className="ecm-feedback" role="status">{feedback}</p>}

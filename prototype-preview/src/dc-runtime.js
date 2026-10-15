@@ -1,3 +1,4 @@
+import { renderPageError } from './page-experience.js';
 /**
  * dc-runtime.js — browser side of the standalone prototype viewer.
  * Loads design/project/<Screen>.dc.html, compiles it with dc-parse.js and mounts it.
@@ -26,7 +27,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.error) {
       return h('pre', { style: { padding: 24, color: '#7A1F1F', whiteSpace: 'pre-wrap', font: '13px/1.5 ui-monospace, monospace' } },
-        'Render error: ' + String(this.state.error && this.state.error.stack || this.state.error));
+        'გვერდის ჩვენება ვერ მოხერხდა. გთხოვთ განაახლოთ გვერდი.');
     }
     return this.props.children;
   }
@@ -97,11 +98,8 @@ export async function mountScreen(screen) {
     showVenueContext(screen);
     createRoot(rootEl).render(h(ErrorBoundary, null, h(BookingProfileBridge, { screen, Component: scr.Component, props: { ...scr.defaultProps, signedIn: false } })));
   } catch (e) {
-    rootEl.innerHTML = '';
-    const pre = document.createElement('pre');
-    pre.style.cssText = 'padding:24px;color:#7A1F1F;white-space:pre-wrap;font:13px/1.5 ui-monospace,monospace';
-    pre.textContent = String(e && e.stack || e);
-    rootEl.appendChild(pre);
+    console.error('Screen could not be loaded', e);
+    renderPageError(rootEl);
   }
 }
 
@@ -127,5 +125,5 @@ export async function renderIndex() {
     ul.appendChild(li);
   }
   wrap.append(h1, p, ul);
-  rootEl.appendChild(wrap);
+  rootEl.replaceChildren(wrap);
 }

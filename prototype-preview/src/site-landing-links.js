@@ -15,6 +15,14 @@ const VENUE_FOOTER_LINKS = [
 ];
 
 export function prepareSiteNavigation(screen, source) {
+  // Embedded registration cards must not manufacture a signed-in identity.
+  source = source.replace(/<button type="button" onClick="{{register}}"([^>]*)>რეგისტრაცია<\/button>/g,
+    '<a href="/register"$1>რეგისტრაცია</a>');
+  if (['Batumi', 'Kutaisi', 'Tbilisi'].includes(screen)) {
+    return source.replace(/href="#menu"/g, 'href="/restaurants/' + screen.toLowerCase() + '/menu"')
+      .replace(/href="#register"/g, 'href="/register"');
+  }
+  if (['Magnolia', 'ChateauMere'].includes(screen)) return source.replace(/href="#register"/g, 'href="/register"');
   if (screen !== 'Main') return source;
   let result = source;
   for (const [text, href] of HEADER_ENTRIES) {

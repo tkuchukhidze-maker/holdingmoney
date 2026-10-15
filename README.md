@@ -59,7 +59,7 @@ npm run typecheck
 npm run build
 ```
 
-**Lockfiles:** Composer and npm lockfiles are not generated in this environment because dependency resolution is unavailable here. CI resolves dependencies independently. Before a production release, run `composer update` and `npm install` in a connected development environment and commit both generated lockfiles; update CI to `npm ci`.
+**Lockfiles:** The root frontend and standalone preview include npm lockfiles; use `npm ci`. The Composer lockfile still needs to be generated and verified in a PHP/Composer environment before release.
 
 **Database note:** Default Laravel framework migrations are included for scaffold compatibility; the normalized Episode operational schema, tenant scopes, shared customers and fake factories will be added in Phase 2. Default user tables are not an authorization mechanism.
 
@@ -74,3 +74,7 @@ See `docs/PHASE_PLAN.md` for the phase sequence, done/stubbed inventory and miss
 ## Isolated prototype preview
 
 The `prototype-preview/` folder is a standalone Node.js preview of the approved designs. It is **not** the Laravel application and saves no real bookings. Laravel Cloud supports monorepo app directories: select `prototype-preview` in a **separate preview application/environment**, use Node.js 22, build `npm install --no-audit --no-fund && npm run build`, start `npm start`, and set no database. The root Laravel application remains on its own staging/runtime. Production must stay on the existing live branch until application phases 2–8 are complete. For exact steps see `docs/LARAVEL_CLOUD.md`.
+
+## Mobile/public-flow improvements
+
+See `docs/MOBILE_UX_REVIEW.md` for the latest mobile navigation and interaction fixes, validation and remaining backend work. Public account/admin routes no longer display simulated identities or successful authentication.

@@ -23,9 +23,9 @@ export function sanitizeDraft(slug, raw) {
 }
 
 export function readDraft(slug, storage) {
-  const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
-  if (!target) return {};
   try {
+    const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
+    if (!target) return {};
     const obj = JSON.parse(target.getItem(draftStorageKey(slug)) || '{}');
     return sanitizeDraft(slug, obj?.version === VERSION ? obj.items : {});
   } catch {
@@ -34,15 +34,15 @@ export function readDraft(slug, storage) {
 }
 
 export function saveDraft(slug, quantities, storage) {
-  const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
   const items = sanitizeDraft(slug, quantities);
-  if (target) {
-    try {
+  try {
+    const target = storage || (typeof window !== 'undefined' ? window.sessionStorage : null);
+    if (target) {
       target.setItem(draftStorageKey(slug), JSON.stringify({ version: VERSION, items }));
-    } catch {
-      // The user can still view/edit the current in-memory cart if storage
-      // is disabled. Never store names, phones, or emails in browser storage.
     }
+  } catch {
+    // Keep the current cart usable even when accessing sessionStorage throws.
+    // Never persist names, phone numbers or email addresses here.
   }
   return items;
 }

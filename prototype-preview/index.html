@@ -2,7 +2,7 @@
 <html lang="ka">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Episode Holding — შექმენი შენი ეპიზოდი</title>
 <meta name="description" content="Episode Holding — რესტორნები და სასტუმროები თბილისში, ბათუმში, ქუთაისსა და თელავში.">
 <meta name="robots" content="noindex, nofollow">
@@ -25,7 +25,9 @@
 <link rel="stylesheet" href="/assets/mobile-experience.css">
 </head>
 <body>
-<div id="root"></div>
+<a class="episode-skip-link" href="#root">შიგთავსზე გადასვლა</a>
+<div id="root" tabindex="-1" aria-busy="true"><p class="episode-loading" role="status">გვერდი იტვირთება…</p></div>
+<noscript>საიტის სანახავად ჩართეთ JavaScript.</noscript>
 <script type="module" src="/assets/main.js"></script>
 </body>
 </html>
