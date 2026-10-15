@@ -42,8 +42,8 @@ test('modern homepage preserves booking context and uses fingerprinted assets', 
     assert.equal(await page.getByLabel('სტუმრების რაოდენობა', { exact: true }).inputValue(), '12');
     await page.goto(base); await page.getByRole('button', { name: 'ოთახი', exact: true }).click();
     await page.getByLabel('სასტუმრო', { exact: true }).selectOption('chateau-mere');
-    await page.getByRole('button', { name: 'სასტუმროს ნახვა' }).click();
-    await page.waitForURL('**/hotels/chateau-mere#booking');
+    await page.getByRole('button', { name: 'ნომრის შერჩევა' }).click();
+    await page.waitForURL('**/hotels/chateau-mere/book?**');
     assert.deepEqual(errors, []);
   } finally { await browser?.close(); server.kill(); }
 });

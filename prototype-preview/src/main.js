@@ -1,14 +1,16 @@
+import { mountHotelBooking } from './hotel-booking.jsx';
 import { mountHome } from './home.jsx';
 import { mountRestaurantBooking } from './restaurant-booking.jsx';
 import { installPageExperience, renderUnavailableAccount, renderPageError } from './page-experience.js';
 import { mountScreen, renderIndex } from './dc-runtime.js';
-import { isKnownScreen, screenPath, screenFromPath, collectionFromPath, menuFromPath, bookingFromPath } from './screen-routes.js';
+import { isKnownScreen, screenPath, screenFromPath, collectionFromPath, menuFromPath, bookingFromPath, hotelBookingFromPath } from './screen-routes.js';
 import { mountCollection } from './venue-collections.js';
 import { mountRestaurantMenu } from './restaurant-menu.jsx';
 import { mountMobileNavigation } from './mobile-nav.js';
 
 const currentUrl = new URL(window.location.href);
 installPageExperience();
+const hotelBookingSlug = hotelBookingFromPath(currentUrl.pathname);
 const bookingSlug = bookingFromPath(currentUrl.pathname);
 const collection = collectionFromPath(currentUrl.pathname);
 const menuSlug = menuFromPath(currentUrl.pathname);
@@ -21,6 +23,8 @@ if (['Register', 'MyEpisode', 'Admin'].includes(screen)) {
 } else if (currentUrl.pathname === '/screens') {
   // Internal design inventory — never the public homepage.
   renderIndex();
+} else if (hotelBookingSlug) {
+  mountHotelBooking(hotelBookingSlug);
 } else if (bookingSlug) {
   mountRestaurantBooking(bookingSlug);
 } else if (menuSlug) {

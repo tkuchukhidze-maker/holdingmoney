@@ -12,13 +12,14 @@ export function Home() {
   const [restaurant, setRestaurant] = useState('batumi');
   const [hotel, setHotel] = useState('magnolia');
   const [date, setDate] = useState('');
+  const [checkOut, setCheckOut] = useState('');
   const [time, setTime] = useState('19:00');
   const [guests, setGuests] = useState('2');
   const collection = VENUE_COLLECTIONS[kind];
   const submit = e => {
     e.preventDefault();
     const params = new URLSearchParams({ ...(date ? { date } : {}), time, guests });
-    window.location.assign(kind === 'restaurants' ? `/restaurants/${restaurant}/book?${params}` : `/hotels/${hotel}#booking`);
+    window.location.assign(kind === 'restaurants' ? `/restaurants/${restaurant}/book?${params}` : `/hotels/${hotel}/book?${new URLSearchParams({ ...(date ? { checkIn: date } : {}), ...(checkOut ? { checkOut } : {}), adults: guests })}`);
   };
   return <div className="eh-home" lang="ka">
     <header className="eh-header">
@@ -39,9 +40,10 @@ export function Home() {
         <form className="eh-quick-form" onSubmit={submit}>
           <label className="eh-field eh-venue"><span>{kind === 'restaurants' ? 'რესტორანი' : 'სასტუმრო'}</span><select aria-label={kind === 'restaurants' ? 'რესტორანი' : 'სასტუმრო'} value={kind === 'restaurants' ? restaurant : hotel} onChange={e => kind === 'restaurants' ? setRestaurant(e.target.value) : setHotel(e.target.value)}>{collection.venues.map(v => <option key={v.slug} value={v.slug}>{v.name} · {v.city}</option>)}</select></label>
           {kind === 'restaurants' && <><label className="eh-field"><span>თარიღი</span><input aria-label="ვიზიტის თარიღი" type="date" min={today()} value={date} onChange={e => setDate(e.target.value)} /></label><label className="eh-field"><span>დრო</span><input aria-label="ვიზიტის დრო" type="time" required value={time} onChange={e => setTime(e.target.value)} /></label><label className="eh-field"><span>სტუმრები</span><input aria-label="სტუმრების რაოდენობა" type="number" min="1" max="100" required value={guests} onChange={e => setGuests(e.target.value)} /></label></>}
-          <button className="eh-primary" type="submit">{kind === 'restaurants' ? 'გაგრძელება' : 'სასტუმროს ნახვა'}<SiteIcon name="arrow"/></button>
+          {kind === 'hotels' && <><label className="eh-field"><span>შესვლა</span><input aria-label="სასტუმროში შესვლა" type="date" min={today()} value={date} onChange={e => setDate(e.target.value)} /></label><label className="eh-field"><span>გასვლა</span><input aria-label="სასტუმროდან გასვლა" type="date" min={date || today()} value={checkOut} onChange={e => setCheckOut(e.target.value)} /></label><label className="eh-field"><span>მოზრდილები</span><input aria-label="მოზრდილების რაოდენობა" type="number" min="1" max="10" required value={guests} onChange={e => setGuests(e.target.value)} /></label></>}
+          <button className="eh-primary" type="submit">{kind === 'restaurants' ? 'გაგრძელება' : 'ნომრის შერჩევა'}<SiteIcon name="arrow"/></button>
         </form>
-        <p className="eh-hint">{kind === 'restaurants' ? 'შემდეგ ეტაპზე შეგიძლია მენიუც შეადგინო. ჯავშანს რესტორანი დაგიდასტურებს.' : 'ოთახები და ჯავშნის ინფორმაცია — არჩეული სასტუმროს გვერდზე.'}</p>
+        <p className="eh-hint">{kind === 'restaurants' ? 'შემდეგ ეტაპზე შეგიძლია მენიუც შეადგინო. ჯავშანს რესტორანი დაგიდასტურებს.' : 'შემდეგ ეტაპზე დაგეხმარებით საწოლის ტიპისა და შესაფერისი ნომრის არჩევაში.'}</p>
       </section>
       <section className="eh-plan-banner" id="plan"><span className="eh-icon-tile"><SiteIcon name="spark"/></span><div><span className="eh-eyebrow">სუფრა შენს ბიუჯეტზე</span><h2>მენიუ, რომელიც ყველას შეკრებს</h2><p>მიუთითე სუფრის ტიპი და სტუმრების რაოდენობა. შეადარე 80, 100, 120 ₾-იანი ან შენი ბიუჯეტით შედგენილი ვარიანტები.</p></div><a href="/restaurants/batumi/menu#menu-planner">შევადგინოთ მენიუ<SiteIcon name="arrow"/></a></section>
       <section className="eh-places"><div className="eh-section-heading"><div><span className="eh-eyebrow">EPISODE-ის ადგილები</span><h2>რომელ ქალაქში შევხვდეთ?</h2></div><a href="/restaurants">ყველა რესტორანი <SiteIcon name="arrow"/></a></div><div className="eh-venue-list">{VENUE_COLLECTIONS.restaurants.venues.map(v => <a className="eh-venue-item" key={v.slug} href={v.href}>{v.logo ? <img src={v.logo} alt={v.name + ' — ლოგო'} loading="lazy"/> : <span className="eh-venue-monogram">თ</span>}<div><span>{v.city}</span><h3>{v.name}</h3></div><SiteIcon name="arrow"/></a>)}</div></section>
