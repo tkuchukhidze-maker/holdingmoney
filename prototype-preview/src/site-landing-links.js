@@ -19,6 +19,7 @@ export function prepareSiteNavigation(screen, source) {
   source = source.replace(/<button type="button" onClick="{{register}}"([^>]*)>რეგისტრაცია<\/button>/g,
     '<a href="/register"$1>რეგისტრაცია</a>');
   if (['Batumi', 'Kutaisi', 'Tbilisi'].includes(screen)) {
+    source = source.replace(/href="#booking"/g, 'href="/restaurants/' + screen.toLowerCase() + '/book"');
     return source.replace(/href="#menu"/g, 'href="/restaurants/' + screen.toLowerCase() + '/menu"')
       .replace(/href="#register"/g, 'href="/register"');
   }

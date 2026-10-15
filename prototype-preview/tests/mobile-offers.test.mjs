@@ -39,11 +39,10 @@ test('mobile navigation shows all core routes and highlights the right category'
   assert.equal(mobileCurrentTab('/'), '/');
 });
 
-test('every restaurant and hotel has a locally served illustrative photo tour', () => {
+test('photography is unpublished until owner uploads arrive', () => {
   for (const name of ['Batumi', 'Kutaisi', 'Tbilisi', 'Magnolia', 'ChateauMere']) {
     const photos = photosForVenue(name);
-    assert.ok(photos.length >= 2, 'Expected at least two gallery photos: ' + name);
-    assert.ok(photos.every(src => src.startsWith('/photos/') && src.endsWith('.webp')));
+    assert.deepEqual(photos, []);
   }
   assert.deepEqual(photosForVenue('Unknown'), []);
 });

@@ -78,3 +78,7 @@ The `prototype-preview/` folder is a standalone Node.js preview of the approved 
 ## Mobile/public-flow improvements
 
 See `docs/MOBILE_UX_REVIEW.md` for the latest mobile navigation and interaction fixes, validation and remaining backend work. Public account/admin routes no longer display simulated identities or successful authentication.
+
+## Restaurant menu planning and requests
+
+The public site now includes occasion/guest/budget menu proposals and a booking request form with an optional attached menu. All venue photos are unpublished; logos remain. The Laravel intake stores pending requests with server-priced menu snapshots. Enable the server connection and review the deployment/inbox instructions in `docs/RESTAURANT_BOOKING_FLOW.md`; an unconfigured site does not claim successful delivery.

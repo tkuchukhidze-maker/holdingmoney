@@ -28,18 +28,6 @@
 
 /* Existing prototype screens keep their approved copy and interactions;
  * visual backgrounds are presentation-only overrides, not real photo claims. */
-body[data-episode-screen="Main"] #root a[href="/restaurants"][style*="min-height: 540px"]{background-image:linear-gradient(0deg,rgba(15,30,23,.55),rgba(15,30,23,.06)),url('/photos/batumi.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Main"] #root a[href="/hotels"][style*="min-height: 540px"]{background-image:linear-gradient(0deg,rgba(15,30,23,.52),rgba(15,30,23,.06)),url('/photos/magnolia.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Main"] #root [style*="aspect-ratio: 4 / 5"][style*="background-image"]{background-image:linear-gradient(0deg,rgba(11,31,25,.36),transparent),url('/photos/holding-interiors.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Batumi"] #root [style*="min-height: 560px"][style*="background-image"]{background-image:linear-gradient(100deg,rgba(17,25,23,.52),rgba(17,25,23,.20)),url('/photos/batumi.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Kutaisi"] #root [style*="min-height: 560px"][style*="background-image"]{background-image:linear-gradient(100deg,rgba(17,25,23,.52),rgba(17,25,23,.20)),url('/photos/kutaisi.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Tbilisi"] #root [style*="min-height: 560px"][style*="background-image"]{background-image:linear-gradient(100deg,rgba(17,25,23,.52),rgba(17,25,23,.20)),url('/photos/holding-interiors.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Magnolia"] #root [style*="min-height: 600px"][style*="background-image"]{background-image:linear-gradient(100deg,rgba(17,25,23,.58),rgba(17,25,23,.1)),url('/photos/magnolia.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="ChateauMere"] #root [style*="min-height: 600px"][style*="background-image"]{background-image:linear-gradient(100deg,rgba(17,25,23,.58),rgba(17,25,23,.16)),url('/photos/editorial.webp')!important;background-size:cover!important;background-position:center!important}
-body[data-episode-screen="Magnolia"] #root .room-ph,
-body[data-episode-screen="ChateauMere"] #root .room-ph{background-image:linear-gradient(0deg,rgba(17,25,23,.12),rgba(17,25,23,.02)),url('/photos/holding-interiors.webp')!important;background-position:center!important;background-size:cover!important}
-body[data-episode-screen="Magnolia"] #root [style*="height: 170px"][style*="background-image"],
-body[data-episode-screen="ChateauMere"] #root [style*="height: 170px"][style*="background-image"]{background-image:linear-gradient(0deg,rgba(17,25,23,.16),transparent),url('/photos/editorial.webp')!important;background-size:cover!important;background-position:center!important}
 @media(max-width:900px){
     .ecm-offer-preview{grid-template-columns:90px 1fr}
 }
@@ -145,7 +133,6 @@ body[data-episode-screen="ChateauMere"] #root [style*="height: 170px"][style*="b
 .ec-gallery-thumbs button{flex:none;width:86px;height:65px;border:3px solid transparent;border-radius:9px;padding:0;background:none;overflow:hidden;cursor:pointer}
 .ec-gallery-thumbs button[aria-pressed="true"]{border-color:#214535}
 .ec-gallery-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
-body[data-episode-screen="Main"] #root [style*="height: 200px"][style*="background-image"]{background-image:linear-gradient(0deg,rgba(11,31,25,.27),transparent),url('/photos/editorial.webp')!important;background-size:cover!important;background-position:center!important}
 @media(max-width:744px){.ec-gallery-dialog{width:calc(100vw - 12px);max-height:calc(100dvh - 12px)}.ec-gallery-shell{padding:15px;max-height:calc(100dvh - 12px)}.ec-gallery-main{height:clamp(240px,49vh,440px)}.ec-gallery-thumbs button{width:78px;height:60px}}
 
 /* Draft promotions live inside each restaurant's own page near its menu. */
@@ -213,3 +200,6 @@ body[data-episode-screen="Main"] #root [style*="height: 200px"][style*="backgrou
   .ec-selected-venue .ecm-venue-actions{flex-wrap:nowrap;max-width:100%;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
   .ec-selected-venue .ecm-venue-actions>*{flex:none;white-space:nowrap}
 }
+
+/* Text-first presentation until the owner supplies venue photography. */
+.ec-art{height:170px}.ec-art::before{display:none}.ecm-offer-preview,.ec-venue-offer{grid-template-columns:1fr}

@@ -66,3 +66,19 @@
 
 .ecm-profile-loaded{margin:0 0 22px;padding:12px 16px;background:#E7F1E9;color:#1C4734;border-radius:6px;font:500 13px/1.6 'Noto Sans Georgian',system-ui,sans-serif;border:1px solid #C4D9C9}
 .ecm-profile-note{font-size:12px;line-height:1.7;color:#5D655B;margin:2px 0 9px;padding:9px 11px;background:#EDF3EA;border-radius:6px}
+/* Shared menu planning and reservation request controls. */
+.ep-planner,.ep-summary,.ep-receipt{padding:clamp(18px,3vw,30px);border:1px solid #d8dccc;background:#fffdf9;border-radius:16px;margin:24px 0}
+.ep-planner h2,.ep-summary h2{margin:0 0 12px;font-size:28px;font-weight:500}
+.ep-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:24px 0}
+.ep-fields label,.ep-custom label{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.ep-fields input,.ep-fields select,.ep-fields textarea,.ep-custom input{width:100%;min-width:0;min-height:48px;padding:12px;border:1px solid #cfc9be;border-radius:9px;background:#fff;font:inherit;font-size:16px;color:#233e33}
+.ep-planner button,.ep-booking button{font:600 14px/1.5 'Noto Sans Georgian',system-ui,sans-serif;background:#214b3d;color:white;min-height:48px;border:1px solid #214b3d;border-radius:10px;padding:12px 18px;cursor:pointer}
+.ep-planner button:focus-visible,.ep-booking button:focus-visible{outline:3px solid #ad8458;outline-offset:3px}
+.ep-booking button:disabled{opacity:.5;cursor:wait}.ep-planner .ep-secondary,.ep-booking .ep-secondary{background:transparent;color:#214b3d;margin:8px 8px 0 0}
+.ep-custom{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:20px 0}.ep-custom input{max-width:240px}
+.ep-note{font-size:13px;line-height:1.8;color:#6e685f}.ep-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+.ep-plan{border:1px solid #d9d5ca;border-radius:12px;padding:20px;display:flex;flex-direction:column}.ep-plan h3{font-size:26px;margin:12px 0 0}.ep-plan h3 small{font-size:12px;font-weight:400}.ep-plan ul{padding:0;list-style:none;flex:1;font-size:13px}.ep-plan li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #e7e2d9}.ep-plan b{white-space:nowrap}
+.ep-booking{max-width:1000px}.ep-booking h1{font-size:clamp(30px,5vw,48px);font-weight:500}.ep-summary ul{list-style:none;padding:0}.ep-summary li{display:flex;align-items:center;gap:16px;border-bottom:1px solid #eee;padding:12px 0}.ep-summary li>span{flex:1}.ep-summary small{display:block;color:#756e63}.ep-summary b{white-space:nowrap}.ep-summary .ecm-quantity button{padding:0;min-width:44px;min-height:44px;color:#214b3d;background:transparent;border:0}.ep-submit{width:100%;margin:12px 0}.ep-error{padding:16px;border:1px solid #be7777;border-radius:10px;color:#8b2323;background:#fff5f2}
+.ep-dialog{max-width:500px;width:calc(100% - 32px);max-height:85dvh;overflow:auto;padding:28px;border:0;border-radius:18px;color:#214b3d}.ep-dialog::backdrop{background:#10251dcc}.ep-dialog button{display:block;width:100%;margin-top:12px!important}.ep-dialog h2{font-size:24px}
+@media(max-width:980px){.ep-plans{grid-template-columns:1fr}.ep-plan ul{columns:2}.ep-plan li{break-inside:avoid}}
+@media(max-width:520px){.ep-fields{grid-template-columns:1fr}.ep-plan ul{columns:1}.ep-summary li{flex-wrap:wrap}.ep-summary li>span{flex-basis:100%}.ep-booking .ep-secondary{width:100%}.ep-dialog{padding:20px}}

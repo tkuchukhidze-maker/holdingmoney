@@ -90,8 +90,11 @@ export async function mountScreen(screen) {
     const res = await fetch(BASE + screen + '.dc.html');
     if (!res.ok) throw new Error('Screen "' + screen + '" not found (' + res.status + ')');
     const src = await res.text();
-    const content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
-    const scr = compileScreen(content, { rewriteHref });
+    let content = preventFakeBookingConfirmation(screen, injectVenueOffer(screen, prepareSiteNavigation(screen, src)));
+    if (['Batumi', 'Kutaisi', 'Tbilisi'].includes(screen)) {
+      content = content.replace(/<section id="booking"[\s\S]*?<\/section>/, `<section id="booking" class="episode-message"><h2>დაგეგმეთ თქვენი სუფრა</h2><p>შეადგინეთ მენიუ ან გააგზავნეთ ჯავშნის მოთხოვნა მენიუს გარეშე.</p><a href="/restaurants/${screen.toLowerCase()}/book">ჯავშნის მოთხოვნა და მენიუს შედგენა</a></section>`);
+    }
+    const scr = compileScreen(content, { rewriteHref, hidePhotos: true });
     document.title = scr.title || screen;
     document.body.dataset.episodeScreen = screen;
     injectHead(scr.links, scr.styles, screen);

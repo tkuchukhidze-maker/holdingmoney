@@ -20,7 +20,6 @@ fs.copyFileSync(path.join(root, 'src', 'venue-collections.css'), path.join(dist,
 fs.copyFileSync(path.join(root, 'src', 'restaurant-menu.css'), path.join(dist, 'assets', 'restaurant-menu.css'));
 fs.copyFileSync(path.join(root, 'src', 'mobile-experience.css'), path.join(dist, 'assets', 'mobile-experience.css'));
 fs.cpSync(path.join(root, 'assets', 'brand'), path.join(dist, 'brand'), { recursive: true });
-fs.cpSync(path.join(root, 'assets', 'photos'), path.join(dist, 'photos'), { recursive: true });
 
 const options = {
   entryPoints: [path.join(root, 'src', 'main.js')],

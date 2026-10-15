@@ -54,7 +54,7 @@ test('quantities are sanitized, never stored under another venue and correct to 
     'soups-1': 1000000,
   };
   const safe = saveDraft('batumi', raw, storage);
-  assert.deepEqual(safe, { 'khinkali-1': 8, 'appetizers-1': 2, 'soups-1': 30 });
+  assert.deepEqual(safe, { 'khinkali-1': 8, 'appetizers-1': 2, 'soups-1': 1000 });
   assert.deepEqual(readDraft('batumi', storage), safe);
   assert.deepEqual(readDraft('kutaisi', storage), {});
   assert.equal(draftLines('batumi', safe).length, 3);

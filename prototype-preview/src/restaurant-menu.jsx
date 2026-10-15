@@ -1,8 +1,9 @@
+import { MenuPlanner } from './menu-planner.jsx';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { menuFor } from './menu-data.js';
 import { giftPreview, offerForVenue } from './daily-offers.js';
-import { draftLines, draftTotal, makeRequestText, readDraft, saveDraft } from './menu-cart.js';
+import { readPlan, savePlan, MAX_QUANTITY, draftLines, draftTotal, makeRequestText, readDraft, saveDraft } from './menu-cart.js';
 import { fetchCustomerProfile, contactFromProfile } from './customer-profile.js';
 
 const GROUPS = [
@@ -20,7 +21,7 @@ export function RestaurantMenu({ slug }) {
   const [query, setQuery] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [guests, setGuests] = useState('2');
+  const [guests, setGuests] = useState(() => String(readPlan(slug).guests));
   const [notes, setNotes] = useState('');
   const [contact, setContact] = useState({ fullName: '', phone: '', email: '' });
   const [accountProfile, setAccountProfile] = useState(null);
@@ -56,7 +57,7 @@ export function RestaurantMenu({ slug }) {
     setQuantities(prev => {
       const count = prev[id] || 0;
       const next = { ...prev };
-      const updated = Math.min(30, Math.max(0, count + delta));
+      const updated = Math.min(MAX_QUANTITY, Math.max(0, count + delta));
       if (updated) next[id] = updated;
       else delete next[id];
       return saveDraft(slug, next);
@@ -106,21 +107,17 @@ export function RestaurantMenu({ slug }) {
       <nav aria-label="მენიუს ნავიგაცია">
         <a href="/restaurants">რესტორნები</a>
         <a href={'/restaurants/' + slug}>რესტორნის გვერდი</a>
-        <a href={'/restaurants/' + slug + '#booking'}>ჯავშნის ფორმა</a>
+        <a href={'/restaurants/' + slug + '/book'}>ჯავშნის ფორმა</a>
       </nav>
     </header>
     <main className="ecm-body">
       <div className="ecm-crumb"><a href="/">მთავარი</a> / <a href="/restaurants">რესტორნები</a> / <a href={'/restaurants/' + slug}>{menu.name}</a> / მენიუ</div>
+      <MenuPlanner slug={slug} guests={guests} onSelect={plan => { savePlan(slug, plan); setQuantities(saveDraft(slug, plan.quantities)); setGuests(String(plan.guests)); setFeedback('მენიუ არჩეულია. ჯავშნის გაგზავნისას ის მოთხოვნას დაერთვება.'); document.getElementById('menu-basket')?.scrollIntoView({ block: 'start' }); }} />
       <div className="ecm-intro">
         <div><div className="ecm-kicker">EPISODE RESTAURANT MENU</div><h1>{menu.name}</h1><p>სრული მენიუ · {menu.city}</p></div>
-        <a className="ecm-outline" href={'/restaurants/' + slug + '#booking'}>ჯავშნის ფორმაზე დაბრუნება <span aria-hidden="true">↗</span></a>
-      </div>
-      <div className="ecm-photo-hero">
-        <img src={slug === 'batumi' ? '/photos/batumi.webp' : slug === 'kutaisi' ? '/photos/kutaisi.webp' : '/photos/holding-interiors.webp'} alt={'საილუსტრაციო ფოტო — ' + menu.name} loading="eager" fetchPriority="high"/>
-        <span>Episode Holding · {menu.city} · საილუსტრაციო ფოტო</span>
+        <a className="ecm-outline" href={'/restaurants/' + slug + '/book'}>ჯავშნის ფორმაზე დაბრუნება <span aria-hidden="true">↗</span></a>
       </div>
       {offer && <section className="ecm-offer-preview" id="daily-offer" aria-label="დღის შეთავაზების პროექტი">
-        <img src="/photos/holding-interiors.webp" alt="საილუსტრაციო ფოტო — რესტორნის გარემო" loading="lazy" />
         <div>
           <span className="ecm-not-live">შეთავაზების პროექტი — ჯერ არ მოქმედებს</span>
           <strong>{offer.title}</strong>
@@ -149,7 +146,7 @@ export function RestaurantMenu({ slug }) {
                 <div className="ecm-quantity">
                   <button aria-label={item.name + ' — რაოდენობის შემცირება'} type="button" disabled={!quantities[item.id]} onClick={() => change(item.id, -1)}>−</button>
                   <output aria-label={item.name + ' რაოდენობა'}>{quantities[item.id] || 0}</output>
-                  <button aria-label={item.name + ' — რაოდენობის გაზრდა'} type="button" disabled={(quantities[item.id] || 0) >= 30} onClick={() => change(item.id, 1)}>+</button>
+                  <button aria-label={item.name + ' — რაოდენობის გაზრდა'} type="button" disabled={(quantities[item.id] || 0) >= MAX_QUANTITY} onClick={() => change(item.id, 1)}>+</button>
                 </div>
               </div>)}</div>
             </section>) : <div className="ecm-noresults">ამ კატეგორიაში ამ სახელით კერძი ვერ მოიძებნა.</div>}
@@ -180,7 +177,7 @@ export function RestaurantMenu({ slug }) {
             </div>
             {feedback && <p className="ecm-feedback" role="status">{feedback}</p>}
             {showText && !!lines.length && <textarea className="ecm-export" readOnly rows="12" value={makeRequestText(slug, quantities, details)} aria-label="სრული მოთხოვნის ტექსტი" />}
-            <a className="ecm-back" href={'/restaurants/' + slug + '#booking'}>რესტორნის ჯავშნის გვერდზე გადასვლა →</a>
+            <a className="ecm-back" href={'/restaurants/' + slug + '/book'}>რესტორნის ჯავშნის გვერდზე გადასვლა →</a>
           </aside>
         </div>
       </>}

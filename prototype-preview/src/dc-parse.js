@@ -261,6 +261,9 @@ function renderNode(n, scopes, ctx, key) {
     return h('div', { key, style: { padding: 8, border: '1px dashed #c00', font: '12px monospace' } }, 'dc-import not supported in standalone viewer: ' + (a.name || ''));
   }
 
+  if (ctx?.hidePhotos && lt === 'img' && !String(a.src || '').startsWith('/brand/')) return null;
+  if (ctx?.hidePhotos && /ფოტო/.test(a['aria-label'] || '')) return null;
+  if (ctx?.hidePhotos && lt === 'span' && /^Photo\s*·/i.test(textOf(n).trim())) return null;
   const props = { key };
   for (const rawName of Object.keys(a)) {
     if (rawName.startsWith('hint-')) continue;
@@ -270,6 +273,7 @@ function renderNode(n, scopes, ctx, key) {
     if (/^on[A-Z]/.test(name)) { if (typeof val === 'function') props[name] = val; continue; }
     props[name] = val;
   }
+  if (ctx?.hidePhotos && props.style?.backgroundImage?.includes('url(')) delete props.style.backgroundImage;
   for (const b of BOOL_ATTRS) {
     if (b in props) {
       const v = props[b];

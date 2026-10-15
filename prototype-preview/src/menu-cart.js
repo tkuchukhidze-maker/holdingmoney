@@ -1,7 +1,7 @@
 import { menuFor, menuItem } from './menu-data.js';
 
 const VERSION = 1;
-const MAX_QUANTITY = 30;
+export const MAX_QUANTITY = 1000;
 const MAX_DIFFERENT_ITEMS = 80;
 
 export function draftStorageKey(slug) {
@@ -96,4 +96,17 @@ export function makeRequestText(slug, quantities, details = {}) {
     'ფასი, ხელმისაწვდომობა და მომსახურების პირობები საჭიროებს რესტორნის დადასტურებას.',
   ];
   return parts.join('\n');
+}
+
+// Only non-sensitive planning preferences are saved, scoped to one venue.
+export function readPlan(slug) {
+  try {
+    const raw = JSON.parse(window.sessionStorage.getItem(draftStorageKey(slug) + ':plan') || '{}');
+    return { guests: Number.isInteger(raw.guests) && raw.guests >= 1 && raw.guests <= 100 ? raw.guests : 2,
+      occasion: ['traditional', 'birthday', 'business'].includes(raw.occasion) ? raw.occasion : 'traditional',
+      budget: Number.isFinite(raw.budget) && raw.budget >= 80 && raw.budget <= 1000 ? raw.budget : null };
+  } catch { return { guests: 2, occasion: 'traditional', budget: null }; }
+}
+export function savePlan(slug, plan) {
+  try { window.sessionStorage.setItem(draftStorageKey(slug) + ':plan', JSON.stringify({ guests: Number(plan.guests), occasion: plan.occasion, budget: Number(plan.budget) })); } catch { /* in-memory planning stays usable */ }
 }

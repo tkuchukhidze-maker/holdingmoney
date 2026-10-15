@@ -68,3 +68,8 @@ export function menuFromPath(pathname) {
   }
   return null;
 }
+
+export function bookingFromPath(pathname) {
+  const match = pathname.toLowerCase().replace(/\/+$/, '').match(/^\/restaurants\/(batumi|kutaisi|tbilisi)\/book$/);
+  return match?.[1] || null;
+}
