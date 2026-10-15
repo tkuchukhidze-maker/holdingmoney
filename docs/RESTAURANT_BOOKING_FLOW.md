@@ -76,7 +76,9 @@ browser smoke, mobile UX/calendar tests and new booking/photo tests passed.
 Booking browser tests exercise a local test server, not a live restaurant.
 PHP feature tests cover authorized intake, server prices, idempotency, no-menu
 requests and rejected invalid/cross-venue selections. PHP/Composer are unavailable
-in the local runner; CI must validate those tests and PHP style before deployment.
+in the local runner; GitHub CI successfully validated the PHP feature tests and
+style checks on commit 7b42896a441ef85c0b92c45aac26f62279e69b59. Both CI jobs, including
+Cloud readiness and all browser checks, passed.
 
 To disable intake, remove Node `BOOKING_API_URL` while preserving the database.
 Reverting frontend code does not require dropping the booking table. Back up any
