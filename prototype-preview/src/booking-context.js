@@ -62,6 +62,13 @@ export function showVenueContext(screen, documentRoot = document) {
       actions.append(pill);
     }
   }
+  if (venue.kind === 'hotel') {
+    const selectRoom = documentRoot.createElement('a');
+    selectRoom.className = 'ecm-menu-link';
+    selectRoom.href = venue.route + '/book';
+    selectRoom.textContent = 'ნომრის შერჩევა →';
+    actions.append(selectRoom);
+  }
   const gallery = createGalleryTrigger(screen, documentRoot);
   if (gallery) actions.append(gallery);
   actions.append(link);

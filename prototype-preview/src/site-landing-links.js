@@ -23,7 +23,10 @@ export function prepareSiteNavigation(screen, source) {
     return source.replace(/href="#menu"/g, 'href="/restaurants/' + screen.toLowerCase() + '/menu"')
       .replace(/href="#register"/g, 'href="/register"');
   }
-  if (['Magnolia', 'ChateauMere'].includes(screen)) return source.replace(/href="#register"/g, 'href="/register"');
+  if (['Magnolia', 'ChateauMere'].includes(screen)) {
+    const slug = screen === 'Magnolia' ? 'magnolia' : 'chateau-mere';
+    return source.replace(/href="#register"/g, 'href="/register"').replace(/href="#booking"/g, 'href="/hotels/' + slug + '/book"').replace(/status: '(ხელმისაწვდომია|ცოტა დარჩა)'/g, "status: 'დასადასტურებელია'");
+  }
   if (screen !== 'Main') return source;
   let result = source;
   for (const [text, href] of HEADER_ENTRIES) {

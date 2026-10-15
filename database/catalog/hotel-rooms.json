@@ -1,0 +1,60 @@
+{
+  "magnolia": {
+    "name": "Hotel Magnolia",
+    "city": "თბილისი",
+    "rooms": [
+      {
+        "id": "single",
+        "name": "Standard Single",
+        "capacity": 1,
+        "beds": [
+          "single"
+        ],
+        "bedLabel": "ერთი ერთადგილიანი საწოლი"
+      },
+      {
+        "id": "double",
+        "name": "Standard Double",
+        "capacity": 2,
+        "beds": [
+          "double"
+        ],
+        "bedLabel": "ერთი ორადგილიანი საწოლი"
+      },
+      {
+        "id": "twin",
+        "name": "Standard Twin",
+        "capacity": 2,
+        "beds": [
+          "twin"
+        ],
+        "bedLabel": "ორი ცალკე საწოლი"
+      },
+      {
+        "id": "triple",
+        "name": "Standard Triple",
+        "capacity": 3,
+        "beds": [
+          "double",
+          "single"
+        ],
+        "bedLabel": "King და ერთადგილიანი საწოლი"
+      },
+      {
+        "id": "deluxe",
+        "name": "Deluxe Double",
+        "capacity": 2,
+        "beds": [
+          "double"
+        ],
+        "bedLabel": "King საწოლი",
+        "view": "ქალაქის ხედი"
+      }
+    ]
+  },
+  "chateau-mere": {
+    "name": "შატო მერე",
+    "city": "თელავი",
+    "rooms": []
+  }
+}

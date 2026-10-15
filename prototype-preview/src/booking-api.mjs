@@ -4,7 +4,7 @@ export async function handleBookingRequest(req, res, config = process.env) {
   if (req.method !== 'POST') return respond(405, { message: 'Method Not Allowed' });
   if (req.headers['sec-fetch-site'] === 'cross-site') return respond(403, { message: 'მოთხოვნა უარყოფილია.' });
   if (!String(req.headers['content-type']).startsWith('application/json')) return respond(415, { message: 'საჭიროა JSON მოთხოვნა.' });
-  if (!config.BOOKING_API_URL || !config.BOOKING_API_TOKEN) return respond(503, { message: 'ონლაინ გაგზავნა ჯერ არ არის ჩართული. თქვენი მენიუ შენარჩუნებულია. მოთხოვნა არ გაგზავნილა.' });
+  if (!config.BOOKING_API_URL || !config.BOOKING_API_TOKEN) return respond(503, { message: 'ონლაინ გაგზავნა ჯერ არ არის ჩართული. თქვენი არჩევანი შენარჩუნებულია. მოთხოვნა არ გაგზავნილა.' });
   try {
     const target = new URL(config.BOOKING_API_URL);
     if (target.protocol !== 'https:' && !['127.0.0.1', 'localhost', '[::1]'].includes(target.hostname)) throw new Error('HTTPS required');
@@ -26,4 +26,11 @@ export async function handleBookingRequest(req, res, config = process.env) {
   } catch {
     return respond(503, { message: 'მიღების დადასტურება ვერ მოხერხდა. სცადეთ ხელახლა — მოთხოვნა არ გაორმაგდება.' });
   }
+}
+
+
+export function handleHotelBookingRequest(req, res, config = process.env) {
+  const base = config.BOOKING_API_URL || '';
+  const hotelUrl = config.HOTEL_BOOKING_API_URL || (/\/booking-requests\/?$/.test(base) ? base.replace(/\/booking-requests\/?$/, '/hotel-booking-requests') : '');
+  return handleBookingRequest(req, res, { ...config, BOOKING_API_URL: hotelUrl });
 }

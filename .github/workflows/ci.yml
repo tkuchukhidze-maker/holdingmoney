@@ -80,6 +80,6 @@ jobs:
       - name: Install Chromium for real mobile layout tests
         run: npx playwright install chromium --with-deps
       - name: Verify phone-size restaurant/hotel calendars and promo placement in browser
-        run: npm run test:e2e && npm run test:ux && npm run test:booking-flow && npm run test:home
+        run: npm run test:e2e && npm run test:ux && npm run test:booking-flow && npm run test:home && npm run test:hotel-flow
       - name: Probe Cloud HTTP readiness and approved preview assets
-        run: npm run test:planner && npm run test:routes && npm run test:venues && npm run test:booking && npm run test:menu && npm run test:profile && npm run test:mobile && npm run test:layout && npm run test:readiness
+        run: npm run test:hotel && npm run test:planner && npm run test:routes && npm run test:venues && npm run test:booking && npm run test:menu && npm run test:profile && npm run test:mobile && npm run test:layout && npm run test:readiness
