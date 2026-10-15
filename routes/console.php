@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -10,13 +11,13 @@ Artisan::command('inspire', function () {
 // Staff-only access through the deployment console until the authenticated
 // control-center UI is available. No guest-readable booking list endpoint.
 Artisan::command('booking:requests {reference?} {--venue=}', function () {
-    $query = \Illuminate\Support\Facades\DB::table('booking_requests');
+    $query = DB::table('booking_requests');
     if ($this->option('venue')) {
         $query->where('venue', $this->option('venue'));
     }
     if ($this->argument('reference')) {
         $row = $query->where('reference', $this->argument('reference'))->first();
-        if (! $row) {
+        if (!$row) {
             $this->error('Request not found.');
 
             return 1;
@@ -32,8 +33,10 @@ Artisan::command('booking:requests {reference?} {--venue=}', function () {
 
         return 0;
     }
-    $this->table(['Reference', 'Venue', 'Date', 'Time', 'Guests', 'Total GEL', 'Status'],
-        $query->latest('id')->limit(50)->get(['reference', 'venue', 'date', 'time', 'guests', 'total', 'status'])->map(fn ($row) => (array) $row)->all());
+    $this->table(
+        ['Reference', 'Venue', 'Date', 'Time', 'Guests', 'Total GEL', 'Status'],
+        $query->latest('id')->limit(50)->get(['reference', 'venue', 'date', 'time', 'guests', 'total', 'status'])->map(fn ($row) => (array) $row)->all()
+    );
 
     return 0;
 })->purpose('Review incoming restaurant booking requests and attached menus');

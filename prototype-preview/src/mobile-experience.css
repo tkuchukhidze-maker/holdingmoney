@@ -203,3 +203,12 @@
 
 /* Text-first presentation until the owner supplies venue photography. */
 .ec-art{height:170px}.ec-art::before{display:none}.ecm-offer-preview,.ec-venue-offer{grid-template-columns:1fr}
+/* Compact icon pills keep the navigation readable without oversized tiles. */
+@media(max-width:744px){
+  .episode-mobile-nav{min-height:calc(72px + env(safe-area-inset-bottom,0px));padding:5px 8px calc(5px + env(safe-area-inset-bottom,0px));gap:4px}
+  .episode-mobile-nav a{gap:3px;min-height:60px;color:#646b65;letter-spacing:0}
+  .episode-mobile-nav a[aria-current="page"]{background:transparent;color:#214b3d}
+  .episode-mobile-icon{box-sizing:border-box;width:44px;height:32px;padding:4px 10px;border-radius:12px}
+  .episode-mobile-nav a[aria-current="page"] .episode-mobile-icon{background:#e7f0e9}
+  .episode-mobile-label{font-size:clamp(9px,2.6vw,11px);line-height:1.4}
+}

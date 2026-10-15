@@ -53,7 +53,7 @@ class BookingRequestController extends Controller
         $totalCents = 0;
         foreach ($data['menu'] as $index => $selection) {
             $item = $items->get($selection['itemId']);
-            if (! $item) {
+            if (!$item) {
                 throw ValidationException::withMessages(["menu.$index.itemId" => 'კერძი ამ ფილიალის მენიუში არ მოიძებნა.']);
             }
             $unitCents = (int) round($item['price'] * 100);

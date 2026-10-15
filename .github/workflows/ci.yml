@@ -39,7 +39,7 @@ jobs:
       - name: Validate PHP configuration
         run: composer validate --no-check-publish
       - name: PHP style
-        run: vendor/bin/pint --test
+        run: vendor/bin/pint --test -v
       - name: PHP tests (Pest)
         run: php artisan test
       - name: Install frontend
